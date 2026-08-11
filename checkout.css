@@ -1,0 +1,628 @@
+/* ==========================================
+   BODIBE DIGITAL
+   CHECKOUT PAGE
+========================================== */
+
+.checkout-back {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.checkout-back:hover {
+    color: #60a5fa;
+}
+
+
+/* ==========================
+   CHECKOUT PAGE
+========================== */
+
+.checkout-page {
+    min-height: calc(100vh - 90px);
+    padding: 110px 20px 80px;
+}
+
+
+/* ==========================
+   MAIN CONTAINER
+========================== */
+
+.checkout-container {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.07),
+            rgba(255,255,255,0.025)
+        );
+
+    border: 1px solid rgba(255,255,255,0.09);
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,0.35);
+}
+
+
+/* ==========================
+   LEFT SUMMARY
+========================== */
+
+.checkout-summary {
+    padding: 55px 45px;
+
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(59,130,246,0.15),
+            transparent 40%
+        );
+
+    border-right: 1px solid rgba(255,255,255,0.07);
+}
+
+
+.checkout-label {
+    color: #60a5fa;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.checkout-summary h1 {
+    font-size: 42px;
+
+    line-height: 1.15;
+
+    letter-spacing: -1.5px;
+
+    margin: 15px 0;
+}
+
+
+.checkout-intro {
+    color: #94a3b8;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    margin-bottom: 35px;
+}
+
+
+/* ==========================
+   SELECTED PACKAGE
+========================== */
+
+.selected-package {
+    padding: 28px;
+
+    border-radius: 22px;
+
+    border: 1px solid rgba(96,165,250,0.18);
+
+    background:
+        rgba(59,130,246,0.06);
+}
+
+
+.package-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.package-label {
+    color: #64748b;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+.package-top h2 {
+    margin-top: 7px;
+
+    font-size: 22px;
+}
+
+
+.package-top > i {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: rgba(59,130,246,0.14);
+
+    color: #60a5fa;
+}
+
+
+/* ==========================
+   PRICE
+========================== */
+
+.package-price {
+    display: flex;
+
+    align-items: flex-start;
+
+    margin-top: 30px;
+
+    color: white;
+}
+
+
+.package-price > span {
+    margin-top: 9px;
+
+    font-size: 19px;
+
+    color: #60a5fa;
+
+    font-weight: 600;
+}
+
+
+.package-price strong {
+    font-size: 48px;
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+}
+
+
+.package-price small {
+    color: #60a5fa;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    margin-top: 3px;
+}
+
+
+.payment-type {
+    color: #64748b;
+
+    font-size: 12px;
+
+    margin-top: 8px;
+}
+
+
+/* ==========================
+   DIVIDER
+========================== */
+
+.package-divider {
+    height: 1px;
+
+    background: rgba(255,255,255,0.08);
+
+    margin: 28px 0;
+}
+
+
+.selected-package h3 {
+    font-size: 14px;
+
+    margin-bottom: 18px;
+}
+
+
+/* ==========================
+   FEATURES
+========================== */
+
+.checkout-features {
+    list-style: none;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.checkout-features li {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    color: #cbd5e1;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.checkout-features i {
+    color: #60a5fa;
+
+    font-size: 12px;
+
+    margin-top: 3px;
+}
+
+
+/* ==========================
+   SECURITY NOTE
+========================== */
+
+.checkout-note {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    margin-top: 25px;
+}
+
+
+.checkout-note i {
+    color: #60a5fa;
+}
+
+
+/* ==========================
+   RIGHT FORM
+========================== */
+
+.checkout-form-container {
+    padding: 55px 45px;
+
+    background:
+        rgba(255,255,255,0.015);
+}
+
+
+.form-heading > span {
+    color: #60a5fa;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+}
+
+
+.form-heading h2 {
+    font-size: 28px;
+
+    margin: 10px 0;
+}
+
+
+.form-heading p {
+    color: #94a3b8;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+}
+
+
+/* ==========================
+   FORM
+========================== */
+
+.checkout-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 19px;
+}
+
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.form-group label {
+    color: #cbd5e1;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255,255,255,0.09);
+
+    background: rgba(255,255,255,0.035);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 125px;
+}
+
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #475569;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: rgba(96,165,250,0.7);
+
+    background: rgba(59,130,246,0.035);
+
+    box-shadow:
+        0 0 0 3px rgba(59,130,246,0.08);
+}
+
+
+/* ==========================
+   TERMS
+========================== */
+
+.terms {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    cursor: pointer;
+}
+
+
+.terms input {
+    margin-top: 3px;
+
+    accent-color: #3b82f6;
+}
+
+
+/* ==========================
+   SUBMIT BUTTON
+========================== */
+
+.checkout-submit {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    padding: 16px 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #3b82f6,
+            #60a5fa
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 15px 35px rgba(59,130,246,0.25);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.checkout-submit:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 20px 45px rgba(59,130,246,0.38);
+}
+
+
+.checkout-submit:active {
+    transform: translateY(-1px);
+}
+
+
+/* ==========================
+   SECURE NOTE
+========================== */
+
+.secure-note {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    color: #475569;
+
+    font-size: 10px;
+
+    margin-top: -5px;
+}
+
+
+.secure-note i {
+    color: #60a5fa;
+}
+
+
+/* ==========================
+   FOOTER
+========================== */
+
+footer {
+    text-align: center;
+
+    padding: 25px 20px;
+
+    border-top: 1px solid rgba(255,255,255,0.06);
+
+    color: #475569;
+
+    font-size: 11px;
+}
+
+
+/* ==========================
+   TABLET
+========================== */
+
+@media (max-width: 900px) {
+
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-summary {
+        border-right: none;
+
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 600px) {
+
+    .checkout-page {
+        padding:
+            90px 15px
+            50px;
+    }
+
+    .checkout-summary,
+    .checkout-form-container {
+        padding: 35px 23px;
+    }
+
+    .checkout-summary h1 {
+        font-size: 34px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .package-price strong {
+        font-size: 42px;
+    }
+
+    .selected-package {
+        padding: 23px;
+    }
+
+}

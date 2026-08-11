@@ -1,0 +1,742 @@
+/* ==========================================
+   BODIBE DIGITAL
+   PRICING PAGE
+========================================== */
+
+/* ==========================
+   PRICING HERO
+========================== */
+
+.pricing-hero {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 120px 20px 70px;
+    text-align: center;
+}
+
+.pricing-tag {
+    display: inline-block;
+
+    padding: 9px 18px;
+
+    border-radius: 50px;
+
+    background: rgba(59, 130, 246, 0.12);
+
+    border: 1px solid rgba(96, 165, 250, 0.2);
+
+    color: #60a5fa;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 25px;
+}
+
+.pricing-hero h1 {
+    font-size: 58px;
+
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 25px;
+}
+
+.pricing-hero h1 span {
+    background: linear-gradient(
+        90deg,
+        #3b82f6,
+        #60a5fa
+    );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+}
+
+.pricing-hero p {
+    max-width: 650px;
+
+    margin: auto;
+
+    color: #94a3b8;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+}
+
+
+/* ==========================
+   PRICING SECTION
+========================== */
+
+.pricing-section {
+    max-width: 1250px;
+
+    margin: 0 auto;
+
+    padding: 20px 20px 100px;
+}
+
+
+/* ==========================
+   PRICING GRID
+========================== */
+
+.pricing-grid {
+    display: grid;
+
+    grid-template-columns:
+        0.88fr
+        1.08fr
+        0.98fr;
+
+    gap: 25px;
+
+    align-items: center;
+}
+
+
+/* ==========================
+   PRICING CARD
+========================== */
+
+.pricing-card {
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.075),
+            rgba(255,255,255,0.025)
+        );
+
+    border: 1px solid rgba(255,255,255,0.09);
+
+    border-radius: 26px;
+
+    padding: 38px 32px;
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.28);
+
+    transition:
+        transform 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+
+/* ==========================
+   STARTER
+========================== */
+
+.pricing-card.starter {
+    transform: scale(0.94);
+
+    opacity: 0.9;
+}
+
+.pricing-card.starter:hover {
+    transform: scale(0.97) translateY(-8px);
+
+    opacity: 1;
+
+    border-color: rgba(96,165,250,0.4);
+
+    box-shadow:
+        0 30px 80px rgba(59,130,246,0.16);
+}
+
+
+/* ==========================
+   BUSINESS
+========================== */
+
+.pricing-card.business {
+    transform: scale(1.04);
+
+    border: 2px solid rgba(59,130,246,0.7);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(59,130,246,0.14),
+            rgba(255,255,255,0.045)
+        );
+
+    box-shadow:
+        0 35px 100px rgba(59,130,246,0.24);
+
+    z-index: 2;
+}
+
+.pricing-card.business:hover {
+    transform: scale(1.06) translateY(-8px);
+
+    box-shadow:
+        0 40px 110px rgba(59,130,246,0.34);
+}
+
+
+/* ==========================
+   PREMIUM
+========================== */
+
+.pricing-card.premium {
+    transform: scale(0.99);
+}
+
+.pricing-card.premium:hover {
+    transform: scale(1.02) translateY(-8px);
+
+    border-color: rgba(96,165,250,0.45);
+
+    box-shadow:
+        0 30px 80px rgba(59,130,246,0.18);
+}
+
+
+/* ==========================
+   POPULAR BADGE
+========================== */
+
+.popular-badge {
+    position: absolute;
+
+    top: -16px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background:
+        linear-gradient(
+            135deg,
+            #3b82f6,
+            #60a5fa
+        );
+
+    color: white;
+
+    padding: 8px 20px;
+
+    border-radius: 50px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 10px 30px rgba(59,130,246,0.35);
+}
+
+
+/* ==========================
+   PRICING HEADER
+========================== */
+
+.pricing-label {
+    color: #60a5fa;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.pricing-header h2 {
+    font-size: 27px;
+
+    margin: 12px 0;
+}
+
+.pricing-header p {
+    color: #94a3b8;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    min-height: 72px;
+}
+
+
+/* ==========================
+   PRICE
+========================== */
+
+.pricing-price {
+    display: flex;
+
+    align-items: flex-start;
+
+    margin-top: 30px;
+
+    color: white;
+}
+
+.pricing-price > span {
+    font-size: 20px;
+
+    font-weight: 600;
+
+    margin-top: 12px;
+
+    color: #60a5fa;
+}
+
+.pricing-price strong {
+    font-size: 48px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+.pricing-price small {
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: #60a5fa;
+
+    margin-top: 4px;
+}
+
+.pricing-price p {
+    position: absolute;
+
+    margin-top: 58px;
+
+    margin-left: 23px;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+/* ==========================
+   DIVIDER
+========================== */
+
+.pricing-divider {
+    height: 1px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    margin: 35px 0 25px;
+}
+
+
+/* ==========================
+   FEATURES
+========================== */
+
+.pricing-features {
+    list-style: none;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    margin-bottom: 32px;
+}
+
+.pricing-features li {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    color: #cbd5e1;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+.pricing-features i {
+    color: #60a5fa;
+
+    font-size: 13px;
+
+    margin-top: 4px;
+}
+
+
+/* ==========================
+   BUTTON
+========================== */
+
+.pricing-btn {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    width: 100%;
+
+    padding: 14px 20px;
+
+    border-radius: 50px;
+
+    border: 1px solid rgba(96,165,250,0.35);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    font-size: 14px;
+
+    transition: 0.3s ease;
+}
+
+.pricing-btn:hover {
+    background: #3b82f6;
+
+    border-color: #3b82f6;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 30px rgba(59,130,246,0.3);
+}
+
+
+/* ==========================
+   BUSINESS BUTTON
+========================== */
+
+.pricing-btn.primary {
+    background:
+        linear-gradient(
+            135deg,
+            #3b82f6,
+            #60a5fa
+        );
+
+    border-color: transparent;
+
+    box-shadow:
+        0 15px 35px rgba(59,130,246,0.28);
+}
+
+.pricing-btn.primary:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 20px 45px rgba(59,130,246,0.4);
+}
+
+
+/* ==========================
+   CUSTOM PRICING
+========================== */
+
+.custom-pricing {
+    max-width: 1050px;
+
+    margin: 40px auto 120px;
+
+    padding: 70px 30px;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(59,130,246,0.18),
+            transparent 45%
+        ),
+        rgba(255,255,255,0.035);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.25);
+}
+
+.custom-content > span {
+    color: #60a5fa;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.custom-content h2 {
+    font-size: 42px;
+
+    margin: 15px 0;
+}
+
+.custom-content h2 strong {
+    color: #60a5fa;
+}
+
+.custom-content p {
+    max-width: 650px;
+
+    margin: 0 auto 30px;
+
+    color: #94a3b8;
+
+    line-height: 1.8;
+}
+
+
+/* ==========================
+   ACTIVE NAV LINK
+========================== */
+
+.nav-links a.active {
+    color: #60a5fa;
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 1000px) {
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+
+        max-width: 600px;
+
+        margin: auto;
+
+        gap: 45px;
+    }
+
+    .pricing-card.starter,
+    .pricing-card.business,
+    .pricing-card.premium {
+        transform: scale(1);
+    }
+
+    .pricing-card.business {
+        transform: scale(1.02);
+    }
+
+    .pricing-card.business:hover {
+        transform: scale(1.03) translateY(-8px);
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .pricing-hero {
+        padding:
+            90px 20px
+            50px;
+    }
+
+    .pricing-hero h1 {
+        font-size: 42px;
+
+        letter-spacing: -1px;
+    }
+
+    .pricing-hero p {
+        font-size: 16px;
+    }
+
+    .pricing-section {
+        padding-bottom: 70px;
+    }
+
+    .pricing-card {
+        padding: 35px 25px;
+    }
+
+    .pricing-price strong {
+        font-size: 42px;
+    }
+
+    .custom-pricing {
+        margin:
+            20px 20px
+            80px;
+
+        padding:
+            55px 25px;
+    }
+
+    .custom-content h2 {
+        font-size: 32px;
+    }
+
+}
+/* ==========================
+   PRICING PAGE POLISH
+========================== */
+
+.pricing-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    top: -90px;
+    right: -90px;
+
+    background: rgba(59, 130, 246, 0.16);
+
+    filter: blur(70px);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.pricing-card.business::after {
+    content: "";
+
+    position: absolute;
+
+    inset: -2px;
+
+    border-radius: 27px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(96,165,250,0.45),
+        transparent 35%,
+        transparent 65%,
+        rgba(59,130,246,0.25)
+    );
+
+    z-index: -1;
+
+    pointer-events: none;
+}
+
+
+/* ==========================
+   SMALL TRUST NOTE
+========================== */
+
+.pricing-section::after {
+    content: "All packages are custom-built around your business needs. Hosting and domain costs may vary.";
+
+    display: block;
+
+    max-width: 750px;
+
+    margin: 45px auto 0;
+
+    text-align: center;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* ==========================
+   CARD FEATURED LABEL
+========================== */
+
+.business .pricing-label {
+    color: #93c5fd;
+}
+
+
+/* ==========================
+   BUTTON ICON FEEL
+========================== */
+
+.pricing-btn::after {
+    content: " →";
+
+    margin-left: 6px;
+
+    transition: 0.3s ease;
+}
+
+.pricing-btn:hover::after {
+    margin-left: 10px;
+}
+
+
+/* ==========================
+   CUSTOM CTA BUTTON
+========================== */
+
+.custom-pricing .btn {
+    margin-top: 5px;
+}
+
+
+/* ==========================
+   ACCESSIBILITY
+========================== */
+
+.pricing-btn:focus-visible,
+.pricing-hero a:focus-visible {
+    outline: 3px solid rgba(96,165,250,0.5);
+
+    outline-offset: 4px;
+}
+
+
+/* ==========================
+   REDUCED MOTION
+========================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .pricing-card,
+    .pricing-btn {
+        transition: none;
+    }
+
+}

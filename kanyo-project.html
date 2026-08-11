@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A polished project showcase for the Kanyo 24hrs Response website, highlighting modern security company branding and a professional digital experience.">
+    <title>Kanyo 24hrs Response | Project Showcase</title>
+
+    <style>
+        :root {
+            --bg: #07111f;
+            --card: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --accent: #0f766e;
+            --accent-2: #2563eb;
+            --border: #e5e7eb;
+            --soft: #f8fafc;
+        }
+
+        body[data-theme="dark"] {
+            --bg: #020617;
+            --card: #0f172a;
+            --text: #f8fafc;
+            --muted: #cbd5e1;
+            --accent: #2dd4bf;
+            --accent-2: #60a5fa;
+            --border: #334155;
+            --soft: #111827;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #07111f 0%, #0f172a 100%);
+            color: var(--text);
+            line-height: 1.7;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body[data-theme="dark"] {
+            background: radial-gradient(circle at top, #111827 0%, #020617 60%, #01040b 100%);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        a:hover,
+        a:focus-visible {
+            outline: none;
+        }
+
+        a:focus-visible {
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+            border-radius: 999px;
+        }
+
+        .project-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .project-card {
+            width: min(1200px, 100%);
+            background: var(--card);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            animation: fadeInUp 0.8s ease both;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body[data-theme="dark"] .project-card {
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .project-hero {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+            color: #fff;
+            padding: 3rem 2rem;
+        }
+
+        .project-hero .hero-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.95;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-hero h1 {
+            margin: 0 0 0.5rem;
+            font-size: clamp(2rem, 3.6vw, 2.9rem);
+            line-height: 1.2;
+        }
+
+        .project-subtitle {
+            margin: 0;
+            font-size: 1.05rem;
+            opacity: 0.95;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1rem;
+        }
+
+        .hero-badges span {
+            background: rgba(255, 255, 255, 0.16);
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(6px);
+        }
+
+        .theme-toggle {
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.14);
+            color: white;
+            padding: 0.7rem 0.95rem;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.22);
+        }
+
+        .project-content {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .project-preview {
+            margin: 0;
+            border-radius: 18px;
+            overflow: hidden;
+            background: var(--soft);
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .project-preview img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .project-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .project-details section,
+        .project-section {
+            background: var(--soft);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1rem 1.1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .project-details section:hover,
+        .project-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .project-details h2,
+        .project-section h2 {
+            margin: 0 0 0.6rem;
+            font-size: 1.08rem;
+            color: var(--accent);
+        }
+
+        .project-details p,
+        .project-details li,
+        .project-section p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.98rem;
+        }
+
+        .project-details ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .tech-stack span {
+            background: #e0f2fe;
+            color: #075985;
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        body[data-theme="dark"] .tech-stack span {
+            background: rgba(96, 165, 250, 0.16);
+            color: #bae6fd;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 0.3rem;
+        }
+
+        .portfolio-btn,
+        .secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .portfolio-btn {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 8px 16px rgba(15, 118, 110, 0.2);
+        }
+
+        .secondary-btn {
+            background: var(--card);
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+
+        body[data-theme="dark"] .secondary-btn {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .portfolio-btn:hover,
+        .secondary-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .project-extended {
+            padding: 0 2rem 2rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .results-grid,
+        .gallery-grid,
+        .related-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .results-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .result-card,
+        .gallery-card,
+        .related-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        body[data-theme="dark"] .result-card,
+        body[data-theme="dark"] .gallery-card,
+        body[data-theme="dark"] .related-card {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-card strong {
+            display: block;
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+
+        .testimonial {
+            border-left: 4px solid var(--accent);
+            background: linear-gradient(90deg, rgba(240, 253, 250, 0.8) 0%, var(--card) 100%);
+        }
+
+        body[data-theme="dark"] .testimonial {
+            background: linear-gradient(90deg, rgba(45, 212, 191, 0.16) 0%, rgba(15, 23, 42, 0.85) 100%);
+        }
+
+        .testimonial blockquote {
+            margin: 0;
+            font-style: italic;
+            color: var(--text);
+        }
+
+        .testimonial .author {
+            margin-top: 0.7rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .gallery-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 0.7rem;
+        }
+
+        .gallery-card h3,
+        .related-card h3 {
+            margin: 0 0 0.4rem;
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .related-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .related-card a {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .project-footer {
+            background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
+            color: #fff;
+            padding: 1.4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .project-footer .footer-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        [data-reveal].is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .project-content {
+                grid-template-columns: 1fr;
+            }
+
+            .results-grid,
+            .gallery-grid,
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-page {
+                padding: 0.8rem;
+            }
+
+            .project-content,
+            .project-extended {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .project-hero {
+                padding: 2.2rem 1.2rem;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .portfolio-btn,
+            .secondary-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="project-page">
+        <article class="project-card" data-reveal>
+            <header class="project-hero" data-reveal>
+                <div class="hero-top">
+                    <div>
+                        <p class="eyebrow">Project Showcase</p>
+                        <h1>Kanyo 24hrs Response</h1>
+                        <p class="project-subtitle">Professional Security Company Website</p>
+
+                        <div class="hero-badges" aria-label="Project highlights">
+                            <span>Responsive</span>
+                            <span>Modern UI</span>
+                            <span>Client Focused</span>
+                            <span>Trust Building</span>
+                        </div>
+                    </div>
+
+                    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">
+                        🌙 Dark
+                    </button>
+                </div>
+            </header>
+
+            <section class="project-content">
+                <figure class="project-preview" data-reveal>
+                    <img src="assets/images/overview.png"
+                         alt="Homepage preview of the Kanyo 24hrs Response website"
+                         loading="lazy"
+                         decoding="async">
+                </figure>
+
+                <div class="project-details">
+                    <section data-reveal>
+                        <h2>Project Overview</h2>
+                        <p>
+                            Kanyo 24hrs Response is a modern security company website designed to
+                            strengthen the brand’s online presence and make it easier for clients
+                            to explore services, request quotations, and get in touch quickly.
+                        </p>
+                    </section>
+
+                    <section data-reveal>
+                        <h2>Project Highlights</h2>
+                        <ul>
+                            <li>Responsive and mobile-friendly design</li>
+                            <li>Professional business branding</li>
+                            <li>WhatsApp integration</li>
+                            <li>Google Maps integration</li>
+                            <li>Online contact form</li>
+                            <li>Clean and user-friendly layout</li>
+                        </ul>
+                    </section>
+
+                    <section data-reveal>
+                        <h2>Technologies Used</h2>
+                        <div class="tech-stack">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </section>
+
+                    <section data-reveal>
+                        <h2>Client Preview</h2>
+                        <p>
+                            This page offers a polished preview of the completed website. Full access
+                            is available during client consultations or upon request.
+                        </p>
+                    </section>
+
+                    <div class="actions" data-reveal>
+                        <a href="#" class="portfolio-btn" aria-label="View the live website preview">
+                            View Live Site
+                        </a>
+                        <a href="index.html" class="secondary-btn" aria-label="Return to the portfolio homepage">
+                            ← Back to Portfolio
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-extended" aria-label="Additional project details">
+                <section class="project-section" data-reveal>
+                    <h2>Results Delivered</h2>
+                    <div class="results-grid">
+                        <div class="result-card" data-reveal>
+                            <strong>01</strong>
+                            <p>Stronger first impression with a professional and modern design.</p>
+                        </div>
+                        <div class="result-card" data-reveal>
+                            <strong>02</strong>
+                            <p>Faster communication through contact options and WhatsApp access.</p>
+                        </div>
+                        <div class="result-card" data-reveal>
+                            <strong>03</strong>
+                            <p>Improved trust and credibility through a clean business-focused layout.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="project-section testimonial" data-reveal>
+                    <h2>Client Feedback</h2>
+                    <blockquote>
+                        “The website gave our company a more polished and trustworthy appearance online.
+                        It made it easier for clients to connect with us.”
+                    </blockquote>
+                    <p class="author">— Kanyo 24hrs Response Team</p>
+                </section>
+
+                <section class="project-section" data-reveal>
+                    <h2>Preview Gallery</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-card" data-reveal>
+                            <img src="assets/images/overview.png" alt="Homepage layout preview">
+                            <h3>Homepage</h3>
+                            <p>Clean and welcoming landing experience.</p>
+                        </div>
+                        <div class="gallery-card" data-reveal>
+                            <img src="assets/images/overview.png" alt="Service overview preview">
+                            <h3>Services</h3>
+                            <p>Easy navigation to the main offerings.</p>
+                        </div>
+                        <div class="gallery-card" data-reveal>
+                            <img src="assets/images/overview.png" alt="Contact section preview">
+                            <h3>Contact</h3>
+                            <p>Multiple options for quick client contact.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="project-section" data-reveal>
+                    <h2>Related Work</h2>
+                    <div class="related-grid">
+                        <div class="related-card" data-reveal>
+                            <h3>Branding & Web Design</h3>
+                            <p>Professional visual direction for businesses looking to grow online.</p>
+                            <a href="index.html">Explore more work →</a>
+                        </div>
+                        <div class="related-card" data-reveal>
+                            <h3>Lead Generation Websites</h3>
+                            <p>Modern websites built to attract, inform, and convert visitors.</p>
+                            <a href="index.html">Explore more work →</a>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <footer class="project-footer" data-reveal>
+                <p>Looking for a polished website for your business?</p>
+                <div class="footer-actions">
+                    <a href="index.html#contact" class="portfolio-btn" aria-label="Contact the team">
+                        Contact the Team
+                    </a>
+                    <a href="index.html" class="secondary-btn" aria-label="Go to the portfolio homepage">
+                        View Portfolio
+                    </a>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <script>
+        const themeToggle = document.getElementById("themeToggle");
+        const body = document.body;
+
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
+
+        function applyTheme(theme) {
+            body.setAttribute("data-theme", theme);
+            themeToggle.setAttribute("aria-pressed", theme === "dark");
+            themeToggle.innerHTML = theme === "dark" ? "☀️ Light" : "🌙 Dark";
+            localStorage.setItem("theme", theme);
+        }
+
+        themeToggle.addEventListener("click", () => {
+            const nextTheme = body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            applyTheme(nextTheme);
+        });
+
+        applyTheme(initialTheme);
+
+        const revealItems = document.querySelectorAll("[data-reveal]");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        revealItems.forEach((item) => observer.observe(item));
+    </script>
+</body>
+</html>
