@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout | Bodibe Digital</title>
+
+    <meta
+        name="description"
+        content="Start your Bodibe Digital website project."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="checkout.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         BACKGROUND
+    ========================== -->
+
+    <div class="background-animation">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <a href="index.html" class="logo">
+
+                <div class="logo-mark">
+
+                    <img
+                        src="assets/images/logo.png"
+                        alt="Bodibe Digital Logo"
+                    >
+
+                </div>
+
+                <div class="logo-details">
+
+                    <h2>Bodibe</h2>
+
+                    <small>DIGITAL</small>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="pricing.html"
+                class="checkout-back"
+            >
+                ← Back to pricing
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         CHECKOUT
+    ========================== -->
+
+    <main class="checkout-page">
+
+
+        <section class="checkout-container">
+
+
+            <!-- LEFT SIDE -->
+
+            <div class="checkout-summary">
+
+                <span class="checkout-label">
+                    BODIBE DIGITAL
+                </span>
+
+                <h1>
+                    Start your project.
+                </h1>
+
+                <p class="checkout-intro">
+                    Review your selected package and
+                    provide your details to get started.
+                </p>
+
+
+                <!-- PACKAGE -->
+
+                <div class="selected-package">
+
+                    <div class="package-top">
+
+                        <div>
+
+                            <span class="package-label">
+                                SELECTED PACKAGE
+                            </span>
+
+                            <h2 id="packageName">
+                                Business Website
+                            </h2>
+
+                        </div>
+
+                        <i class="fa-solid fa-globe"></i>
+
+                    </div>
+
+
+                    <div class="package-price">
+
+                        <span>R</span>
+
+                        <strong id="packagePrice">
+                            3,499
+                        </strong>
+
+                        <small>
+                            .99
+                        </small>
+
+                    </div>
+
+                    <p class="payment-type">
+                        One-time payment
+                    </p>
+
+
+                    <div class="package-divider"></div>
+
+
+                    <h3>
+                        What's included
+                    </h3>
+
+
+                    <ul class="checkout-features">
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Professional responsive website
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Mobile-friendly design
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Contact form
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            WhatsApp integration
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Basic SEO setup
+                        </li>
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            Project support
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <p class="checkout-note">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    Your information is only used to
+                    process your project enquiry.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="checkout-form-container">
+
+                <div class="form-heading">
+
+                    <span>
+                        PROJECT DETAILS
+                    </span>
+
+                    <h2>
+                        Tell us about yourself
+                    </h2>
+
+                    <p>
+                        We'll use these details to contact
+                        you about your project.
+                    </p>
+
+                </div>
+
+
+                <form
+                    class="checkout-form"
+                    action="https://script.google.com/macros/s/AKfycbwidS8oUrA-1K59OQ8EcBpZ8fkKRHOfj4Yyzi9ya02owvtwMwSzJU03SZKteRn50CkR/exec"
+                    method="POST"
+                >
+
+
+                    <input
+                        type="hidden"
+                        name="selected_package"
+                        id="selectedPackage"
+                        value="Business Website"
+                    >
+
+
+                    <input
+                        type="hidden"
+                        name="package_price"
+                        id="selectedPrice"
+                        value="R3,499.99"
+                    >
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Full name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Your name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="business">
+                                Business name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="business"
+                                name="business"
+                                placeholder="Your business"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            WhatsApp / phone
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="+27 ..."
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="message">
+                            Tell us about your project
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="5"
+                            placeholder="Tell us what you need your website to do..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <!-- TERMS -->
+
+                    <label class="terms">
+
+                        <input
+                            type="checkbox"
+                            name="terms"
+                            required
+                        >
+
+                        <span>
+
+                            I understand that submitting this
+                            form is a project enquiry and does
+                            not constitute payment or a confirmed
+                            project.
+
+                        </span>
+
+                    </label>
+
+
+
+                    <button
+                        type="submit"
+                        class="checkout-submit"
+                    >
+
+                        Continue
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                    <p class="secure-note">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        Secure enquiry · No payment taken yet
+
+                    </p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="copyright">
+
+            © 2026 Bodibe Digital.
+            All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+
+    <script src="checkout.js"></script>
+
+</body>
+
+</html>
