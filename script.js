@@ -154,3 +154,27 @@ if (heroWordSwapWrap && heroWordCurrent && !window.matchMedia("(prefers-reduced-
     setTimeout(() => outgoing.remove(), 500);
   }, 2800);
 }
+
+/* ==========================
+   PORTFOLIO CARD 3D TILT
+   Layers a cursor-tracked perspective tilt on top of
+   the existing lift/scale hover — restrained (max 6deg),
+   resets to the plain CSS hover state on mouseleave.
+========================== */
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.querySelectorAll(".portfolio-card").forEach((card) => {
+    card.addEventListener("mousemove", (event) => {
+      const rect = card.getBoundingClientRect();
+      const nx = (event.clientX - rect.left) / rect.width - 0.5;
+      const ny = (event.clientY - rect.top) / rect.height - 0.5;
+
+      card.style.transform =
+        `perspective(1000px) rotateX(${(-ny * 6).toFixed(2)}deg) rotateY(${(nx * 6).toFixed(2)}deg) translateY(-10px) scale(1.02)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "";
+    });
+  });
+}
