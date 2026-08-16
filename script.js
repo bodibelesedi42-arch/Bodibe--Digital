@@ -121,21 +121,36 @@ if (liveBackground) {
 
 /* ==========================
    HERO DYNAMIC HEADING
+   Rolls the current word up and out while the next
+   one rolls up into place from below, like an odometer.
 ========================== */
 
-const heroWordSwap = document.getElementById("heroWordSwap");
+const heroWordSwapWrap = document.getElementById("heroWordSwapWrap");
+let heroWordCurrent = document.getElementById("heroWordSwap");
 
-if (heroWordSwap && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+if (heroWordSwapWrap && heroWordCurrent && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const heroWords = ["brand", "business", "vision", "reputation"];
   let heroWordIndex = 0;
 
   setInterval(() => {
-    heroWordSwap.classList.add("swap-out");
+    heroWordIndex = (heroWordIndex + 1) % heroWords.length;
 
-    setTimeout(() => {
-      heroWordIndex = (heroWordIndex + 1) % heroWords.length;
-      heroWordSwap.textContent = heroWords[heroWordIndex];
-      heroWordSwap.classList.remove("swap-out");
-    }, 350);
+    const incoming = document.createElement("span");
+    incoming.className = "hero-word-swap hero-word-incoming-start";
+    incoming.textContent = heroWords[heroWordIndex];
+    heroWordSwapWrap.appendChild(incoming);
+
+    // Force a layout flush so the starting position (below, translateY(100%))
+    // is committed before removing it — otherwise the browser coalesces the
+    // add-then-remove into one paint and the roll never plays.
+    incoming.getBoundingClientRect();
+
+    heroWordCurrent.classList.add("hero-word-outgoing");
+    incoming.classList.remove("hero-word-incoming-start");
+
+    const outgoing = heroWordCurrent;
+    heroWordCurrent = incoming;
+
+    setTimeout(() => outgoing.remove(), 500);
   }, 2800);
 }
