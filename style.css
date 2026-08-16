@@ -972,34 +972,6 @@ footer {
   text-shadow: 0 0 25px rgba(59, 130, 246, 0.45);
 }
 
-.hero-word-swap-wrap {
-  display: inline-grid;
-  overflow: hidden;
-  vertical-align: bottom;
-}
-
-.hero-word-swap {
-  grid-area: 1 / 1;
-  display: inline-block;
-  white-space: nowrap;
-  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.4s ease;
-}
-
-.hero-word-outgoing {
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
-.hero-word-incoming-start {
-  transform: translateY(100%);
-  opacity: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-word-swap {
-    transition: none;
-  }
-}
 .circle {
   position: absolute;
 

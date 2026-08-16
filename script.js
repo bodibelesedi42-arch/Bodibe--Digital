@@ -120,42 +120,6 @@ if (liveBackground) {
 }
 
 /* ==========================
-   HERO DYNAMIC HEADING
-   Rolls the current word up and out while the next
-   one rolls up into place from below, like an odometer.
-========================== */
-
-const heroWordSwapWrap = document.getElementById("heroWordSwapWrap");
-let heroWordCurrent = document.getElementById("heroWordSwap");
-
-if (heroWordSwapWrap && heroWordCurrent && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const heroWords = ["brand", "business", "vision", "reputation"];
-  let heroWordIndex = 0;
-
-  setInterval(() => {
-    heroWordIndex = (heroWordIndex + 1) % heroWords.length;
-
-    const incoming = document.createElement("span");
-    incoming.className = "hero-word-swap hero-word-incoming-start";
-    incoming.textContent = heroWords[heroWordIndex];
-    heroWordSwapWrap.appendChild(incoming);
-
-    // Force a layout flush so the starting position (below, translateY(100%))
-    // is committed before removing it — otherwise the browser coalesces the
-    // add-then-remove into one paint and the roll never plays.
-    incoming.getBoundingClientRect();
-
-    heroWordCurrent.classList.add("hero-word-outgoing");
-    incoming.classList.remove("hero-word-incoming-start");
-
-    const outgoing = heroWordCurrent;
-    heroWordCurrent = incoming;
-
-    setTimeout(() => outgoing.remove(), 500);
-  }, 2800);
-}
-
-/* ==========================
    PORTFOLIO CARD 3D TILT
    Layers a cursor-tracked perspective tilt on top of
    the existing lift/scale hover — restrained (max 6deg),
