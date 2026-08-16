@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Careers | Bodibe Digital</title>
+
+    <meta
+      name="description"
+      content="Apply to join the Bodibe Digital team — tell us about your skills, experience and availability."
+    />
+
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="checkout.css" />
+    <link rel="stylesheet" href="careers.css" />
+  </head>
+
+  <body>
+    <div class="background-animation">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <header>
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <div class="logo-mark">
+            <img src="assets/images/logo.svg" alt="Bodibe Digital Logo" />
+          </div>
+          <div class="logo-details">
+            <h2>Bodibe</h2>
+            <small>DIGITAL</small>
+          </div>
+        </a>
+        <a href="index.html" class="checkout-back">← Back to website</a>
+      </nav>
+    </header>
+
+    <main class="careers-page">
+      <section class="careers-hero">
+        <span class="checkout-label">BODIBE DIGITAL</span>
+        <h1>Join the team.</h1>
+        <p class="checkout-intro">
+          Tell us about yourself — your skills, your experience, and where you'd fit best.
+          We read every application.
+        </p>
+      </section>
+
+      <form class="careers-form" id="careersForm">
+
+        <!-- SECTION A — PERSONAL -->
+        <div class="careers-section">
+          <h2><i class="fa-solid fa-user"></i> Personal Information</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName">Full name</label>
+              <input type="text" id="fullName" name="fullName" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone / WhatsApp</label>
+              <input type="tel" id="phone" name="phone" placeholder="+27 ..." required />
+            </div>
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input type="number" id="age" name="age" min="14" max="100" placeholder="Age" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" id="location" name="location" placeholder="City / township" />
+            </div>
+            <div class="form-group">
+              <label for="preferredContact">Preferred contact method</label>
+              <select id="preferredContact" name="preferredContact">
+                <option value="WhatsApp">WhatsApp</option>
+                <option value="Email">Email</option>
+                <option value="Phone call">Phone call</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION B — EDUCATION -->
+        <div class="careers-section">
+          <h2><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="qualification">Highest / current qualification</label>
+              <input type="text" id="qualification" name="qualification" placeholder="e.g. Matric, Diploma, Degree" />
+            </div>
+            <div class="form-group">
+              <label for="school">School / college / university</label>
+              <input type="text" id="school" name="school" placeholder="Institution name" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fieldOfStudy">Subjects / field of study</label>
+              <input type="text" id="fieldOfStudy" name="fieldOfStudy" placeholder="e.g. Information Technology" />
+            </div>
+            <div class="form-group">
+              <label for="certificates">Relevant certificates</label>
+              <input type="text" id="certificates" name="certificates" placeholder="If any" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="additionalCourses">Additional courses</label>
+            <input type="text" id="additionalCourses" name="additionalCourses" placeholder="Online courses, workshops, etc." />
+          </div>
+        </div>
+
+        <!-- SECTION C — SKILLS -->
+        <div class="careers-section">
+          <h2><i class="fa-solid fa-star"></i> Skills</h2>
+          <p class="careers-section-note">Rate yourself honestly from 1 (needs work) to 5 (strong).</p>
+
+          <div class="skills-grid">
+            <div class="form-group">
+              <label for="skillComputer">Computer skills</label>
+              <select id="skillComputer" name="skillComputer">
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="skillCommunication">Communication</label>
+              <select id="skillCommunication" name="skillCommunication">
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="skillProblemSolving">Problem solving</label>
+              <select id="skillProblemSolving" name="skillProblemSolving">
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="skillTeamwork">Teamwork</label>
+              <select id="skillTeamwork" name="skillTeamwork">
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="skillLeadership">Leadership</label>
+              <select id="skillLeadership" name="skillLeadership">
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="skillCreativity">Creativity</label>
+              <select id="skillCreativity" name="skillCreativity">
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="skillOrganisation">Organisation</label>
+              <select id="skillOrganisation" name="skillOrganisation">
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="skillTimeManagement">Time management</label>
+              <select id="skillTimeManagement" name="skillTimeManagement">
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="skillCustomerService">Customer service</label>
+              <select id="skillCustomerService" name="skillCustomerService">
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="skillTechnical">Technical skills</label>
+              <select id="skillTechnical" name="skillTechnical">
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="strongestSkill">Which skill are you strongest in?</label>
+              <input type="text" id="strongestSkill" name="strongestSkill" />
+            </div>
+            <div class="form-group">
+              <label for="skillToImprove">Which skill do you need to improve?</label>
+              <input type="text" id="skillToImprove" name="skillToImprove" />
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION D — DEPARTMENT -->
+        <div class="careers-section">
+          <h2><i class="fa-solid fa-building"></i> Department Preference</h2>
+
+          <div class="form-group">
+            <label for="department">Which department interests you most?</label>
+            <select id="department" name="department" required>
+              <option value="" disabled selected>Select a department</option>
+              <option>Management</option>
+              <option>Administration</option>
+              <option>Sales & Marketing</option>
+              <option>Finance</option>
+              <option>Web Development</option>
+              <option>Design / Branding</option>
+              <option>Customer Support</option>
+              <option>Project Management</option>
+              <option>IT / Technical</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="whyDepartment">Why are you interested in this department?</label>
+            <textarea id="whyDepartment" name="whyDepartment" rows="3"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="workEnjoyed">What type of work do you enjoy most?</label>
+              <textarea id="workEnjoyed" name="workEnjoyed" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="workDisliked">What type of work do you dislike or struggle with?</label>
+              <textarea id="workDisliked" name="workDisliked" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION E — EXPERIENCE & PORTFOLIO -->
+        <div class="careers-section">
+          <h2><i class="fa-solid fa-briefcase"></i> Experience &amp; Portfolio</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="previousExperience">Previous work experience?</label>
+              <select id="previousExperience" name="previousExperience">
+                <option>Yes</option><option>No</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="workedInTeam">Worked on a team before?</label>
+              <select id="workedInTeam" name="workedInTeam">
+                <option>Yes</option><option>No</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="workedWithClients">Worked with clients/customers?</label>
+              <select id="workedWithClients" name="workedWithClients">
+                <option>Yes</option><option>No</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="completedProjects">Completed any relevant projects?</label>
+              <select id="completedProjects" name="completedProjects">
+                <option>Yes</option><option>No</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="portfolioLink">Portfolio link (if you have one)</label>
+            <input type="url" id="portfolioLink" name="portfolioLink" placeholder="https://..." />
+          </div>
+
+          <div class="form-group">
+            <label for="keyProject">Describe your most important project.</label>
+            <textarea id="keyProject" name="keyProject" rows="4"></textarea>
+          </div>
+        </div>
+
+        <!-- SECTION F — AVAILABILITY -->
+        <div class="careers-section">
+          <h2><i class="fa-solid fa-calendar-check"></i> Availability</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="currentlyStudying">Currently studying?</label>
+              <select id="currentlyStudying" name="currentlyStudying">
+                <option>Yes</option><option>No</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="currentlyWorking">Currently working?</label>
+              <select id="currentlyWorking" name="currentlyWorking">
+                <option>Yes</option><option>No</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="hoursAvailable">How many hours can you contribute?</label>
+              <input type="text" id="hoursAvailable" name="hoursAvailable" placeholder="e.g. 20 hours/week" />
+            </div>
+            <div class="form-group">
+              <label for="daysAvailable">Which days are you available?</label>
+              <input type="text" id="daysAvailable" name="daysAvailable" placeholder="e.g. Weekdays" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="availableForMeetings">Available for meetings?</label>
+              <select id="availableForMeetings" name="availableForMeetings">
+                <option>Yes</option><option>No</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="couldStart">When could you start?</label>
+              <input type="text" id="couldStart" name="couldStart" placeholder="e.g. Immediately, 2 weeks notice" />
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION G — SITUATIONAL -->
+        <div class="careers-section">
+          <h2><i class="fa-solid fa-comments"></i> A Few Scenarios</h2>
+          <p class="careers-section-note">Short answers are fine — we want to see how you think.</p>
+
+          <div class="form-group">
+            <label for="scenarioDeadline">You're given a task due tomorrow, but you realise you won't finish it on time. What do you do?</label>
+            <textarea id="scenarioDeadline" name="scenarioDeadline" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="scenarioClient">A client is unhappy with work you've completed. How would you respond?</label>
+            <textarea id="scenarioClient" name="scenarioClient" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="scenarioTeamwork">You disagree with a team member about how something should be done. What would you do?</label>
+            <textarea id="scenarioTeamwork" name="scenarioTeamwork" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="scenarioMistake">You make a mistake that affects a project. What do you do?</label>
+            <textarea id="scenarioMistake" name="scenarioMistake" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="scenarioPressure">You have three tasks from different people at the same time. How do you decide what to do first?</label>
+            <textarea id="scenarioPressure" name="scenarioPressure" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="careers-error" id="careersError"></div>
+
+        <button type="submit" class="checkout-submit" id="careersSubmit">
+          Submit Application
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <p class="secure-note">
+          <i class="fa-solid fa-lock"></i>
+          We'll only use this to review your application.
+        </p>
+      </form>
+    </main>
+
+    <footer>
+      <div class="copyright">
+        © 2026 Bodibe Digital. All rights reserved.
+      </div>
+    </footer>
+
+    <a href="https://wa.me/27835686995" class="whatsapp-btn" target="_blank" aria-label="Chat with Bodibe Digital on WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="careers.js"></script>
+  </body>
+</html>
