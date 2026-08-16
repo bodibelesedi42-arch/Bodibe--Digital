@@ -971,6 +971,22 @@ footer {
 
   text-shadow: 0 0 25px rgba(59, 130, 246, 0.45);
 }
+
+.hero-word-swap {
+  display: inline-block;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.hero-word-swap.swap-out {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-word-swap {
+    transition: none;
+  }
+}
 .circle {
   position: absolute;
 

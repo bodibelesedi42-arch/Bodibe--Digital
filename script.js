@@ -118,3 +118,24 @@ if (liveBackground) {
     });
 
 }
+
+/* ==========================
+   HERO DYNAMIC HEADING
+========================== */
+
+const heroWordSwap = document.getElementById("heroWordSwap");
+
+if (heroWordSwap && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const heroWords = ["brand", "business", "vision", "reputation"];
+  let heroWordIndex = 0;
+
+  setInterval(() => {
+    heroWordSwap.classList.add("swap-out");
+
+    setTimeout(() => {
+      heroWordIndex = (heroWordIndex + 1) % heroWords.length;
+      heroWordSwap.textContent = heroWords[heroWordIndex];
+      heroWordSwap.classList.remove("swap-out");
+    }, 350);
+  }, 2800);
+}
