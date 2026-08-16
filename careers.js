@@ -57,7 +57,7 @@ if (careersForm) {
             thanks.style.textAlign = "center";
             thanks.innerHTML = `
                 <h2><i class="fa-solid fa-circle-check"></i> Application received</h2>
-                <p style="color:#94a3b8;">Thanks for applying — reference <strong>${result.applicantId}</strong>. We'll be in touch if you're shortlisted.</p>
+                <p style="color:#94a3b8;">Thanks for applying — we'll be in touch if you're shortlisted.</p>
             `;
             careersForm.parentElement.appendChild(thanks);
         } catch (err) {
