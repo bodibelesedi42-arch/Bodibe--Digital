@@ -207,6 +207,36 @@ header {
 }
 
 /* ==========================
+   BUSINESS PORTAL CHIP
+   (shared by staff-login.html
+   and staff-dashboard.html)
+========================== */
+
+.portal-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.portal-chip i {
+  color: var(--secondary);
+}
+
+@media (max-width: 480px) {
+  .portal-chip span {
+    display: none;
+  }
+}
+
+/* ==========================
    NAVIGATION LINKS
 ========================== */
 

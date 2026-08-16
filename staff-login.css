@@ -1,0 +1,273 @@
+/* ==========================================
+   BODIBE DIGITAL
+   STAFF LOGIN — Business Portal
+========================================== */
+
+.staff-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 130px 20px 70px;
+}
+
+/* ---------- 3D STAGE ---------- */
+
+.staff-stage {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    perspective: 1400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stage-plane {
+    position: absolute;
+    left: 50%;
+    bottom: -80px;
+    width: 720px;
+    height: 360px;
+    transform: translateX(-50%) translateZ(-260px) rotateX(72deg);
+    background-image:
+        linear-gradient(rgba(96, 165, 250, 0.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(96, 165, 250, 0.14) 1px, transparent 1px);
+    background-size: 40px 40px;
+    -webkit-mask-image: radial-gradient(ellipse 55% 65% at center, #000 0%, transparent 72%);
+    mask-image: radial-gradient(ellipse 55% 65% at center, #000 0%, transparent 72%);
+    pointer-events: none;
+}
+
+.stage-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+}
+
+.stage-orb-a {
+    width: 260px;
+    height: 260px;
+    top: -60px;
+    left: -90px;
+    transform: translateZ(60px);
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.35), transparent 70%);
+}
+
+.stage-orb-b {
+    width: 220px;
+    height: 220px;
+    bottom: -70px;
+    right: -80px;
+    transform: translateZ(-40px);
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.28), transparent 70%);
+}
+
+/* ---------- CARD ---------- */
+
+.staff-card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg);
+    transition: transform 0.12s ease-out;
+    will-change: transform;
+
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.025)
+    );
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 26px;
+    padding: 48px 40px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 2px 0 rgba(255, 255, 255, 0.06) inset,
+        0 35px 80px rgba(2, 6, 16, 0.55),
+        0 12px 28px rgba(37, 99, 235, 0.12);
+}
+
+.staff-card-sheen {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        420px circle at var(--mx, 50%) var(--my, 30%),
+        rgba(255, 255, 255, 0.14),
+        transparent 60%
+    );
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
+.staff-label {
+    color: #60a5fa;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: block;
+    text-align: center;
+}
+
+.staff-card h1 {
+    font-size: 30px;
+    text-align: center;
+    margin: 12px 0 8px;
+}
+
+.staff-subtitle {
+    color: #94a3b8;
+    font-size: 13px;
+    text-align: center;
+    line-height: 1.55;
+    margin: 0 auto 32px;
+    max-width: 30ch;
+}
+
+.staff-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.staff-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.staff-field label {
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.staff-input-shell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.035);
+    transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.staff-input-shell i {
+    color: #64748b;
+    font-size: 13px;
+    transition: color 0.3s ease;
+}
+
+.staff-input-shell:focus-within {
+    border-color: rgba(96, 165, 250, 0.7);
+    background: rgba(59, 130, 246, 0.06);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    transform: translateZ(18px);
+}
+
+.staff-input-shell:focus-within i {
+    color: #60a5fa;
+}
+
+.staff-field input {
+    width: 100%;
+    padding: 14px 0;
+    border: none;
+    background: transparent;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+}
+
+.staff-error {
+    display: none;
+    color: #fca5a5;
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.25);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.staff-error.show {
+    display: block;
+}
+
+.staff-submit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 22px;
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 6px;
+}
+
+.staff-submit:hover {
+    transform: translateY(-3px) translateZ(10px);
+    box-shadow: 0 20px 45px rgba(59, 130, 246, 0.4);
+}
+
+.staff-submit:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+.staff-submit:disabled {
+    opacity: 0.6;
+    cursor: default;
+    transform: none;
+}
+
+.staff-back {
+    display: block;
+    text-align: center;
+    margin-top: 26px;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s ease;
+}
+
+.staff-back:hover {
+    color: #60a5fa;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .staff-card,
+    .stage-orb,
+    .staff-input-shell {
+        transition: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .staff-card {
+        padding: 36px 24px;
+    }
+    .stage-plane {
+        display: none;
+    }
+}

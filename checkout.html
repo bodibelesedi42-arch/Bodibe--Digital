@@ -7,20 +7,18 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Checkout | Bodibe Digital</title>
+    <title>Let's Build Your Project | Bodibe Digital</title>
 
     <meta
         name="description"
-        content="Start your Bodibe Digital website project."
+        content="Tell Bodibe Digital about your business and website project."
     >
+
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
@@ -41,10 +39,7 @@
 
 <body>
 
-
-    <!-- =========================
-         BACKGROUND
-    ========================== -->
+    <!-- BACKGROUND -->
 
     <div class="background-animation">
 
@@ -58,10 +53,7 @@
     </div>
 
 
-
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <!-- HEADER -->
 
     <header>
 
@@ -72,7 +64,7 @@
                 <div class="logo-mark">
 
                     <img
-                        src="assets/images/logo.png"
+                        src="assets/images/logo.svg"
                         alt="Bodibe Digital Logo"
                     >
 
@@ -93,7 +85,11 @@
                 href="pricing.html"
                 class="checkout-back"
             >
-                ← Back to pricing
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to pricing
+
             </a>
 
         </nav>
@@ -101,18 +97,14 @@
     </header>
 
 
-
-    <!-- =========================
-         CHECKOUT
-    ========================== -->
+    <!-- MAIN -->
 
     <main class="checkout-page">
-
 
         <section class="checkout-container">
 
 
-            <!-- LEFT SIDE -->
+            <!-- LEFT: PROJECT SUMMARY -->
 
             <div class="checkout-summary">
 
@@ -120,17 +112,21 @@
                     BODIBE DIGITAL
                 </span>
 
+
                 <h1>
-                    Start your project.
+                    Let's build your project.
                 </h1>
 
+
                 <p class="checkout-intro">
-                    Review your selected package and
-                    provide your details to get started.
+
+                    Tell us about your business, your goals
+                    and what you need your website to do.
+
                 </p>
 
 
-                <!-- PACKAGE -->
+                <!-- SELECTED PACKAGE -->
 
                 <div class="selected-package">
 
@@ -148,6 +144,7 @@
 
                         </div>
 
+
                         <i class="fa-solid fa-globe"></i>
 
                     </div>
@@ -157,15 +154,10 @@
 
                         <span>R</span>
 
-                        <strong id="packagePrice">
-                            3,499
-                        </strong>
-
-                        <small>
-                            .99
-                        </small>
+                        <strong id="packagePrice">3,499<small>.99</small></strong>
 
                     </div>
+
 
                     <p class="payment-type">
                         One-time payment
@@ -176,7 +168,7 @@
 
 
                     <h3>
-                        What's included
+                        Your package includes
                     </h3>
 
 
@@ -217,39 +209,45 @@
                 </div>
 
 
-                <p class="checkout-note">
+                <div class="checkout-note">
 
-                    <i class="fa-solid fa-shield-halved"></i>
+                    <i class="fa-solid fa-circle-info"></i>
 
-                    Your information is only used to
-                    process your project enquiry.
+                    <span>
+                        We'll review your information before
+                        beginning the project.
+                    </span>
 
-                </p>
+                </div>
 
             </div>
 
 
 
-            <!-- RIGHT SIDE -->
+            <!-- RIGHT: ENQUIRY FORM -->
 
             <div class="checkout-form-container">
+
 
                 <div class="form-heading">
 
                     <span>
-                        PROJECT DETAILS
+                        PROJECT ENQUIRY
                     </span>
 
+
                     <h2>
-                        Tell us about yourself
+                        Tell us about your business
                     </h2>
 
+
                     <p>
-                        We'll use these details to contact
-                        you about your project.
+                        The more information you provide,
+                        the better we can understand your vision.
                     </p>
 
                 </div>
+
 
 
                 <form
@@ -258,6 +256,8 @@
                     method="POST"
                 >
 
+
+                    <!-- PACKAGE DATA -->
 
                     <input
                         type="hidden"
@@ -275,19 +275,53 @@
                     >
 
 
+                    <!-- VISIBLE PACKAGE CONFIRMATION -->
+
+                    <div class="selected-form-package">
+
+                        <div class="selected-form-package-icon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+
+                        <div>
+                            <span>YOU SELECTED</span>
+
+                            <strong id="formPackageName">
+                                Business Website
+                            </strong>
+
+                            <small id="formPackagePrice">
+                                R3,499.99
+                            </small>
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONTACT INFORMATION -->
+
+                    <div class="form-section-title">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        Your information
+
+                    </div>
+
+
                     <div class="form-row">
 
                         <div class="form-group">
 
                             <label for="name">
-                                Full name
+                                Full name *
                             </label>
 
                             <input
                                 type="text"
                                 id="name"
                                 name="name"
-                                placeholder="Your name"
+                                placeholder="e.g. Lesedi Bodibe"
                                 required
                             >
 
@@ -297,14 +331,52 @@
                         <div class="form-group">
 
                             <label for="business">
-                                Business name
+                                Business name *
                             </label>
 
                             <input
                                 type="text"
                                 id="business"
                                 name="business"
-                                placeholder="Your business"
+                                placeholder="e.g. Bodibe Digital"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email address *
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                WhatsApp / phone *
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="+27 00 000 0000"
                                 required
                             >
 
@@ -314,19 +386,180 @@
 
 
 
+                    <!-- BUSINESS INFORMATION -->
+
+                    <div class="form-section-title">
+
+                        <i class="fa-solid fa-building"></i>
+
+                        About your business
+
+                    </div>
+
+
                     <div class="form-group">
 
-                        <label for="email">
-                            Email address
+                        <label for="business_description">
+                            Tell us about your business *
                         </label>
 
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="you@example.com"
+                        <textarea
+                            id="business_description"
+                            name="business_description"
+                            rows="4"
+                            placeholder="What does your business do? Who are your customers?"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="website_goal">
+                            What should your website achieve? *
+                        </label>
+
+                        <textarea
+                            id="website_goal"
+                            name="website_goal"
+                            rows="4"
+                            placeholder="For example: attract customers, showcase services, receive enquiries, sell products..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <!-- WEBSITE DETAILS -->
+
+                    <div class="form-section-title">
+
+                        <i class="fa-solid fa-laptop-code"></i>
+
+                        Website requirements
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="website_type">
+                            What type of website do you need? *
+                        </label>
+
+                        <select
+                            id="website_type"
+                            name="website_type"
                             required
                         >
+
+                            <option value="">
+                                Select an option
+                            </option>
+
+                            <option value="Business website">
+                                Business website
+                            </option>
+
+                            <option value="Portfolio website">
+                                Portfolio website
+                            </option>
+
+                            <option value="Online store">
+                                Online store
+                            </option>
+
+                            <option value="Booking website">
+                                Booking website
+                            </option>
+
+                            <option value="Landing page">
+                                Landing page
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="branding">
+                                Do you have branding?
+                            </label>
+
+                            <select
+                                id="branding"
+                                name="branding"
+                            >
+
+                                <option value="">
+                                    Select an option
+                                </option>
+
+                                <option value="Yes - complete branding">
+                                    Yes — complete branding
+                                </option>
+
+                                <option value="Logo only">
+                                    Logo only
+                                </option>
+
+                                <option value="No branding">
+                                    No branding
+                                </option>
+
+                                <option value="Need help with branding">
+                                    I need help with branding
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="content">
+                                Do you have website content?
+                            </label>
+
+                            <select
+                                id="content"
+                                name="content"
+                            >
+
+                                <option value="">
+                                    Select an option
+                                </option>
+
+                                <option value="Yes - ready">
+                                    Yes — ready
+                                </option>
+
+                                <option value="Some content">
+                                    Some content
+                                </option>
+
+                                <option value="No content">
+                                    No content yet
+                                </option>
+
+                                <option value="Need help">
+                                    I need help creating it
+                                </option>
+
+                            </select>
+
+                        </div>
 
                     </div>
 
@@ -334,16 +567,32 @@
 
                     <div class="form-group">
 
-                        <label for="phone">
-                            WhatsApp / phone
+                        <label for="features">
+                            Features or special requirements
+                        </label>
+
+                        <textarea
+                            id="features"
+                            name="features"
+                            rows="4"
+                            placeholder="Examples: booking system, gallery, WhatsApp, online payments, customer login, forms..."
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="reference_website">
+                            Websites you like
                         </label>
 
                         <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            placeholder="+27 ..."
-                            required
+                            type="url"
+                            id="reference_website"
+                            name="reference_website"
+                            placeholder="https://example.com"
                         >
 
                     </div>
@@ -353,15 +602,14 @@
                     <div class="form-group">
 
                         <label for="message">
-                            Tell us about your project
+                            Anything else we should know?
                         </label>
 
                         <textarea
                             id="message"
                             name="message"
-                            rows="5"
-                            placeholder="Tell us what you need your website to do..."
-                            required
+                            rows="4"
+                            placeholder="Add any other information, ideas or requirements..."
                         ></textarea>
 
                     </div>
@@ -378,12 +626,13 @@
                             required
                         >
 
+
                         <span>
 
-                            I understand that submitting this
-                            form is a project enquiry and does
-                            not constitute payment or a confirmed
-                            project.
+                            I confirm that the information provided
+                            is accurate and I understand that
+                            submitting this enquiry will continue
+                            to the selected payment process.
 
                         </span>
 
@@ -391,12 +640,14 @@
 
 
 
+                    <!-- SUBMIT -->
+
                     <button
                         type="submit"
                         class="checkout-submit"
                     >
 
-                        Continue
+                        Continue to Payment
 
                         <i class="fa-solid fa-arrow-right"></i>
 
@@ -407,7 +658,7 @@
 
                         <i class="fa-solid fa-lock"></i>
 
-                        Secure enquiry · No payment taken yet
+                        Secure payment via PayFast Sandbox
 
                     </p>
 
@@ -417,14 +668,11 @@
 
         </section>
 
-
     </main>
 
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+    <!-- FOOTER -->
 
     <footer>
 
@@ -436,7 +684,6 @@
         </div>
 
     </footer>
-
 
 
     <script src="checkout.js"></script>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Bodibe Digital</title>
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="staff-dashboard.css" />
+  </head>
+
+  <body class="portal-body">
+    <div class="background-animation">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <header>
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <div class="logo-mark">
+            <img src="assets/images/logo.svg" alt="Bodibe Digital Logo" />
+          </div>
+          <div class="logo-details">
+            <h2>Bodibe</h2>
+            <small>DIGITAL</small>
+          </div>
+        </a>
+        <span class="portal-chip"><i class="fa-solid fa-building"></i><span>Business Portal</span></span>
+      </nav>
+    </header>
+
+    <main class="dash-page">
+      <div class="dash-header">
+        <div class="dash-greeting">
+          <span>DASHBOARD</span>
+          <h1 id="greetingName">Welcome back</h1>
+          <p class="dash-role" id="roleLine"></p>
+        </div>
+        <button class="dash-logout" id="logoutBtn">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          Sign Out
+        </button>
+      </div>
+
+      <div id="dashContent">
+        <div class="dash-loading">Loading your work...</div>
+      </div>
+    </main>
+
+    <script src="portal-effects.js"></script>
+    <script src="staff-dashboard.js"></script>
+  </body>
+</html>

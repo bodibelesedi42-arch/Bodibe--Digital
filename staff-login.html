@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff Login | Bodibe Digital</title>
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="staff-login.css" />
+  </head>
+
+  <body class="portal-body">
+    <div class="background-animation">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <header>
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <div class="logo-mark">
+            <img src="assets/images/logo.svg" alt="Bodibe Digital Logo" />
+          </div>
+          <div class="logo-details">
+            <h2>Bodibe</h2>
+            <small>DIGITAL</small>
+          </div>
+        </a>
+        <span class="portal-chip"><i class="fa-solid fa-building"></i><span>Business Portal</span></span>
+      </nav>
+    </header>
+
+    <main class="staff-page">
+
+      <!-- 3D STAGE: everything inside tilts together with the cursor -->
+      <div class="staff-stage" id="staffStage">
+
+        <div class="stage-plane" aria-hidden="true"></div>
+        <div class="stage-orb stage-orb-a" aria-hidden="true"></div>
+        <div class="stage-orb stage-orb-b" aria-hidden="true"></div>
+
+        <div class="staff-card" id="staffCard">
+          <div class="staff-card-sheen" aria-hidden="true"></div>
+
+          <span class="staff-label">BODIBE DIGITAL</span>
+          <h1>Welcome back.</h1>
+          <p class="staff-subtitle">Sign in with your work email and password to reach your projects and tasks.</p>
+
+          <div class="staff-error" id="loginError"></div>
+
+          <form class="staff-form" id="loginForm">
+            <div class="staff-field">
+              <label for="email">Email</label>
+              <div class="staff-input-shell">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder="you@bodibedigital.co.za" required autocomplete="username" />
+              </div>
+            </div>
+
+            <div class="staff-field">
+              <label for="password">Password</label>
+              <div class="staff-input-shell">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password" />
+              </div>
+            </div>
+
+            <button type="submit" class="staff-submit" id="submitBtn">
+              Sign In
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+
+          <a href="index.html" class="staff-back">← Back to website</a>
+        </div>
+
+      </div>
+
+    </main>
+
+    <script src="portal-effects.js"></script>
+    <script src="staff-login.js"></script>
+  </body>
+</html>

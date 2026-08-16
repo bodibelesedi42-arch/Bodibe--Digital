@@ -27,6 +27,9 @@ const packagePrice = document.querySelector("#packagePrice");
 const selectedPackage = document.querySelector("#selectedPackage");
 const selectedPrice = document.querySelector("#selectedPrice");
 
+const formPackageName = document.querySelector("#formPackageName");
+const formPackagePrice = document.querySelector("#formPackagePrice");
+
 if (packageName) {
   packageName.textContent = plan.name;
 }
@@ -43,6 +46,14 @@ if (selectedPackage) {
 
 if (selectedPrice) {
   selectedPrice.value = plan.price;
+}
+
+if (formPackageName) {
+  formPackageName.textContent = plan.name;
+}
+
+if (formPackagePrice) {
+  formPackagePrice.textContent = plan.price;
 }
 
 /* ==========================================
@@ -77,7 +88,18 @@ if (checkoutForm) {
       submitBtn.innerHTML = "Processing...";
     }
 
+    // One shared reference ID for this whole checkout — sent to both Google Sheets
+    // (as the Reference ID column) and to PayFast (as m_payment_id), so a payment
+    // notification can be matched back to the right Leads row later. This is
+    // separate from Lead ID, which Apps Script generates on its own.
+    const leadRef =
+      "BD-" +
+      Date.now() +
+      "-" +
+      Math.random().toString(36).substring(2, 7).toUpperCase();
+
     const formData = new FormData(checkoutForm);
+    formData.append("reference", leadRef);
     const name = formData.get("name");
     const business = formData.get("business");
     const email = formData.get("email");
@@ -107,6 +129,7 @@ if (checkoutForm) {
           itemName: plan.name,
           itemDescription:
             `${business ? business + " — " : ""}${message || ""}`.slice(0, 255),
+          reference: leadRef,
         }),
       });
 
@@ -143,4 +166,3 @@ if (checkoutForm) {
     }
   });
 }
-

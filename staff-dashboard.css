@@ -1,0 +1,232 @@
+/* ==========================================
+   BODIBE DIGITAL
+   STAFF DASHBOARD
+========================================== */
+
+.dash-page {
+    min-height: calc(100vh - 90px);
+    padding: 130px 20px 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.dash-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+}
+
+.dash-greeting span {
+    color: #60a5fa;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.dash-greeting h1 {
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.dash-role {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.dash-logout {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+    color: #cbd5e1;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+    height: fit-content;
+}
+
+.dash-logout:hover {
+    border-color: rgba(248, 113, 113, 0.4);
+    color: #fca5a5;
+}
+
+.dash-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.dash-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px;
+    padding: 28px;
+    backdrop-filter: blur(16px);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.05) inset,
+        0 24px 50px -28px rgba(2, 6, 16, 0.7);
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out, border-color 0.18s ease-out;
+    will-change: transform;
+}
+
+.dash-card:hover {
+    border-color: rgba(96, 165, 250, 0.25);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.06) inset,
+        0 30px 60px -26px rgba(2, 6, 16, 0.75),
+        0 10px 24px -12px rgba(59, 130, 246, 0.2);
+}
+
+.dash-card h2 {
+    font-size: 16px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dash-card h2 i {
+    color: #60a5fa;
+}
+
+.dash-empty {
+    color: #64748b;
+    font-size: 13px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.dash-item {
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 10px;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.dash-item:hover {
+    background: rgba(255, 255, 255, 0.045);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(2px);
+}
+
+.dash-item:last-child {
+    margin-bottom: 0;
+}
+
+.dash-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.dash-item-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f1f5f9;
+}
+
+.dash-item-meta {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.dash-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 50px;
+    text-transform: uppercase;
+}
+
+.dash-badge.status-progress { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+.dash-badge.status-hold { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+.dash-badge.status-overdue { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+.dash-badge.status-default { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+
+.dash-progress-track {
+    height: 6px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.dash-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 10px;
+}
+
+.dash-loading {
+    text-align: center;
+    color: #64748b;
+    padding: 40px 0;
+    font-size: 13px;
+}
+
+.dash-stats {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.dash-stat {
+    flex: 1;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 18px;
+    text-align: center;
+    box-shadow: 0 18px 36px -22px rgba(2, 6, 16, 0.7);
+    transition: transform 0.18s ease-out, border-color 0.18s ease-out;
+    will-change: transform;
+}
+
+.dash-stat:hover {
+    border-color: rgba(96, 165, 250, 0.3);
+}
+
+.dash-stat strong {
+    display: block;
+    font-size: 26px;
+    color: #60a5fa;
+}
+
+.dash-stat span {
+    font-size: 11px;
+    color: #94a3b8;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 800px) {
+    .dash-grid {
+        grid-template-columns: 1fr;
+    }
+    .dash-stats {
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dash-card,
+    .dash-stat,
+    .dash-item {
+        transition: none !important;
+    }
+}

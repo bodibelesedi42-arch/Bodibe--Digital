@@ -626,3 +626,56 @@ footer {
     }
 
 }
+
+
+/* ==========================================
+   SELECTED PACKAGE CONFIRMATION
+========================================== */
+
+.selected-form-package {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 14px;
+    background: rgba(59, 130, 246, 0.06);
+}
+
+.selected-form-package-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.12);
+    color: #3B82F6;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.selected-form-package span {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #94A3B8;
+}
+
+.selected-form-package strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #F8FAFC;
+}
+
+.selected-form-package small {
+    display: block;
+    margin-top: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #60A5FA;
+}

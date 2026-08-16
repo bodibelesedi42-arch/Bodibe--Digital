@@ -1,12 +1,14 @@
-window.addEventListener("scroll", () => {
-  const scrollTop = window.scrollY;
+const progressBar = document.querySelector(".progress-bar");
 
-  const height = document.documentElement.scrollHeight - window.innerHeight;
+if (progressBar) {
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    const percentage = (scrollTop / height) * 100;
 
-  const percentage = (scrollTop / height) * 100;
-
-  document.querySelector(".progress-bar").style.width = percentage + "%";
-});
+    progressBar.style.width = percentage + "%";
+  });
+}
 const elements = document.querySelectorAll(
   ".services,.portfolio,.about,.contact",
 );
@@ -36,21 +38,27 @@ window.addEventListener("scroll", () => {
 const menuToggle = document.querySelector(".menu-toggle");
 const navLinks = document.querySelector(".nav-links");
 
-menuToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("active");
-});
-
-navLinks.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("active");
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
   });
-});
 
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    document.querySelector(".loader").classList.add("hide");
-  }, 1800);
-});
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("active");
+    });
+  });
+}
+
+const loader = document.querySelector(".loader");
+
+if (loader) {
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      loader.classList.add("hide");
+    }, 1800);
+  });
+}
 
 const backgroundLayer = document.querySelector(".background-animation");
 
