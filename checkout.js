@@ -130,6 +130,9 @@ if (checkoutForm) {
           itemDescription:
             `${business ? business + " — " : ""}${message || ""}`.slice(0, 255),
           reference: leadRef,
+          business: business || "",
+          phone: phone || "",
+          message: message || "",
         }),
       });
 
