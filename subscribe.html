@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Subscribe | Bodibe Digital</title>
+
+    <meta
+        name="description"
+        content="Subscribe to the Bodibe Digital business operations platform."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="checkout.css">
+
+</head>
+
+
+<body>
+
+
+    <div class="background-animation">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+
+
+    <header>
+
+        <nav class="navbar">
+
+            <a href="index.html" class="logo">
+
+                <div class="logo-mark">
+
+                    <img
+                        src="assets/images/logo.png"
+                        alt="Bodibe Digital Logo"
+                    >
+
+                </div>
+
+                <div class="logo-details">
+
+                    <h2>Bodibe</h2>
+
+                    <small>DIGITAL</small>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="pricing.html"
+                class="checkout-back"
+            >
+                ← Back to pricing
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <main class="checkout-page">
+
+
+        <section class="checkout-container">
+
+
+            <!-- LEFT SIDE -->
+
+            <div class="checkout-summary">
+
+                <span class="checkout-label">
+                    BODIBE DIGITAL
+                </span>
+
+                <h1>
+                    Start your subscription.
+                </h1>
+
+                <p class="checkout-intro">
+                    Recurring monthly billing via PayFast. Cancel any time by
+                    contacting us directly — automated self-service
+                    cancellation is coming soon.
+                </p>
+
+
+                <div class="selected-package">
+
+                    <div class="package-top">
+
+                        <div>
+
+                            <span class="package-label">
+                                SELECTED PLAN
+                            </span>
+
+                            <h2 id="tierName">
+                                Ops Platform — Growth
+                            </h2>
+
+                        </div>
+
+                        <i class="fa-solid fa-arrows-rotate"></i>
+
+                    </div>
+
+
+                    <div class="package-price">
+
+                        <span>R</span>
+
+                        <strong id="tierPrice">
+                            499
+                        </strong>
+
+                        <small>
+                            .00
+                        </small>
+
+                    </div>
+
+                    <p class="payment-type">
+                        Billed monthly · cancel any time
+                    </p>
+
+
+                    <div class="package-divider"></div>
+
+
+                    <h3>
+                        What's included
+                    </h3>
+
+
+                    <ul class="checkout-features" id="tierFeatures">
+                        <!-- populated by subscribe.js -->
+                    </ul>
+
+                </div>
+
+
+                <p class="checkout-note">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    Your card is processed securely by PayFast — we never see
+                    or store your card details.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="checkout-form-container">
+
+                <div class="form-heading">
+
+                    <span>
+                        YOUR DETAILS
+                    </span>
+
+                    <h2>
+                        Tell us who's subscribing
+                    </h2>
+
+                    <p>
+                        We'll use these details to set up your billing and
+                        send you access.
+                    </p>
+
+                </div>
+
+
+                <form
+                    class="subscribe-form"
+                    id="subscribeForm"
+                >
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            required
+                        >
+
+                    </div>
+
+
+                    <label class="terms">
+
+                        <input
+                            type="checkbox"
+                            name="terms"
+                            required
+                        >
+
+                        <span>
+
+                            I understand this starts a recurring monthly
+                            subscription that will keep billing my card until
+                            I contact Bodibe Digital to cancel.
+
+                        </span>
+
+                    </label>
+
+
+
+                    <button
+                        type="submit"
+                        class="checkout-submit"
+                    >
+
+                        Subscribe & Continue
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                    <p class="secure-note">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        Secure recurring payment via PayFast
+
+                    </p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <footer>
+
+        <div class="copyright">
+
+            © 2026 Bodibe Digital.
+            All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+
+    <script src="subscribe.js"></script>
+
+</body>
+
+</html>
