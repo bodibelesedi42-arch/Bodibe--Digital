@@ -1,0 +1,1183 @@
+/* ==========================================================================
+   BODIBE DIGITAL — CRM / LEADS WORKSPACE
+
+   Layered on top of staff-dashboard.css, which owns the portal shell (sidebar,
+   drawer, notices). This file only styles the Leads content.
+
+   The 1024/1025px boundary here is deliberately the SAME boundary as the
+   sidebar's and as BodibeAccess.DESKTOP_MIN, so the rule an employee actually
+   experiences stays checkable: if you can see the full sidebar, you have the
+   full workspace — and the ten-column table.
+   ========================================================================== */
+
+.crm-page {
+  padding: 2.5rem 1.75rem 4rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.crm-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Header ---------- */
+.crm-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.crm-eyebrow {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  margin-bottom: 0.45rem;
+}
+
+.crm-header h1 {
+  font-size: 1.9rem;
+  line-height: 1.15;
+  margin: 0 0 0.35rem;
+  color: var(--text);
+}
+
+.crm-subtitle {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+}
+
+.crm-header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* ---------- Buttons ---------- */
+.crm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-glass);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.crm-btn:hover:not(:disabled) {
+  background: var(--surface-glass-strong);
+  border-color: var(--accent-secondary);
+}
+
+.crm-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.crm-btn-primary {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+.crm-btn-primary:hover:not(:disabled) {
+  background: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+  color: #ffffff;
+}
+
+.crm-btn-danger {
+  color: var(--error);
+  border-color: var(--error-border);
+  background: var(--error-bg);
+}
+
+.crm-btn-danger:hover:not(:disabled) {
+  border-color: var(--error);
+  background: var(--error-bg);
+}
+
+/* Why a control the employee IS authorised for is not on screen here. */
+.crm-device-note {
+  margin: 0;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  max-width: 30ch;
+}
+
+/* In the drawer the note sits on its own line under the last section. */
+.crm-device-note.is-block {
+  max-width: none;
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ---------- Follow-ups: "who do I need to contact today?" ---------- */
+.crm-followups {
+  margin-bottom: 1.5rem;
+}
+
+.crm-section-heading {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 0.7rem;
+}
+
+.crm-followup-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.crm-followup {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.1rem 0.75rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-glass);
+  color: var(--text);
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.crm-followup:hover {
+  background: var(--surface-glass-strong);
+}
+
+/* Pressed state is carried by a thicker border and an inset ring, not by
+   colour alone. */
+.crm-followup.is-active {
+  border-color: var(--accent-secondary);
+  box-shadow: inset 0 0 0 1px var(--accent-secondary);
+}
+
+.crm-followup-n {
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.crm-followup-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.crm-followup-icon {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  font-size: 0.72rem;
+}
+
+.crm-fu-overdue .crm-followup-icon {
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+.crm-fu-today .crm-followup-icon {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.crm-fu-upcoming .crm-followup-icon {
+  background: var(--surface-glass-strong);
+  color: var(--text-secondary);
+}
+
+.crm-followup-clear {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--success-border);
+  background: var(--success-bg);
+  color: var(--success);
+  font-size: 0.82rem;
+}
+
+/* ---------- Toolbar ---------- */
+.crm-toolbar[hidden] {
+  display: none;
+}
+
+.crm-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.7rem;
+  padding: 0.9rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface-glass-soft);
+  margin-bottom: 1rem;
+}
+
+.crm-search {
+  position: relative;
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.crm-search i {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  pointer-events: none;
+}
+
+.crm-search input {
+  width: 100%;
+  padding: 0.62rem 0.8rem 0.62rem 2.1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.84rem;
+}
+
+.crm-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  min-width: 0;
+}
+
+.crm-filter label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.crm-filter select {
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.82rem;
+  max-width: 12rem;
+}
+
+.crm-clear[hidden] {
+  display: none;
+}
+
+.crm-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 10px;
+  border: 1px dashed var(--border-strong);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.crm-clear:hover {
+  color: var(--text);
+  border-color: var(--accent-secondary);
+}
+
+.crm-result-count {
+  margin: 0 0 0.7rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Status pills ---------- */
+.crm-status {
+  display: inline-block;
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-glass);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.crm-status.is-new {
+  border-color: var(--accent-secondary);
+  color: var(--accent-secondary);
+}
+
+.crm-status.is-contacted {
+  border-color: var(--warning-border);
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.crm-status.is-quoted {
+  border-color: var(--accent-secondary);
+  background: var(--accent-glow-soft);
+  color: var(--accent-secondary);
+}
+
+.crm-status.is-won,
+.crm-status.is-paid {
+  border-color: var(--success-border);
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.crm-status.is-lost {
+  border-color: var(--error-border);
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+/* ---------- Follow-up tags ----------
+   Icon + word, never colour alone: these have to survive greyscale printing
+   and colour-blindness. */
+.crm-fu-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.crm-fu-tag.crm-fu-overdue {
+  color: var(--error);
+}
+
+.crm-fu-tag.crm-fu-today {
+  color: var(--warning);
+}
+
+.crm-fu-tag.crm-fu-upcoming {
+  color: var(--text-secondary);
+}
+
+.crm-fu-tag.crm-fu-none {
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+.crm-fu-sub {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+
+/* ---------- Table (desktop) ---------- */
+.crm-table-wrap {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-glass-soft);
+  overflow-x: auto;
+}
+
+.crm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+/* Lead ID, Date, Phone, Status, Follow-up: short, fixed-shape values that
+   should never wrap. Client / Business / Email / Project type may. */
+.crm-table th:nth-child(1), .crm-table td:nth-child(1),
+.crm-table th:nth-child(2), .crm-table td:nth-child(2),
+.crm-table th:nth-child(6), .crm-table td:nth-child(6),
+.crm-table th:nth-child(9), .crm-table td:nth-child(9),
+.crm-table th:nth-child(10), .crm-table td:nth-child(10) {
+  white-space: nowrap;
+}
+
+.crm-table td:nth-child(5) {
+  min-width: 7rem;
+}
+
+.crm-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: left;
+  padding: 0.7rem 0.6rem;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border-strong);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.crm-table td {
+  padding: 0.7rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.crm-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.crm-table tbody tr:hover td {
+  background: var(--surface-glass);
+}
+
+.crm-cell-strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.crm-cell-wrap {
+  overflow-wrap: anywhere;
+}
+
+.crm-table a {
+  color: var(--accent-secondary);
+  text-decoration: none;
+}
+
+.crm-table a:hover {
+  text-decoration: underline;
+}
+
+/* The left edge repeats the follow-up bucket as a border WEIGHT and STYLE,
+   so an overdue row is distinguishable without reading the colour. */
+.crm-row > td:first-child {
+  border-left: 3px solid transparent;
+}
+
+.crm-row-overdue > td:first-child {
+  border-left: 3px solid var(--error);
+}
+
+.crm-row-today > td:first-child {
+  border-left: 3px dashed var(--warning);
+}
+
+.crm-idlink {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.crm-cards {
+  display: none;
+}
+
+/* ---------- Narrow desktop: 1025-1199px ----------
+   1025px is the NARROWEST desktop -- the exact policy boundary -- and the
+   sidebar takes a fixed 248px of it. Ten columns do not fit in what is left,
+   and the column that gets pushed off the right edge is Follow-up: the one
+   the page exists to show. Rather than squeeze every column unreadably or
+   hide the answer behind a sideways scroll, two columns step aside here:
+
+     Email    -- long, and it is a tap-to-mail link in the lead detail anyway
+     Package  -- usually blank, and Project Type already says the same thing
+
+   Both are still in the lead detail, one click away. Everything that
+   identifies a lead (ID, client, business, phone) and everything that drives
+   the day (status, follow-up) stays on screen. */
+@media (min-width: 1025px) and (max-width: 1199px) {
+  .crm-page {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .crm-table th:nth-child(5),
+  .crm-table td:nth-child(5),
+  .crm-table th:nth-child(7),
+  .crm-table td:nth-child(7) {
+    display: none;
+  }
+
+  .crm-table thead th,
+  .crm-table td {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+/* ---------- Cards (tablet / mobile) ---------- */
+@media (max-width: 1024px) {
+  .crm-table-wrap {
+    display: none;
+  }
+
+  .crm-cards {
+    display: grid;
+    gap: 0.7rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .crm-card {
+    border: 1px solid var(--border);
+    border-left-width: 3px;
+    border-left-color: transparent;
+    border-radius: 12px;
+    background: var(--surface-glass-soft);
+    overflow: hidden;
+  }
+
+  .crm-card.crm-row-overdue {
+    border-left-style: solid;
+    border-left-color: var(--error);
+  }
+
+  .crm-card.crm-row-today {
+    border-left-style: dashed;
+    border-left-color: var(--warning);
+  }
+
+  .crm-card-open {
+    display: grid;
+    gap: 0.35rem;
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 0;
+    background: none;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .crm-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+  }
+
+  .crm-card-id {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--accent-secondary);
+  }
+
+  .crm-card-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .crm-card-biz {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+  }
+
+  .crm-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.7rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .crm-card-fu {
+    margin-top: 0.2rem;
+  }
+
+  .crm-card-contact {
+    display: flex;
+    border-top: 1px solid var(--border);
+  }
+
+  .crm-card-contact a {
+    flex: 1 1 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-secondary);
+    text-decoration: none;
+  }
+
+  .crm-card-contact a + a {
+    border-left: 1px solid var(--border);
+  }
+
+  .crm-card-contact a:hover {
+    background: var(--surface-glass);
+  }
+}
+
+/* ---------- Empty / loading ---------- */
+.crm-empty,
+.crm-loading {
+  margin: 0;
+  padding: 2rem 1.25rem;
+  border: 1px dashed var(--border-strong);
+  border-radius: 14px;
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+}
+
+/* ---------- Lead drawer ---------- */
+.crm-drawer-backdrop[hidden],
+.crm-drawer[hidden] {
+  display: none;
+}
+
+.crm-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: rgba(2, 6, 23, 0.62);
+  backdrop-filter: blur(2px);
+}
+
+.crm-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1201;
+  width: min(30rem, 100vw);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-left: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-elevated);
+  transform: translateX(100%);
+  transition: transform 0.22s ease;
+}
+
+.crm-drawer.is-open {
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crm-drawer {
+    transition: none;
+  }
+}
+
+body.crm-drawer-open {
+  overflow: hidden;
+}
+
+.crm-drawer-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--header-bg);
+}
+
+.crm-drawer-eyebrow {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.crm-drawer-head h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.crm-drawer-close {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-glass);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.crm-drawer-close:hover {
+  color: var(--text);
+  border-color: var(--accent-secondary);
+}
+
+.crm-drawer-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 1.25rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.crm-drawer-summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+}
+
+.crm-drawer-heading {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 1.6rem 0 0.7rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.crm-drawer-hint {
+  margin: 0.6rem 0 0;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.crm-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 0;
+}
+
+.crm-fields.is-stacked {
+  grid-template-columns: 1fr;
+}
+
+.crm-field.is-wide {
+  grid-column: 1 / -1;
+}
+
+.crm-field dt {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.22rem;
+}
+
+.crm-field dd {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.crm-field dd a {
+  color: var(--accent-secondary);
+}
+
+/* ---------- Edit / create forms ---------- */
+.crm-edit {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.crm-edit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.crm-edit-field {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.crm-edit-field > span {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.crm-edit-field input,
+.crm-edit-field select,
+.crm-edit-field textarea {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-glass);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.86rem;
+}
+
+.crm-edit-field textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.crm-edit-field input:focus,
+.crm-edit-field select:focus,
+.crm-edit-field textarea:focus,
+.crm-search input:focus,
+.crm-filter select:focus {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 1px;
+  border-color: var(--accent-secondary);
+}
+
+.crm-edit-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.crm-edit-status,
+.crm-op-status {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.crm-edit-status.is-ok,
+.crm-op-status.is-ok {
+  color: var(--success);
+}
+
+.crm-edit-status.is-error,
+.crm-op-status.is-error {
+  color: var(--error);
+}
+
+.crm-op-status {
+  margin: 0.7rem 0 0;
+  line-height: 1.5;
+}
+
+.crm-drawer-ops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* Focus must always be visible — this is a keyboard-heavy admin surface. */
+.crm-btn:focus-visible,
+.crm-clear:focus-visible,
+.crm-idlink:focus-visible,
+.crm-followup:focus-visible,
+.crm-card-open:focus-visible,
+.crm-card-contact a:focus-visible,
+.crm-drawer-close:focus-visible {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 2px;
+}
+
+/* ---------- Narrow phones ---------- */
+@media (max-width: 1024px) {
+  .crm-page {
+    padding: 1.25rem 1rem 3rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .crm-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .crm-header-actions {
+    width: 100%;
+  }
+
+  .crm-toolbar {
+    padding: 0.75rem;
+  }
+
+  .crm-filter {
+    flex: 1 1 8rem;
+  }
+
+  .crm-filter select {
+    max-width: none;
+    width: 100%;
+  }
+
+  .crm-followup {
+    flex: 1 1 100%;
+  }
+
+  .crm-drawer {
+    width: 100vw;
+    border-left: 0;
+  }
+
+  .crm-fields,
+  .crm-edit-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   DISCOVERY & QUALIFICATION
+
+   A verdict is never carried by colour alone: each one has an icon and the
+   word, and the guidance underneath says the same thing in a sentence.
+   ========================================================================== */
+
+.crm-disc-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.crm-disc-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-glass-soft);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.crm-disc-state.is-done {
+  border-color: var(--success-border);
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.crm-disc-when {
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+.crm-verdict {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-glass-soft);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.crm-verdict.is-good {
+  border-color: var(--success-border);
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.crm-verdict.is-partial,
+.crm-verdict.is-wait {
+  border-color: var(--warning-border);
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.crm-verdict.is-risk {
+  border-color: var(--error-border);
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+/* ---------- the verdict panel ---------- */
+
+.crm-disc-verdict {
+  padding: 0.85rem 0.95rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  background: var(--surface-glass-soft);
+  margin-bottom: 0.9rem;
+}
+
+.crm-disc-verdict.is-good { border-left-color: var(--success); }
+.crm-disc-verdict.is-partial,
+.crm-disc-verdict.is-wait { border-left-color: var(--warning); }
+.crm-disc-verdict.is-risk { border-left-color: var(--error); }
+.crm-disc-verdict.is-unknown { border-left-color: var(--border-strong); }
+
+.crm-disc-headline {
+  margin: 0 0 0.35rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.crm-disc-guidance {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.crm-disc-subhead {
+  margin: 0.9rem 0 0.4rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.crm-disc-avoid {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin: 0 0 0.5rem;
+  font-size: 0.79rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.crm-disc-avoid i { margin-top: 0.15rem; color: var(--error); }
+
+.crm-disc-ops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.crm-disc-ops li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.crm-disc-ops i { margin-top: 0.2rem; color: var(--accent-secondary); font-size: 0.7rem; }
+
+/* ---------- the questionnaire ---------- */
+
+.crm-disc-form {
+  margin-top: 0.85rem;
+  padding: 0.95rem 1rem 1rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  background: var(--surface-glass);
+}
+
+.crm-disc-set {
+  margin: 0 0 0.85rem;
+  padding: 0;
+  border: 0;
+}
+
+.crm-disc-set legend {
+  padding: 0;
+  margin-bottom: 0.45rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.crm-disc-checks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.35rem;
+}
+
+.crm-disc-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.35rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-glass-soft);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.crm-disc-check:hover { border-color: var(--border-strong); }
+
+.crm-disc-check input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  accent-color: var(--accent-primary);
+}
+
+.crm-disc-check:focus-within {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+  .crm-disc-checks { grid-template-columns: 1fr; }
+  .crm-disc-head { gap: 0.4rem; }
+}
