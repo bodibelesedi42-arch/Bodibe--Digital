@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects | Bodibe Digital</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t !== "dark" && t !== "light") {
+            t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+          }
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+    <script src="theme.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="staff-dashboard.css" />
+    <link rel="stylesheet" href="staff-projects.css" />
+  </head>
+  <body class="portal-body portal-shell-body">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <div class="portal-topbar">
+      <button type="button" class="portal-nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar">
+        <span class="portal-burger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+      <a href="index.html" class="portal-topbar-brand">
+        <span class="logo-mark" aria-hidden="true">
+          <img src="assets/images/logo.svg" alt="" class="logo-mark-dark" />
+          <img src="assets/images/logo.svg" alt="" class="logo-mark-light" />
+        </span>
+        <span>Bodibe Digital <strong>Staff Portal</strong></span>
+      </a>
+      <button type="button" class="theme-toggle" aria-label="Switch to light mode" aria-pressed="false">
+        <svg class="theme-toggle-icon theme-toggle-icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="1.5" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22.5" y2="12"/><line x1="4.4" y1="4.4" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.6" y2="19.6"/><line x1="4.4" y1="19.6" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.6" y2="4.4"/></g></svg>
+        <svg class="theme-toggle-icon theme-toggle-icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1z"/></svg>
+      </button>
+    </div>
+
+    <div class="portal-backdrop" id="navBackdrop" hidden></div>
+
+    <div class="portal-layout">
+      <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+        <div class="portal-sidebar-head">
+          <a href="index.html" class="portal-brand">
+            <span class="portal-brand-mark logo-mark" aria-hidden="true">
+              <img src="assets/images/logo.svg" alt="" class="logo-mark-dark" />
+              <img src="assets/images/logo.svg" alt="" class="logo-mark-light" />
+            </span>
+            <span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span>
+          </a>
+          <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+          </button>
+        </div>
+        <div class="portal-sidebar-scroll">
+          <ul class="portal-nav-list" id="navPrimary">
+            <li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li>
+          </ul>
+          <div class="portal-nav-section" id="navModulesSection" hidden>
+            <h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2>
+            <ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul>
+            <p class="portal-nav-note" id="navModulesNote"></p>
+          </div>
+          <div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div>
+        </div>
+        <div class="portal-sidebar-foot">
+          <div class="portal-whoami" id="whoAmI">
+            <span class="portal-avatar" id="whoAvatar" aria-hidden="true">&mdash;</span>
+            <span class="portal-whoami-text"><strong id="whoName">Loading&hellip;</strong><small id="whoRole"></small></span>
+          </div>
+          <button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span>Sign out</span></button>
+        </div>
+      </nav>
+
+      <main id="main" class="portal-main projects-page">
+        <div class="projects-header">
+          <div>
+            <span class="projects-eyebrow">PROJECTS</span>
+            <h1>Project workspace</h1>
+            <p class="projects-subtitle">Track delivery, ownership, deadlines and project health.</p>
+          </div>
+          <div class="projects-header-actions" id="projectsHeaderActions"></div>
+        </div>
+
+        <div class="portal-mode-notice" id="modeNotice" role="status" hidden>
+          <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span id="modeNoticeText"></span>
+        </div>
+        <div class="portal-notice" id="portalNotice" role="status" hidden></div>
+
+        <section class="projects-summary" id="projectsSummary" aria-label="Project summary"></section>
+
+        <section class="projects-toolbar" aria-label="Filter projects">
+          <div class="projects-search">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <label class="projects-visually-hidden" for="projectSearch">Search projects</label>
+            <input type="search" id="projectSearch" placeholder="Search project ID, client or type&hellip;" autocomplete="off" />
+          </div>
+          <div class="projects-filter"><label for="projectStatus">Status</label><select id="projectStatus"><option value="">All</option></select></div>
+          <div class="projects-filter"><label for="projectPriority">Priority</label><select id="projectPriority"><option value="">All</option></select></div>
+          <div class="projects-filter"><label for="projectAssignee">Assigned to</label><select id="projectAssignee"><option value="">All</option></select></div>
+          <button type="button" class="projects-clear" id="projectClear" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i> Clear</button>
+        </section>
+
+        <p class="projects-result-count" id="projectResultCount" role="status" aria-live="polite"></p>
+
+        <section class="projects-list-wrap" aria-label="Projects">
+          <div id="projectList"><p class="projects-loading">Loading projects&hellip;</p></div>
+        </section>
+      </main>
+    </div>
+
+    <div class="projects-drawer-backdrop" id="projectBackdrop" hidden></div>
+    <aside class="projects-drawer" id="projectDrawer" role="dialog" aria-modal="true" aria-labelledby="projectDrawerTitle" hidden>
+      <div class="projects-drawer-head">
+        <div><span class="projects-drawer-eyebrow" id="projectDrawerId"></span><h2 id="projectDrawerTitle">Project</h2></div>
+        <button type="button" class="projects-drawer-close" id="projectClose" aria-label="Close project details"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <div class="projects-drawer-body" id="projectDrawerBody"></div>
+    </aside>
+
+    <div class="projects-modal-backdrop" id="projectModalBackdrop" hidden></div>
+    <section class="projects-modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle" hidden>
+      <div class="projects-modal-head"><h2 id="projectModalTitle">Project</h2><button type="button" id="projectModalClose" class="projects-modal-close" aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>
+      <div id="projectModalBody"></div>
+    </section>
+
+    <script src="portal-effects.js"></script>
+    <script src="portal-access.js"></script>
+    <script src="staff-portal-shell.js"></script>
+    <script src="staff-projects.js"></script>
+  </body>
+</html>
