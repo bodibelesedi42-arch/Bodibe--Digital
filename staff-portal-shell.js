@@ -112,12 +112,15 @@
     // Presentation only. A module with no entry still renders with a default
     // icon, so the sheet can add a module without this file knowing first.
     var MODULE_PRESENTATION = {
-        CRM:        { icon: "fa-address-book",    href: "staff-leads.html", label: "Leads" },
-        Projects:   { icon: "fa-diagram-project", href: "staff-projects.html", label: "Projects" },
-        Quotations: { icon: "fa-file-invoice",    href: "staff-quotes.html", label: "Quotations" },
-        Finance:    { icon: "fa-receipt",         href: null },
-        Staff:      { icon: "fa-users",           href: null },
-        Settings:   { icon: "fa-sliders",         href: null },
+        CRM:        { icon: "fa-address-book", href: "staff-leads.html", label: "Leads" },
+        Projects:   { entries: [
+            { icon: "fa-diagram-project", href: "staff-projects.html", label: "Projects" },
+            { icon: "fa-list-check", href: "staff-tasks.html", label: "Tasks" },
+        ] },
+        Quotations: { icon: "fa-file-invoice", href: "staff-quotes.html", label: "Quotations" },
+        Finance:    { icon: "fa-receipt", href: null },
+        Staff:      { icon: "fa-users", href: null },
+        Settings:   { icon: "fa-sliders", href: null },
     };
     var DEFAULT_ICON = "fa-folder";
 
@@ -167,31 +170,39 @@
 
         var fullWorkspace = !window.BodibeAccess || window.BodibeAccess.isFullWorkspace();
 
-        list.innerHTML = visible.map(function (name) {
+        function entriesFor(name) {
             var look = MODULE_PRESENTATION[name] || {};
-            var icon = look.icon || DEFAULT_ICON;
-            var label = escapeHtml(look.label || name);
-            var safeName = escapeHtml(name);
+            return Array.isArray(look.entries) && look.entries.length ? look.entries : [look];
+        }
 
-            if (look.href) {
-                var isCurrent = look.href === here;
-                // Away from the desktop a shipped module is still reachable but
-                // read-only, because the device policy withholds every
-                // non-View action. It is never hidden and never looks broken.
-                var tag = fullWorkspace ? "" : '<span class="portal-nav-tag">View only</span>';
-                return '<li><a href="' + escapeHtml(look.href) + '" class="portal-nav-link'
-                    + (isCurrent ? " is-current" : "") + '"'
-                    + (isCurrent ? ' aria-current="page"' : "") + '>'
+        list.innerHTML = visible.map(function (name) {
+            return entriesFor(name).map(function (look) {
+                var icon = look.icon || DEFAULT_ICON;
+                var label = escapeHtml(look.label || name);
+                var safeName = escapeHtml(look.label || name);
+
+                if (look.href) {
+                    var isCurrent = look.href === here;
+                    // Away from the desktop a shipped module is still reachable but
+                    // read-only, because the device policy withholds every non-View
+                    // action. Tasks deliberately inherit Projects -> View Projects.
+                    var tag = fullWorkspace ? "" : '<span class="portal-nav-tag">View only</span>';
+                    return '<li><a href="' + escapeHtml(look.href) + '" class="portal-nav-link'
+                        + (isCurrent ? " is-current" : "") + '"'
+                        + (isCurrent ? ' aria-current="page"' : "") + '>'
+                        + '<span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid ' + icon + '"></i></span>'
+                        + '<span class="portal-nav-label">' + label + '</span>' + tag + '</a></li>';
+                }
+                return '<li><span class="portal-nav-static">'
                     + '<span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid ' + icon + '"></i></span>'
-                    + '<span class="portal-nav-label">' + label + '</span>' + tag + '</a></li>';
-            }
-            return '<li><span class="portal-nav-static">'
-                + '<span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid ' + icon + '"></i></span>'
-                + '<span class="portal-nav-label">' + safeName + '</span>'
-                + '<span class="portal-nav-tag">Soon</span></span></li>';
+                    + '<span class="portal-nav-label">' + safeName + '</span>'
+                    + '<span class="portal-nav-tag">Soon</span></span></li>';
+            }).join("");
         }).join("");
 
-        var built = visible.filter(function (n) { return (MODULE_PRESENTATION[n] || {}).href; }).length;
+        var built = visible.filter(function (n) {
+            return entriesFor(n).some(function (entry) { return Boolean(entry.href); });
+        }).length;
         var pending = visible.length - built;
         if (note) {
             note.textContent = fullWorkspace
