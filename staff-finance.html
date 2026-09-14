@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finance | Bodibe Digital</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t !== "dark" && t !== "light") t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) { document.documentElement.setAttribute("data-theme", "dark"); }
+      })();
+    </script>
+    <script src="theme.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="staff-dashboard.css" />
+    <link rel="stylesheet" href="staff-finance.css" />
+  </head>
+  <body class="portal-body portal-shell-body">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <div class="portal-topbar">
+      <button type="button" class="portal-nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar"><span class="portal-burger" aria-hidden="true"><span></span><span></span><span></span></span></button>
+      <a href="index.html" class="portal-topbar-brand"><span class="logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" /></span><span>Bodibe Digital <strong>Staff Portal</strong></span></a>
+      <button type="button" class="theme-toggle" aria-label="Switch theme" aria-pressed="false">
+        <svg class="theme-toggle-icon theme-toggle-icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/></svg>
+        <svg class="theme-toggle-icon theme-toggle-icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1z"/></svg>
+      </button>
+    </div>
+
+    <div class="portal-backdrop" id="navBackdrop" hidden></div>
+    <div class="portal-layout">
+      <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+        <div class="portal-sidebar-head">
+          <a href="index.html" class="portal-brand"><span class="portal-brand-mark logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" /></span><span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span></a>
+          <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </div>
+        <div class="portal-sidebar-scroll">
+          <ul class="portal-nav-list" id="navPrimary"><li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul>
+          <div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul><p class="portal-nav-note" id="navModulesNote"></p></div>
+          <div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div>
+        </div>
+        <div class="portal-sidebar-foot">
+          <div class="portal-whoami" id="whoAmI"><span class="portal-avatar" id="whoAvatar" aria-hidden="true">&mdash;</span><span class="portal-whoami-text"><strong id="whoName">Loading&hellip;</strong><small id="whoRole"></small></span></div>
+          <button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span>Sign out</span></button>
+        </div>
+      </nav>
+
+      <main id="main" class="portal-main finance-page">
+        <header class="finance-header">
+          <div><span class="finance-eyebrow">FINANCE</span><h1>Invoices & payments</h1><p>One financial workspace for invoicing, PayFast, verified bank transfers and reporting.</p></div>
+          <div id="financeHeaderActions"></div>
+        </header>
+
+        <div class="portal-mode-notice" id="modeNotice" role="status" hidden><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span id="modeNoticeText"></span></div>
+        <div class="portal-notice" id="portalNotice" role="status" hidden></div>
+
+        <nav class="finance-tabs" id="financeTabs" aria-label="Finance sections"></nav>
+
+        <section id="invoiceView" class="finance-view" hidden>
+          <div class="finance-summary" id="invoiceSummary"></div>
+          <div class="finance-toolbar"><div class="finance-search"><i class="fa-solid fa-magnifying-glass"></i><input id="invoiceSearch" type="search" placeholder="Search invoice, client or quote…" autocomplete="off" /></div><select id="invoiceStatus"><option value="">All statuses</option></select></div>
+          <p class="finance-count" id="invoiceCount"></p>
+          <div class="finance-list" id="invoiceList"><p class="finance-loading">Loading invoices&hellip;</p></div>
+        </section>
+
+        <section id="paymentView" class="finance-view" hidden>
+          <div class="finance-summary" id="paymentSummary"></div>
+          <div class="finance-toolbar"><div class="finance-search"><i class="fa-solid fa-magnifying-glass"></i><input id="paymentSearch" type="search" placeholder="Search transaction, invoice or bank reference…" autocomplete="off" /></div><select id="paymentStatus"><option value="">All statuses</option></select><select id="paymentMethod"><option value="">All methods</option></select></div>
+          <p class="finance-count" id="paymentCount"></p>
+          <div class="finance-list" id="paymentList"><p class="finance-loading">Loading payments&hellip;</p></div>
+        </section>
+
+        <section id="reportView" class="finance-view" hidden><div id="financeReport" class="finance-report"><p class="finance-loading">Loading report&hellip;</p></div></section>
+      </main>
+    </div>
+
+    <div class="finance-backdrop" id="financeBackdrop" hidden></div>
+    <aside class="finance-drawer" id="financeDrawer" role="dialog" aria-modal="true" aria-labelledby="financeDrawerTitle" hidden><div class="finance-drawer-head"><div><span class="finance-drawer-eyebrow" id="financeDrawerEyebrow"></span><h2 id="financeDrawerTitle">Finance record</h2></div><button type="button" id="financeDrawerClose" class="finance-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><div class="finance-drawer-body" id="financeDrawerBody"></div></aside>
+
+    <div class="finance-modal-backdrop" id="financeModalBackdrop" hidden></div>
+    <section class="finance-modal" id="financeModal" role="dialog" aria-modal="true" aria-labelledby="financeModalTitle" hidden><div class="finance-modal-head"><h2 id="financeModalTitle">Finance</h2><button type="button" id="financeModalClose" class="finance-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><div class="finance-modal-body" id="financeModalBody"></div></section>
+
+    <script src="portal-effects.js"></script>
+    <script src="portal-access.js"></script>
+    <script src="staff-portal-shell.js"></script>
+    <script src="staff-finance.js"></script>
+  </body>
+</html>

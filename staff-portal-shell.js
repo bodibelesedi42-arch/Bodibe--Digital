@@ -118,7 +118,7 @@
             { icon: "fa-list-check", href: "staff-tasks.html", label: "Tasks" },
         ] },
         Quotations: { icon: "fa-file-invoice", href: "staff-quotes.html", label: "Quotations" },
-        Finance:    { icon: "fa-receipt", href: null },
+        Finance:    { icon: "fa-receipt", href: "staff-finance.html", label: "Finance" },
         Staff:      { icon: "fa-users", href: null },
         Settings:   { icon: "fa-sliders", href: null },
     };
