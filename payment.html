@@ -1,3 +1,140 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="robots" content="noindex"><title>Invoice payment | Bodibe Digital</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="payment.css"></head>
-<body class="bodibe-system"><main class="payment-shell"><a class="payment-brand" href="index.html">BODIBE DIGITAL</a><section class="sys-card"><p class="payment-eyebrow">OFFICIAL INVOICE PAYMENT</p><h1>Let’s get your project moving.</h1><p id="paymentMode" role="status"></p><div id="paymentDetails" aria-busy="true"><p>Loading your invoice…</p></div><p id="paymentStatus" role="status"></p><div id="paymentActions" hidden><h2>Choose how to pay</h2><label id="paymentPartLabel" hidden>Payment amount<select id="paymentPart"><option value="balance">Outstanding balance</option><option value="deposit">Required deposit</option></select></label><button id="payYoco" class="sys-button primary" type="button">Pay Securely with Yoco</button><details><summary>Pay by EFT</summary><p id="eftInstructions"></p><p>Use your invoice number as the reference. EFT is confirmed by authorised Finance staff after funds arrive in the business account.</p></details><p class="payment-help">Card details are entered only on Yoco’s secure checkout. Bodibe Digital never asks you to send card details, a PIN or an OTP to a salesperson.</p></div><button id="refreshPayment" class="sys-button" type="button">Check payment status</button><p><a href="contact.html">Contact Bodibe Digital</a></p></section></main><script src="payment.js"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#08111f" />
+  <title>Secure invoice payment | Bodibe Digital</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="payment.css" />
+</head>
+<body>
+  <div class="payment-page">
+    <header class="payment-topbar">
+      <a class="payment-brand" href="index.html" aria-label="Bodibe Digital home">
+        <span class="payment-brand-mark"><img src="assets/images/logo.svg" alt="" /></span>
+        <span><strong>BODIBE DIGITAL</strong><small>Secure invoice checkout</small></span>
+      </a>
+      <span class="secure-chip" aria-label="Secure payment page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V8a5 5 0 0 1 10 0v2m-9 0h8a2 2 0 0 1 2 2v7H6v-7a2 2 0 0 1 2-2Zm2 0h4V8a2 2 0 1 0-4 0v2Z"/></svg>
+        Secure checkout
+      </span>
+    </header>
+
+    <main class="checkout-shell">
+      <section class="checkout-intro">
+        <p class="eyebrow">OFFICIAL INVOICE PAYMENT</p>
+        <h1>Complete your payment securely.</h1>
+        <p>Review your invoice, choose the amount you want to pay, then continue to Yoco’s secure checkout.</p>
+      </section>
+
+      <nav class="checkout-steps" aria-label="Payment progress">
+        <span class="is-active"><b>1</b> Invoice</span>
+        <i></i>
+        <span><b>2</b> Secure payment</span>
+        <i></i>
+        <span><b>3</b> Confirmation</span>
+      </nav>
+
+      <div id="paymentMode" class="mode-banner" role="status" hidden></div>
+      <div id="paymentStatus" class="payment-status" role="status" aria-live="polite" hidden></div>
+
+      <div class="checkout-grid">
+        <section class="invoice-panel" aria-labelledby="invoiceHeading">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">INVOICE SUMMARY</p>
+              <h2 id="invoiceHeading">Your invoice</h2>
+            </div>
+            <span class="invoice-badge">Bodibe Digital</span>
+          </div>
+
+          <div id="paymentDetails" class="invoice-loading" aria-busy="true">
+            <span class="skeleton skeleton-title"></span>
+            <span class="skeleton"></span>
+            <span class="skeleton"></span>
+            <span class="skeleton"></span>
+          </div>
+
+          <div class="invoice-trust">
+            <span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5.2 3.3 9.7 8 11 4.7-1.3 8-5.8 8-11V5l-8-3Zm0 3.2 5 1.9V11c0 3.7-2.1 6.9-5 8-2.9-1.1-5-4.3-5-8V7.1l5-1.9Z"/></svg>
+              Protected payment flow
+            </span>
+            <span>Amounts shown in ZAR</span>
+          </div>
+        </section>
+
+        <section class="payment-panel" aria-labelledby="paymentHeading">
+          <div class="panel-heading">
+            <div>
+              <p class="panel-kicker">PAYMENT METHOD</p>
+              <h2 id="paymentHeading">Pay your invoice</h2>
+            </div>
+          </div>
+
+          <div id="paymentActions" hidden>
+            <fieldset id="paymentPartField" class="amount-choice" hidden>
+              <legend>Choose payment amount</legend>
+              <label class="amount-option">
+                <input type="radio" name="paymentPart" value="deposit" />
+                <span><strong id="depositLabel">Required deposit</strong><small>Start the project with the required deposit.</small></span>
+              </label>
+              <label class="amount-option">
+                <input type="radio" name="paymentPart" value="balance" checked />
+                <span><strong id="balanceLabel">Outstanding balance</strong><small>Pay the full amount currently outstanding.</small></span>
+              </label>
+            </fieldset>
+
+            <button id="payYoco" class="primary-payment" type="button">
+              <span class="button-lock" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a2 2 0 0 1 2 2v8H4v-8a2 2 0 0 1 2-2h1Zm3 0h4V8a2 2 0 1 0-4 0v2Z"/></svg>
+              </span>
+              <span><strong>Continue to secure Yoco checkout</strong><small>Card details are entered on Yoco</small></span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+
+            <div class="divider"><span>or</span></div>
+
+            <details class="eft-card">
+              <summary>
+                <span><strong>Pay by EFT</strong><small>Use your invoice number as the reference</small></span>
+                <span aria-hidden="true">+</span>
+              </summary>
+              <div class="eft-body">
+                <p id="eftInstructions"></p>
+                <p class="eft-note">EFT payments are confirmed by authorised Finance staff only after the funds appear in the business bank account.</p>
+              </div>
+            </details>
+
+            <p class="payment-help">
+              Bodibe Digital never asks customers to send card details, PINs or OTPs to a salesperson. Card details are entered only on Yoco’s secure checkout.
+            </p>
+          </div>
+
+          <div id="paymentUnavailable" class="unavailable-card" hidden>
+            <strong>Payment link unavailable</strong>
+            <p>Open the latest official payment link sent with your invoice, or ask Bodibe Digital to issue a new one.</p>
+          </div>
+
+          <div class="payment-secondary-actions">
+            <button id="refreshPayment" class="secondary-button" type="button">Check payment status</button>
+            <a href="contact.html">Need help? Contact Bodibe Digital</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="payment-footer">
+      <span>Bodibe Digital</span>
+      <span>Secure payment processing powered by Yoco</span>
+    </footer>
+  </div>
+  <script src="payment.js"></script>
+</body>
+</html>
