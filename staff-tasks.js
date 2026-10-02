@@ -121,8 +121,10 @@
         var completed = statusText(task).toLowerCase() === "completed";
         var actions = "";
         if (!completed && Portal.canHere("Projects", "Assign Tasks")) actions += actionButton("assign", "fa-user-plus", task.assignedTo ? "Reassign" : "Assign");
+        if (Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("progress", "fa-chart-line", "Update progress");
         if (!completed && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("complete", "fa-check", "Mark complete", "is-success");
-        var restricted = !completed && ((Portal.can("Projects", "Assign Tasks") && !Portal.canHere("Projects", "Assign Tasks")) || (Portal.can("Projects", "Complete Tasks") && !Portal.canHere("Projects", "Complete Tasks")));
+        var restricted = (!completed && Portal.can("Projects", "Assign Tasks") && !Portal.canHere("Projects", "Assign Tasks"))
+            || (Portal.can("Projects", "Complete Tasks") && !Portal.canHere("Projects", "Complete Tasks"));
 
         drawerBody.innerHTML = '<div class="task-detail-status"><span class="' + badgeClass(statusText(task)) + '">' + esc(statusText(task)) + '</span>'
             + (task.priority ? '<span class="task-badge">' + esc(task.priority) + '</span>' : '') + '</div>'
@@ -143,6 +145,7 @@
             button.addEventListener("click", function () {
                 var action = button.getAttribute("data-task-action");
                 if (action === "assign") openAssign(task);
+                if (action === "progress") openProgress(task);
                 if (action === "complete") completeTask(task);
             });
         });
@@ -172,7 +175,7 @@
             + '<label>Priority<input name="priority" maxlength="60" placeholder="Optional" /></label></div>'
             + '<label class="task-form-wide">Description<textarea name="description" maxlength="1200"></textarea></label>'
             + '<label class="task-form-wide">Notes<textarea name="notes" maxlength="1200"></textarea></label>'
-            + '<p class="task-form-hint">Assignment and completion are separate actions with separate permissions.</p>'
+            + '<p class="task-form-hint">Assignment and progress are separate actions with separate permissions.</p>'
             + '<div class="task-form-actions"><button type="button" class="task-secondary" data-modal-cancel>Cancel</button><button class="task-primary-btn" type="submit"><i class="fa-solid fa-plus" aria-hidden="true"></i>Create task</button></div></form>';
     }
 
@@ -220,6 +223,35 @@
                 } catch (err) { if (err.sessionExpired) return Portal.goToLogin(); Portal.showNotice(err.message || "Could not assign task.", "warning"); }
             });
         } catch (err) { if (err.sessionExpired) return Portal.goToLogin(); Portal.showNotice(err.message || "Could not load staff.", "warning"); }
+    }
+
+    function openProgress(task) {
+        var current = progressPct(task.progress);
+        var steps = [0, 25, 50, 75, 100];
+        var options = steps.map(function (value) {
+            return '<option value="' + value + '"' + (value === current ? ' selected' : '') + '>' + value + '%</option>';
+        }).join("");
+        openModal("Update " + task.taskId + " progress",
+            '<form id="taskProgressForm" class="task-form">'
+            + '<label>Progress<select name="progress" required>' + options + '</select></label>'
+            + '<p class="task-form-hint">0% = Not Started, 25–75% = In Progress, 100% = Completed. Project progress updates automatically from its tasks.</p>'
+            + '<div class="task-form-actions"><button type="button" class="task-secondary" data-modal-cancel>Cancel</button><button class="task-primary-btn" type="submit">Save progress</button></div></form>');
+        var form = document.getElementById("taskProgressForm");
+        form.querySelector("[data-modal-cancel]").addEventListener("click", closeModal);
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            var progress = Number(new FormData(form).get("progress"));
+            try {
+                var res = await Portal.authedFetch("/staff/tasks/" + encodeURIComponent(task.taskId) + "/progress", {
+                    method: "PATCH",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ progress: progress })
+                });
+                var data = await res.json();
+                if (!res.ok || !data.success) throw new Error(data.message || "Could not update task progress.");
+                closeModal(); closeDrawer(); Portal.showNotice(task.taskId + " progress updated to " + data.progressPercent + "%."); await loadTasks();
+            } catch (err) { if (err.sessionExpired) return Portal.goToLogin(); Portal.showNotice(err.message || "Could not update task progress.", "warning"); }
+        });
     }
 
     async function completeTask(task) {
