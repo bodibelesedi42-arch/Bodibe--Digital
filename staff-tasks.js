@@ -40,6 +40,9 @@
         if (n <= 1) n *= 100;
         return Math.max(0, Math.min(100, Math.round(n)));
     }
+    function isAutoSalesTask(task) {
+        return Boolean(task && task.autoTracking && task.autoTracking.enabled && task.autoTracking.type === "sales_contact_target");
+    }
     function badgeClass(value) {
         var s = String(value || "not-started").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
         return "task-badge task-badge-" + (s || "not-started");
@@ -47,6 +50,13 @@
     function projectName(id) {
         var p = state.projects.find(function (x) { return x.projectId === id; });
         return p ? (p.clientName || p.projectType || id) : id;
+    }
+    function taskWorkLabel(task) {
+        return isAutoSalesTask(task) ? "Sales target" : (task.projectId || "—");
+    }
+    function taskWorkDetail(task) {
+        if (isAutoSalesTask(task)) return "Automatic CRM target";
+        return projectName(task.projectId) || "—";
     }
 
     function summaryCard(label, value, icon) {
@@ -77,7 +87,7 @@
             if (statusEl.value && statusText(task) !== statusEl.value) return false;
             if (assigneeEl.value && task.assignedTo !== assigneeEl.value) return false;
             if (!q) return true;
-            return [task.taskId, task.taskName, task.projectId, projectName(task.projectId), task.assignedTo, task.description]
+            return [task.taskId, task.taskName, task.projectId, projectName(task.projectId), task.assignedTo, task.description, taskWorkLabel(task)]
                 .some(function (x) { return String(x || "").toLowerCase().indexOf(q) !== -1; });
         });
     }
@@ -90,12 +100,12 @@
             listEl.innerHTML = '<div class="tasks-empty"><i class="fa-regular fa-circle-check" aria-hidden="true"></i><strong>No tasks match this view.</strong><span>Change the filters or create a task on desktop.</span></div>';
             return;
         }
-        var head = '<div class="task-table-head"><span>Task</span><span>Project</span><span>Status</span><span>Assigned</span><span>Due</span><span>Progress</span></div>';
+        var head = '<div class="task-table-head"><span>Task</span><span>Project / Work</span><span>Status</span><span>Assigned</span><span>Due</span><span>Progress</span></div>';
         var rows = tasks.map(function (task) {
             var pct = progressPct(task.progress);
             return '<button type="button" class="task-row" data-task="' + esc(task.taskId) + '">'
                 + '<span class="task-main"><strong>' + esc(task.taskName || task.taskId) + '</strong><small>' + esc(task.taskId) + '</small></span>'
-                + '<span class="task-project"><strong>' + esc(task.projectId) + '</strong><small>' + esc(projectName(task.projectId)) + '</small></span>'
+                + '<span class="task-project"><strong>' + esc(taskWorkLabel(task)) + '</strong><small>' + esc(taskWorkDetail(task)) + '</small></span>'
                 + '<span><span class="' + badgeClass(statusText(task)) + '">' + esc(statusText(task)) + '</span></span>'
                 + '<span class="task-assignee">' + esc(task.assignedTo || "Unassigned") + '</span>'
                 + '<span class="task-date">' + esc(formatDate(task.dueDate)) + '</span>'
@@ -112,6 +122,16 @@
         return '<button type="button" class="task-action ' + (extra || "") + '" data-task-action="' + action + '"><i class="fa-solid ' + icon + '" aria-hidden="true"></i>' + esc(label) + '</button>';
     }
 
+    function renderAutoTracking(task) {
+        if (!isAutoSalesTask(task)) return "";
+        var t = task.autoTracking;
+        return '<section class="task-notes"><span>Automatic sales tracking</span>'
+            + '<p><strong>' + Number(t.claimedCount || 0) + '/' + Number(t.targetCount || 0) + '</strong> leads claimed · '
+            + '<strong>' + Number(t.contactedCount || 0) + '/' + Number(t.targetCount || 0) + '</strong> contacted · '
+            + '<strong>' + Number(t.remaining || 0) + '</strong> remaining.</p>'
+            + '<p>Progress updates from the CRM when the assigned salesperson claims a lead and logs a Call, WhatsApp, Email, Meeting or Follow-Up within this task\'s date window.</p></section>';
+    }
+
     function renderDrawer() {
         var task = state.selected;
         if (!task) return;
@@ -119,23 +139,26 @@
         drawerTitle.textContent = task.taskName || "Task";
         var pct = progressPct(task.progress);
         var completed = statusText(task).toLowerCase() === "completed";
+        var autoTracked = isAutoSalesTask(task);
         var actions = "";
         if (!completed && Portal.canHere("Projects", "Assign Tasks")) actions += actionButton("assign", "fa-user-plus", task.assignedTo ? "Reassign" : "Assign");
-        if (Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("progress", "fa-chart-line", "Update progress");
-        if (!completed && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("complete", "fa-check", "Mark complete", "is-success");
-        var restricted = (!completed && Portal.can("Projects", "Assign Tasks") && !Portal.canHere("Projects", "Assign Tasks"))
-            || (Portal.can("Projects", "Complete Tasks") && !Portal.canHere("Projects", "Complete Tasks"));
+        if (!autoTracked && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("progress", "fa-chart-line", "Update progress");
+        if (!autoTracked && !completed && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("complete", "fa-check", "Mark complete", "is-success");
+        var restricted = !autoTracked && ((!completed && Portal.can("Projects", "Assign Tasks") && !Portal.canHere("Projects", "Assign Tasks"))
+            || (Portal.can("Projects", "Complete Tasks") && !Portal.canHere("Projects", "Complete Tasks")));
 
         drawerBody.innerHTML = '<div class="task-detail-status"><span class="' + badgeClass(statusText(task)) + '">' + esc(statusText(task)) + '</span>'
-            + (task.priority ? '<span class="task-badge">' + esc(task.priority) + '</span>' : '') + '</div>'
+            + (task.priority ? '<span class="task-badge">' + esc(task.priority) + '</span>' : '')
+            + (autoTracked ? '<span class="task-badge">Auto tracked</span>' : '') + '</div>'
             + '<div class="task-detail-progress"><div><span>Progress</span><strong>' + pct + '%</strong></div><div class="task-progress-track"><i style="width:' + pct + '%"></i></div></div>'
             + '<div class="task-detail-grid">'
-            + detail("Project", task.projectId + (projectName(task.projectId) ? " · " + projectName(task.projectId) : ""))
+            + detail(autoTracked ? "Work type" : "Project", autoTracked ? "Sales target" : task.projectId + (projectName(task.projectId) ? " · " + projectName(task.projectId) : ""))
             + detail("Assigned to", task.assignedTo || "Unassigned")
             + detail("Start date", formatDate(task.startDate))
             + detail("Due date", formatDate(task.dueDate))
             + detail("Last updated", formatDate(task.lastUpdated))
             + '</div>'
+            + renderAutoTracking(task)
             + (task.description ? '<section class="task-notes"><span>Description</span><p>' + esc(task.description) + '</p></section>' : '')
             + (task.notes ? '<section class="task-notes"><span>Notes</span><p>' + esc(task.notes) + '</p></section>' : '')
             + (actions ? '<div class="task-detail-actions">' + actions + '</div>' : '')
@@ -169,13 +192,15 @@
     function createFormHtml() {
         var options = state.projects.map(function (p) { return '<option value="' + esc(p.projectId) + '">' + esc(p.projectId + " · " + (p.clientName || p.projectType || "Project")) + '</option>'; }).join("");
         return '<form id="taskCreateForm" class="task-form">'
-            + '<div class="task-form-grid"><label>Project<select name="projectId" required><option value="">Choose a project</option>' + options + '</select></label>'
-            + '<label>Task name<input name="taskName" maxlength="160" required /></label>'
+            + '<div class="task-form-grid"><label>Task type<select name="taskType"><option value="project">Project / delivery task</option><option value="sales-target">Sales target — claim & contact leads</option></select></label>'
+            + '<label>Project<select name="projectId"><option value="">No project / choose a project</option>' + options + '</select></label>'
+            + '<label>Task name<input name="taskName" maxlength="160" placeholder="e.g. Claim and contact 20 leads" /></label>'
+            + '<label>Target leads<input type="number" name="targetCount" min="1" max="500" value="20" /></label>'
             + '<label>Start date<input type="date" name="startDate" /></label><label>Due date<input type="date" name="dueDate" /></label>'
             + '<label>Priority<input name="priority" maxlength="60" placeholder="Optional" /></label></div>'
             + '<label class="task-form-wide">Description<textarea name="description" maxlength="1200"></textarea></label>'
             + '<label class="task-form-wide">Notes<textarea name="notes" maxlength="1200"></textarea></label>'
-            + '<p class="task-form-hint">Assignment and progress are separate actions with separate permissions.</p>'
+            + '<p class="task-form-hint"><strong>Project task:</strong> choose a project. <strong>Sales target:</strong> no project is needed; progress is calculated automatically from CRM lead claims and logged contact activity. If no dates are entered, the target starts and ends today.</p>'
             + '<div class="task-form-actions"><button type="button" class="task-secondary" data-modal-cancel>Cancel</button><button class="task-primary-btn" type="submit"><i class="fa-solid fa-plus" aria-hidden="true"></i>Create task</button></div></form>';
     }
 
@@ -186,12 +211,13 @@
         form.addEventListener("submit", async function (event) {
             event.preventDefault();
             var fd = new FormData(form), body = {};
-            ["projectId","taskName","description","startDate","dueDate","priority","notes"].forEach(function (k) { body[k] = fd.get(k) || ""; });
+            ["taskType","projectId","taskName","description","startDate","dueDate","priority","notes","targetCount"].forEach(function (k) { body[k] = fd.get(k) || ""; });
+            if (body.taskType === "sales-target" && !body.taskName) body.taskName = "Claim and contact " + (body.targetCount || 20) + " leads";
             try {
                 var res = await Portal.authedFetch("/staff/tasks", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
                 var data = await res.json();
                 if (!res.ok || !data.success) throw new Error(data.message || "Could not create task.");
-                closeModal(); Portal.showNotice("Task " + data.taskId + " created."); await loadTasks();
+                closeModal(); Portal.showNotice("Task " + data.taskId + " created. Assign it to the salesperson who should complete it."); await loadTasks();
             } catch (err) { if (err.sessionExpired) return Portal.goToLogin(); Portal.showNotice(err.message || "Could not create task.", "warning"); }
         });
     }
@@ -226,6 +252,10 @@
     }
 
     function openProgress(task) {
+        if (isAutoSalesTask(task)) {
+            Portal.showNotice("This sales target updates automatically from CRM activity.");
+            return;
+        }
         var current = progressPct(task.progress);
         var steps = [0, 25, 50, 75, 100];
         var options = steps.map(function (value) {
@@ -255,6 +285,10 @@
     }
 
     async function completeTask(task) {
+        if (isAutoSalesTask(task)) {
+            Portal.showNotice("This sales target completes automatically when the CRM target is reached.");
+            return;
+        }
         if (!window.confirm("Mark " + task.taskId + " as completed? This sets task progress to 100%.")) return;
         try {
             var res = await Portal.authedFetch("/staff/tasks/" + encodeURIComponent(task.taskId) + "/complete", { method: "POST" });
