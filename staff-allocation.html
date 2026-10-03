@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lead Allocation | Bodibe Digital</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+  <script src="theme.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff-dashboard.css" />
+  <link rel="stylesheet" href="staff-allocation.css" />
+</head>
+<body class="portal-body portal-shell-body">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="portal-topbar">
+    <button type="button" class="portal-nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar"><span class="portal-burger" aria-hidden="true"><span></span><span></span><span></span></span></button>
+    <a href="index.html" class="portal-topbar-brand"><span class="logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" class="logo-mark-dark"><img src="assets/images/logo.svg" alt="" class="logo-mark-light"></span><span>Bodibe Digital <strong>Staff Portal</strong></span></a>
+    <button type="button" class="theme-toggle" aria-label="Switch theme" aria-pressed="false"><svg class="theme-toggle-icon theme-toggle-icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/></svg><svg class="theme-toggle-icon theme-toggle-icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1z"/></svg></button>
+  </div>
+  <div class="portal-backdrop" id="navBackdrop" hidden></div>
+
+  <div class="portal-layout">
+    <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+      <div class="portal-sidebar-head">
+        <a href="index.html" class="portal-brand"><span class="portal-brand-mark logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" class="logo-mark-dark"><img src="assets/images/logo.svg" alt="" class="logo-mark-light"></span><span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span></a>
+        <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="portal-sidebar-scroll">
+        <ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading" aria-hidden="true">MAIN</li><li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul>
+        <div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul><p class="portal-nav-note" id="navModulesNote"></p></div>
+        <div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div>
+      </div>
+      <div class="portal-sidebar-foot"><div class="portal-whoami" id="whoAmI"><span class="portal-avatar" id="whoAvatar">&mdash;</span><span class="portal-whoami-text"><strong id="whoName">Loading&hellip;</strong><small id="whoRole"></small></span></div><button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign out</span></button></div>
+    </nav>
+
+    <main id="main" class="portal-main allocation-workspace">
+      <div class="allocation-inner">
+        <div class="allocation-header">
+          <div><span class="allocation-eyebrow">SALES OPERATIONS</span><h1>Lead allocation</h1><p>Balance sales workloads, manage the claim pool and keep every lead under clear ownership.</p></div>
+          <div class="allocation-header-actions">
+            <button type="button" id="refreshAllocation" class="allocation-btn allocation-btn-secondary"><i class="fa-solid fa-rotate"></i> Refresh</button>
+            <button type="button" id="openImport" class="allocation-btn allocation-btn-primary" hidden><i class="fa-solid fa-file-arrow-up"></i> Import leads</button>
+          </div>
+        </div>
+
+        <div class="portal-mode-notice" id="modeNotice" role="status" hidden><i class="fa-solid fa-mobile-screen-button"></i><span id="modeNoticeText"></span></div>
+        <div class="portal-notice" id="portalNotice" role="status" hidden></div>
+
+        <section class="allocation-kpis" aria-label="Allocation summary">
+          <article class="allocation-kpi"><span>Available pool</span><strong id="kpiPool">0</strong><small>Ready to claim or assign</small></article>
+          <article class="allocation-kpi"><span>Assigned leads</span><strong id="kpiAssigned">0</strong><small>Under active ownership</small></article>
+          <article class="allocation-kpi"><span>Active sales staff</span><strong id="kpiStaff">0</strong><small>Available allocation targets</small></article>
+          <article class="allocation-kpi"><span>Average workload</span><strong id="kpiAverage">0</strong><small>Active leads per salesperson</small></article>
+        </section>
+
+        <section class="allocation-chart-grid" id="managementAnalytics">
+          <article class="allocation-card allocation-card-wide">
+            <div class="allocation-card-head"><div><span>WORKLOAD BALANCE</span><h2>Leads by salesperson</h2></div></div>
+            <div class="allocation-chart"><canvas id="workloadChart"></canvas></div>
+          </article>
+          <article class="allocation-card">
+            <div class="allocation-card-head"><div><span>OWNERSHIP MIX</span><h2>Allocation status</h2></div></div>
+            <div class="allocation-chart"><canvas id="ownershipChart"></canvas></div>
+          </article>
+        </section>
+
+        <section class="allocation-board">
+          <div class="allocation-toolbar">
+            <div class="allocation-tabs" role="tablist" aria-label="Allocation view">
+              <button type="button" class="is-active" data-view="all">All leads</button>
+              <button type="button" data-view="pool">Available pool <span id="poolBadge">0</span></button>
+              <button type="button" data-view="assigned">Assigned</button>
+            </div>
+            <div class="allocation-tools">
+              <select id="filterStatus" aria-label="Filter by lead status"><option value="">All statuses</option></select>
+              <select id="filterOwner" aria-label="Filter by owner"><option value="">All owners</option></select>
+              <div class="allocation-search"><i class="fa-solid fa-magnifying-glass"></i><input id="allocationSearch" type="search" placeholder="Search leads" /></div>
+            </div>
+          </div>
+
+          <div class="allocation-bulkbar" id="bulkBar" hidden>
+            <strong><span id="selectedCount">0</span> selected</strong>
+            <span>Distribute selected leads evenly across chosen staff.</span>
+            <button type="button" class="allocation-btn allocation-btn-secondary" id="clearSelection">Clear</button>
+            <button type="button" class="allocation-btn allocation-btn-primary" id="openBulk">Bulk assign</button>
+          </div>
+
+          <div class="allocation-table-head"><div><span>LEAD QUEUE</span><h2 id="tableTitle">All allocation</h2></div><span id="allocationCount" class="allocation-count">0 leads</span></div>
+          <div class="allocation-table-wrap">
+            <table class="allocation-table">
+              <thead><tr><th class="allocation-select-col"><input type="checkbox" id="selectAll" aria-label="Select visible leads" /></th><th>Lead</th><th>Business</th><th>Project</th><th>Status</th><th>Ownership</th><th>Owner</th><th>Workload</th><th></th></tr></thead>
+              <tbody id="allocationRows"><tr><td colspan="9" class="allocation-empty">Loading allocation&hellip;</td></tr></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="allocation-drawer-backdrop" id="allocationBackdrop" hidden></div>
+  <aside class="allocation-drawer" id="allocationDrawer" aria-hidden="true" aria-label="Lead allocation details">
+    <div class="allocation-drawer-head"><div><span>ALLOCATION DETAIL</span><h2 id="drawerTitle">Lead</h2></div><button type="button" id="closeAllocationDrawer" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="allocation-drawer-body" id="drawerBody"></div>
+  </aside>
+
+  <dialog class="allocation-dialog" id="assignDialog">
+    <form id="assignForm" method="dialog">
+      <div class="allocation-dialog-head"><div><span>OWNERSHIP</span><h2 id="assignTitle">Assign lead</h2></div><button type="button" class="allocation-dialog-close" data-close-assign><i class="fa-solid fa-xmark"></i></button></div>
+      <input type="hidden" id="assignLeadId" />
+      <input type="hidden" id="assignVersion" />
+      <div class="allocation-form-grid">
+        <label><span>Allocation type</span><select id="assignType"><option value="ASSIGNED">Assign to salesperson</option><option value="CLAIM_POOL">Put up for claim</option><option value="MANAGEMENT">Management owned</option></select></label>
+        <label id="assignOwnerWrap"><span>Salesperson</span><select id="assignOwner"></select></label>
+        <label class="allocation-form-wide"><span>Reason *</span><textarea id="assignReason" rows="3" maxlength="1000" required placeholder="Why is ownership changing?"></textarea></label>
+      </div>
+      <div class="allocation-dialog-actions"><button type="button" class="allocation-btn allocation-btn-secondary" data-close-assign>Cancel</button><button type="submit" class="allocation-btn allocation-btn-primary" id="saveAssignment">Save assignment</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="allocation-dialog" id="bulkDialog">
+    <form id="bulkForm" method="dialog">
+      <div class="allocation-dialog-head"><div><span>BULK DISTRIBUTION</span><h2>Distribute selected leads</h2></div><button type="button" class="allocation-dialog-close" data-close-bulk><i class="fa-solid fa-xmark"></i></button></div>
+      <p class="allocation-dialog-copy">Select the salespeople who should receive the chosen leads. The backend will distribute them round-robin and preserve allocation history.</p>
+      <div id="bulkStaff" class="allocation-recipient-grid"></div>
+      <label class="allocation-block-label"><span>Reason *</span><textarea id="bulkReason" rows="3" maxlength="1000" required placeholder="Example: Balance workload for this week"></textarea></label>
+      <div class="allocation-dialog-actions"><button type="button" class="allocation-btn allocation-btn-secondary" data-close-bulk>Cancel</button><button type="submit" class="allocation-btn allocation-btn-primary" id="saveBulk">Distribute leads</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="allocation-dialog allocation-import-dialog" id="importDialog">
+    <form id="importForm" method="dialog">
+      <div class="allocation-dialog-head"><div><span>LEAD IMPORT</span><h2>Import leads</h2></div><button type="button" class="allocation-dialog-close" data-close-import><i class="fa-solid fa-xmark"></i></button></div>
+      <p class="allocation-dialog-copy">Paste CSV rows using the headers: <strong>name,business,email,phone,projectType,source,industry</strong>. Required: name and email.</p>
+      <textarea id="importCsv" class="allocation-import-area" rows="9" placeholder="name,business,email,phone,projectType,source,industry&#10;Jane Doe,Example Co,jane@example.com,0123456789,Website,Google Maps,Retail"></textarea>
+      <div class="allocation-form-grid">
+        <label><span>Import destination</span><select id="importType"><option value="CLAIM_POOL">Claim pool</option><option value="ASSIGNED">Assign to salesperson</option><option value="MANAGEMENT">Management owned</option></select></label>
+        <label id="importOwnerWrap" hidden><span>Salesperson</span><select id="importOwner"></select></label>
+      </div>
+      <div id="importPreview" class="allocation-import-preview" hidden></div>
+      <div class="allocation-dialog-actions"><button type="button" class="allocation-btn allocation-btn-secondary" id="previewImport">Preview</button><button type="submit" class="allocation-btn allocation-btn-primary" id="confirmImport" disabled>Import leads</button></div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="portal-access.js"></script>
+  <script src="portal-effects.js"></script>
+  <script src="staff-portal-shell.js"></script>
+  <script src="staff-allocation.js"></script>
+</body>
+</html>
