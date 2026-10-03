@@ -20,60 +20,40 @@
 </head>
 <body class="portal-body portal-shell-body bodibe-system" data-system-page="dashboard">
   <a href="#main" class="skip-link">Skip to content</a>
-
   <div class="portal-topbar">
     <button type="button" class="portal-nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar"><span class="portal-burger" aria-hidden="true"><span></span><span></span><span></span></span></button>
     <a href="index.html" class="portal-topbar-brand"><span class="logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" /></span><span>Bodibe Digital <strong>Staff Portal</strong></span></a>
     <button type="button" class="theme-toggle" aria-label="Switch theme" aria-pressed="false"><i class="fa-regular fa-moon" aria-hidden="true"></i></button>
   </div>
-
   <div class="portal-backdrop" id="navBackdrop" hidden></div>
   <div class="portal-layout">
     <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
-      <div class="portal-sidebar-head">
-        <a href="index.html" class="portal-brand"><span class="portal-brand-mark logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" /></span><span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span></a>
-        <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-      </div>
-      <div class="portal-sidebar-scroll">
-        <ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading" aria-hidden="true">MAIN</li><li><a href="staff-dashboard.html" class="portal-nav-link is-current" aria-current="page"><span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul>
-        <div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul><p class="portal-nav-note" id="navModulesNote"></p></div>
-        <div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div>
-      </div>
-      <div class="portal-sidebar-foot">
-        <div class="portal-whoami" id="whoAmI"><span class="portal-avatar" id="whoAvatar" aria-hidden="true">—</span><span class="portal-whoami-text"><strong id="whoName">Loading…</strong><small id="whoRole"></small></span></div>
-        <button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span>Sign out</span></button>
-      </div>
+      <div class="portal-sidebar-head"><a href="index.html" class="portal-brand"><span class="portal-brand-mark logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" /></span><span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span></a><button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>
+      <div class="portal-sidebar-scroll"><ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading" aria-hidden="true">MAIN</li><li><a href="staff-dashboard.html" class="portal-nav-link is-current" aria-current="page"><span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul><div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul><p class="portal-nav-note" id="navModulesNote"></p></div><div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div></div>
+      <div class="portal-sidebar-foot"><div class="portal-whoami" id="whoAmI"><span class="portal-avatar" id="whoAvatar" aria-hidden="true">—</span><span class="portal-whoami-text"><strong id="whoName">Loading…</strong><small id="whoRole"></small></span></div><button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span>Sign out</span></button></div>
     </nav>
-
     <main id="main" class="portal-main dash-page">
       <div class="dash-header">
         <div class="dash-greeting"><span>DASHBOARD</span><h1 id="greetingName">Welcome back</h1><p class="dash-role" id="roleLine"></p></div>
         <div class="dash-actions" aria-label="Dashboard controls">
           <button type="button" class="dash-action theme-toggle" aria-label="Switch theme" title="Switch light or dark mode"><i class="fa-regular fa-moon" aria-hidden="true"></i><span>Mode</span></button>
-          <div class="dash-action-wrap">
-            <button type="button" class="dash-action" id="dashNotificationsBtn" aria-haspopup="true" aria-expanded="false" aria-controls="dashNotificationsPanel"><i class="fa-regular fa-bell" aria-hidden="true"></i><span>Notifications</span><b class="dash-action-badge" id="dashNotificationBadge" hidden>0</b></button>
-            <div class="dash-popover" id="dashNotificationsPanel" hidden><div class="dash-popover-head"><strong>Notifications</strong><span>Based on your current work</span></div><div id="dashNotificationsList"><p class="dash-popover-empty">Loading notifications…</p></div></div>
-          </div>
-          <div class="dash-action-wrap">
-            <button type="button" class="dash-action" id="dashHelpBtn" aria-haspopup="true" aria-expanded="false" aria-controls="dashHelpPanel"><i class="fa-regular fa-circle-question" aria-hidden="true"></i><span>Help</span></button>
-            <div class="dash-popover dash-help-popover" id="dashHelpPanel" hidden><div class="dash-popover-head"><strong>Help & resources</strong><span>Quick ways to get unstuck</span></div><a href="staff-resources.html"><i class="fa-solid fa-book-open"></i><span>Sales resources<small>Scripts, discovery and follow-up guidance</small></span></a><a href="staff-support.html#knowledge"><i class="fa-solid fa-headset"></i><span>Support workspace<small>Open support tools and knowledge</small></span></a><a href="staff-profile.html"><i class="fa-solid fa-user"></i><span>Your profile<small>Check your staff details and access</small></span></a></div>
-          </div>
+          <div class="dash-action-wrap"><button type="button" class="dash-action" id="dashNotificationsBtn" aria-haspopup="true" aria-expanded="false" aria-controls="dashNotificationsPanel"><i class="fa-regular fa-bell" aria-hidden="true"></i><span>Notifications</span><b class="dash-action-badge" id="dashNotificationBadge" hidden>0</b></button><div class="dash-popover" id="dashNotificationsPanel" hidden><div class="dash-popover-head"><strong>Notifications</strong><span>Based on your current work</span></div><div id="dashNotificationsList"><p class="dash-popover-empty">Loading notifications…</p></div></div></div>
+          <div class="dash-action-wrap"><button type="button" class="dash-action" id="dashHelpBtn" aria-haspopup="true" aria-expanded="false" aria-controls="dashHelpPanel"><i class="fa-regular fa-circle-question" aria-hidden="true"></i><span>Help</span></button><div class="dash-popover dash-help-popover" id="dashHelpPanel" hidden><div class="dash-popover-head"><strong>Help & resources</strong><span>Quick ways to get unstuck</span></div><a href="staff-resources.html"><i class="fa-solid fa-book-open"></i><span>Sales resources<small>Scripts, discovery and follow-up guidance</small></span></a><a href="staff-support.html#knowledge"><i class="fa-solid fa-headset"></i><span>Support workspace<small>Open support tools and knowledge</small></span></a><a href="staff-profile.html"><i class="fa-solid fa-user"></i><span>Your profile<small>Check your staff details and access</small></span></a></div></div>
           <button type="button" class="dash-action" id="dashFocusBtn" aria-pressed="false" title="Full screen workspace"><i class="fa-solid fa-expand" aria-hidden="true"></i><span>Full screen</span></button>
           <button type="button" class="dash-action dash-action-signout" id="logoutBtnTop"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span>Sign out</span></button>
         </div>
       </div>
-
       <div class="portal-mode-notice" id="modeNotice" role="status" hidden><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span id="modeNoticeText"></span></div>
       <div class="portal-notice" id="portalNotice" role="status" hidden></div>
       <div id="dashContent"><div class="dash-loading">Loading your work…</div></div>
     </main>
   </div>
-
   <script src="portal-effects.js"></script>
   <script src="portal-access.js"></script>
   <script src="staff-portal-shell.js"></script>
   <script src="js/system-ui.js"></script>
   <script src="js/system-modules.js"></script>
+  <script src="staff-dashboard-controls.js"></script>
   <script src="staff-dashboard.js"></script>
 </body>
 </html>
