@@ -2,37 +2,21 @@
 (function (window, document) {
   "use strict";
 
-  var THEME_KEY = "theme";                 // effective theme used by legacy inline boot scripts
-  var PREF_KEY = "bd_theme_preference";    // light | dark | system
-  var MOTION_KEY = "bd_motion_preference"; // full | reduced | system
+  var THEME_KEY = "theme";
+  var PREF_KEY = "bd_theme_preference";
+  var MOTION_KEY = "bd_motion_preference";
   var NAV_CACHE_KEY = "bd_staff_sidebar_cache_v1";
   var BRIDGE_ID = "bodibe-staff-theme";
 
-  function safeGet(key) {
-    try { return localStorage.getItem(key); } catch (e) { return null; }
-  }
-  function safeSet(key, value) {
-    try { localStorage.setItem(key, value); } catch (e) { /* storage can be blocked */ }
-  }
-  function safeRemove(key) {
-    try { localStorage.removeItem(key); } catch (e) { /* ignore */ }
-  }
-  function sessionGet(key) {
-    try { return sessionStorage.getItem(key); } catch (e) { return null; }
-  }
-  function sessionSet(key, value) {
-    try { sessionStorage.setItem(key, value); } catch (e) { /* ignore */ }
-  }
-  function sessionRemove(key) {
-    try { sessionStorage.removeItem(key); } catch (e) { /* ignore */ }
-  }
+  function safeGet(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+  function safeSet(key, value) { try { localStorage.setItem(key, value); } catch (e) {} }
+  function safeRemove(key) { try { localStorage.removeItem(key); } catch (e) {} }
+  function sessionGet(key) { try { return sessionStorage.getItem(key); } catch (e) { return null; } }
+  function sessionSet(key, value) { try { sessionStorage.setItem(key, value); } catch (e) {} }
+  function sessionRemove(key) { try { sessionStorage.removeItem(key); } catch (e) {} }
 
-  function systemTheme() {
-    return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-  }
-  function systemReducedMotion() {
-    return Boolean(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }
+  function systemTheme() { return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"; }
+  function systemReducedMotion() { return Boolean(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches); }
 
   function getPreference() {
     var pref = safeGet(PREF_KEY);
@@ -47,22 +31,13 @@
     return pref === "full" || pref === "reduced" || pref === "system" ? pref : "system";
   }
 
-  function effectiveTheme(pref) {
-    return pref === "system" ? systemTheme() : pref;
-  }
-
-  function effectiveMotion(pref) {
-    if (pref === "reduced") return true;
-    if (pref === "full") return false;
-    return systemReducedMotion();
-  }
+  function effectiveTheme(pref) { return pref === "system" ? systemTheme() : pref; }
+  function effectiveMotion(pref) { if (pref === "reduced") return true; if (pref === "full") return false; return systemReducedMotion(); }
 
   function ensureStaffThemeBridge() {
     if (document.getElementById(BRIDGE_ID)) return;
     var link = document.createElement("link");
-    link.id = BRIDGE_ID;
-    link.rel = "stylesheet";
-    link.href = "staff-theme.css";
+    link.id = BRIDGE_ID; link.rel = "stylesheet"; link.href = "staff-theme.css";
     document.head.appendChild(link);
   }
 
@@ -74,9 +49,7 @@
       button.setAttribute("title", "Switch to " + next + " mode");
       button.setAttribute("aria-pressed", current === "light" ? "true" : "false");
       var icon = button.querySelector("i");
-      if (icon && !button.querySelector("svg")) {
-        icon.className = current === "dark" ? "fa-regular fa-sun" : "fa-regular fa-moon";
-      }
+      if (icon && !button.querySelector("svg")) icon.className = current === "dark" ? "fa-regular fa-sun" : "fa-regular fa-moon";
     });
   }
 
@@ -87,14 +60,9 @@
     window.Chart.defaults.borderColor = dark ? "rgba(148,163,184,.14)" : "rgba(15,23,42,.09)";
     try {
       var instances = window.Chart.instances;
-      if (instances && typeof instances.forEach === "function") {
-        instances.forEach(function (chart) { chart.update("none"); });
-      } else if (instances && typeof instances === "object") {
-        Object.keys(instances).forEach(function (key) {
-          if (instances[key] && instances[key].update) instances[key].update("none");
-        });
-      }
-    } catch (e) { /* charts are optional */ }
+      if (instances && typeof instances.forEach === "function") instances.forEach(function (chart) { chart.update("none"); });
+      else if (instances && typeof instances === "object") Object.keys(instances).forEach(function (key) { if (instances[key] && instances[key].update) instances[key].update("none"); });
+    } catch (e) {}
   }
 
   function applyTheme(pref, options) {
@@ -104,8 +72,7 @@
     document.documentElement.setAttribute("data-theme-preference", preference);
     safeSet(THEME_KEY, effective);
     if (!options || options.persistPreference !== false) safeSet(PREF_KEY, preference);
-    syncToggleButtons();
-    syncChartDefaults();
+    syncToggleButtons(); syncChartDefaults();
     window.dispatchEvent(new CustomEvent("bodibe:themechange", { detail: { preference: preference, theme: effective } }));
     return effective;
   }
@@ -121,27 +88,13 @@
   }
 
   function resetPreferences() {
-    safeRemove(PREF_KEY);
-    safeRemove(MOTION_KEY);
-    safeRemove(THEME_KEY);
-    applyTheme("system");
-    applyMotion("system");
+    safeRemove(PREF_KEY); safeRemove(MOTION_KEY); safeRemove(THEME_KEY);
+    applyTheme("system"); applyMotion("system");
   }
 
-  /* -----------------------------------------------------------------------
-     FAST SIDEBAR HYDRATION
-
-     Role navigation is still rebuilt from the server by staff-portal-shell.js.
-     This cache is presentation-only: it keeps the last confirmed menu visible
-     while /auth/me and /staff/my-permissions are loading on the next page.
-     Backend permissions remain the security boundary and replace this cached
-     markup as soon as the live response arrives.
-     ----------------------------------------------------------------------- */
   function pageName(value) {
-    try {
-      var url = new URL(value || window.location.href, window.location.href);
-      return url.pathname.split("/").pop() || "staff-dashboard.html";
-    } catch (e) { return ""; }
+    try { var url = new URL(value || window.location.href, window.location.href); return url.pathname.split("/").pop() || "staff-dashboard.html"; }
+    catch (e) { return ""; }
   }
 
   function markCachedCurrent(list) {
@@ -150,70 +103,53 @@
     list.querySelectorAll(".portal-nav-link").forEach(function (link) {
       var current = pageName(link.href) === here;
       link.classList.toggle("is-current", current);
-      if (current) link.setAttribute("aria-current", "page");
-      else link.removeAttribute("aria-current");
+      if (current) link.setAttribute("aria-current", "page"); else link.removeAttribute("aria-current");
     });
   }
 
   function restoreSidebarCache() {
     if (!document.body || !document.body.classList.contains("portal-shell-body")) return;
-    var raw = sessionGet(NAV_CACHE_KEY);
-    if (!raw) return;
-    var cached;
-    try { cached = JSON.parse(raw); } catch (e) { return; }
+    var raw = sessionGet(NAV_CACHE_KEY); if (!raw) return;
+    var cached; try { cached = JSON.parse(raw); } catch (e) { return; }
     if (!cached || !cached.html) return;
-
-    var list = document.getElementById("navModules");
-    var section = document.getElementById("navModulesSection");
-    var heading = document.getElementById("navModulesHeading");
-    var note = document.getElementById("navModulesNote");
+    var list = document.getElementById("navModules"), section = document.getElementById("navModulesSection"), heading = document.getElementById("navModulesHeading"), note = document.getElementById("navModulesNote");
     if (list && !list.innerHTML.trim()) {
-      list.innerHTML = cached.html;
-      markCachedCurrent(list);
-      if (section) section.hidden = false;
+      list.innerHTML = cached.html; markCachedCurrent(list); if (section) section.hidden = false;
       if (heading && typeof cached.headingHidden === "boolean") heading.hidden = cached.headingHidden;
       if (note && typeof cached.note === "string") note.textContent = cached.note;
     }
-
-    var whoName = document.getElementById("whoName");
-    var whoRole = document.getElementById("whoRole");
-    var whoAvatar = document.getElementById("whoAvatar");
+    var whoName = document.getElementById("whoName"), whoRole = document.getElementById("whoRole"), whoAvatar = document.getElementById("whoAvatar");
     if (whoName && cached.name) whoName.textContent = cached.name;
     if (whoRole && cached.role) whoRole.textContent = cached.role;
     if (whoAvatar && cached.avatar) whoAvatar.textContent = cached.avatar;
   }
 
   function saveSidebarCache() {
-    var list = document.getElementById("navModules");
-    var section = document.getElementById("navModulesSection");
+    var list = document.getElementById("navModules"), section = document.getElementById("navModulesSection");
     if (!list || !section || section.hidden || !list.innerHTML.trim()) return;
-    var heading = document.getElementById("navModulesHeading");
-    var note = document.getElementById("navModulesNote");
-    var whoName = document.getElementById("whoName");
-    var whoRole = document.getElementById("whoRole");
-    var whoAvatar = document.getElementById("whoAvatar");
-    sessionSet(NAV_CACHE_KEY, JSON.stringify({
-      html: list.innerHTML,
-      headingHidden: heading ? heading.hidden : false,
-      note: note ? note.textContent : "",
-      name: whoName ? whoName.textContent : "",
-      role: whoRole ? whoRole.textContent : "",
-      avatar: whoAvatar ? whoAvatar.textContent : ""
-    }));
+    var heading = document.getElementById("navModulesHeading"), note = document.getElementById("navModulesNote"), whoName = document.getElementById("whoName"), whoRole = document.getElementById("whoRole"), whoAvatar = document.getElementById("whoAvatar");
+    sessionSet(NAV_CACHE_KEY, JSON.stringify({ html:list.innerHTML, headingHidden:heading?heading.hidden:false, note:note?note.textContent:"", name:whoName?whoName.textContent:"", role:whoRole?whoRole.textContent:"", avatar:whoAvatar?whoAvatar.textContent:"" }));
+  }
+
+  function syncProspectBankNav() {
+    var list = document.getElementById("navModules");
+    if (!list || list.querySelector('a[href="staff-prospects.html"]')) return;
+    var crm = Array.prototype.slice.call(list.querySelectorAll("a.portal-nav-link")).find(function (a) { return (a.textContent || "").trim() === "Leads / CRM"; });
+    if (!crm) return;
+    var li = document.createElement("li"), current = pageName(window.location.href) === "staff-prospects.html";
+    li.innerHTML = '<a href="staff-prospects.html" class="portal-nav-link' + (current ? ' is-current' : '') + '"' + (current ? ' aria-current="page"' : '') + '><span class="portal-nav-icon"><i class="fa-solid fa-building-circle-check"></i></span><span class="portal-nav-label">Prospect Bank</span></a>';
+    var parent = crm.closest("li"); if (parent && parent.parentNode) parent.parentNode.insertBefore(li, parent.nextSibling);
   }
 
   function watchSidebar() {
-    var list = document.getElementById("navModules");
-    var section = document.getElementById("navModulesSection");
+    var list = document.getElementById("navModules"), section = document.getElementById("navModulesSection");
     if (!list || !section || !window.MutationObserver) return;
     var timer = null;
     var observer = new MutationObserver(function () {
-      clearTimeout(timer);
-      timer = setTimeout(saveSidebarCache, 40);
+      syncProspectBankNav(); clearTimeout(timer); timer = setTimeout(saveSidebarCache, 40);
     });
     observer.observe(list, { childList: true, subtree: true, attributes: true });
     observer.observe(section, { attributes: true, attributeFilter: ["hidden"] });
-
     document.addEventListener("click", function (event) {
       var logout = event.target.closest && event.target.closest('#logoutBtn,#logoutBtnTop,[data-portal-action="logout"]');
       if (logout) sessionRemove(NAV_CACHE_KEY);
@@ -238,35 +174,28 @@
 
   function bootUiHelpers() {
     restoreSidebarCache();
+    syncProspectBankNav();
     watchSidebar();
     bindToggles();
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootUiHelpers);
-  else bootUiHelpers();
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootUiHelpers); else bootUiHelpers();
 
   if (window.matchMedia) {
-    var themeMedia = window.matchMedia("(prefers-color-scheme: light)");
-    var motionMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
-    var onThemeSystemChange = function () {
-      if (getPreference() === "system") applyTheme("system", { persistPreference: false });
-    };
-    var onMotionSystemChange = function () {
-      if (getMotionPreference() === "system") applyMotion("system", { persistPreference: false });
-    };
-    if (themeMedia.addEventListener) themeMedia.addEventListener("change", onThemeSystemChange);
-    else if (themeMedia.addListener) themeMedia.addListener(onThemeSystemChange);
-    if (motionMedia.addEventListener) motionMedia.addEventListener("change", onMotionSystemChange);
-    else if (motionMedia.addListener) motionMedia.addListener(onMotionSystemChange);
+    var themeMedia = window.matchMedia("(prefers-color-scheme: light)"), motionMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var onThemeSystemChange = function () { if (getPreference() === "system") applyTheme("system", { persistPreference: false }); };
+    var onMotionSystemChange = function () { if (getMotionPreference() === "system") applyMotion("system", { persistPreference: false }); };
+    if (themeMedia.addEventListener) themeMedia.addEventListener("change", onThemeSystemChange); else if (themeMedia.addListener) themeMedia.addListener(onThemeSystemChange);
+    if (motionMedia.addEventListener) motionMedia.addEventListener("change", onMotionSystemChange); else if (motionMedia.addListener) motionMedia.addListener(onMotionSystemChange);
   }
 
   window.BodibeTheme = {
-    getPreference: getPreference,
-    getTheme: function () { return document.documentElement.getAttribute("data-theme") || effectiveTheme(getPreference()); },
-    setPreference: applyTheme,
-    getMotionPreference: getMotionPreference,
-    setMotionPreference: applyMotion,
-    resetPreferences: resetPreferences,
-    sync: function () { applyTheme(getPreference(), { persistPreference: false }); applyMotion(getMotionPreference(), { persistPreference: false }); }
+    getPreference:getPreference,
+    getTheme:function(){return document.documentElement.getAttribute("data-theme")||effectiveTheme(getPreference());},
+    setPreference:applyTheme,
+    getMotionPreference:getMotionPreference,
+    setMotionPreference:applyMotion,
+    resetPreferences:resetPreferences,
+    sync:function(){applyTheme(getPreference(),{persistPreference:false});applyMotion(getMotionPreference(),{persistPreference:false});}
   };
 })(window, document);
