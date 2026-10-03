@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prospect Bank | Bodibe Digital</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();</script>
+  <script src="theme.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff-dashboard.css" />
+  <link rel="stylesheet" href="staff-prospects.css" />
+</head>
+<body class="portal-body portal-shell-body">
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="portal-topbar"><button id="navToggle" class="portal-nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar"><span class="portal-burger"><span></span><span></span><span></span></span></button><a href="index.html" class="portal-topbar-brand"><span class="logo-mark"><img src="assets/images/logo.svg" alt="" /></span><span>Bodibe Digital <strong>Staff Portal</strong></span></a><button type="button" class="theme-toggle" aria-label="Switch theme"><i class="fa-regular fa-moon"></i></button></div>
+<div class="portal-backdrop" id="navBackdrop" hidden></div>
+<div class="portal-layout">
+  <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+    <div class="portal-sidebar-head"><a href="index.html" class="portal-brand"><span class="portal-brand-mark logo-mark"><img src="assets/images/logo.svg" alt="" /></span><span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span></a><button type="button" class="portal-nav-close" id="navClose"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="portal-sidebar-scroll"><ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading">MAIN</li><li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul><div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules"></ul><p class="portal-nav-note" id="navModulesNote"></p></div><div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div></div>
+    <div class="portal-sidebar-foot"><div class="portal-whoami"><span class="portal-avatar" id="whoAvatar">—</span><span class="portal-whoami-text"><strong id="whoName">Loading…</strong><small id="whoRole"></small></span></div><button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign out</span></button></div>
+  </nav>
+
+  <main id="main" class="portal-main prospect-page">
+    <header class="prospect-header">
+      <div><span class="prospect-eyebrow">SALES PIPELINE RESERVE</span><h1>Prospect Bank</h1><p>Build tomorrow's pipeline today. Store potential businesses here, clean the information, then release only ready prospects into the live CRM.</p></div>
+      <div class="prospect-header-actions"><button class="prospect-btn prospect-btn-secondary" id="refreshProspects" type="button"><i class="fa-solid fa-rotate"></i>Refresh</button><button class="prospect-btn prospect-btn-primary" id="newProspect" type="button"><i class="fa-solid fa-plus"></i>Add prospect</button></div>
+    </header>
+
+    <div class="portal-notice" id="portalNotice" hidden></div>
+
+    <section class="prospect-kpis" aria-label="Prospect summary">
+      <article><span>Total reserve</span><strong id="kpiTotal">0</strong><small>All stored prospects</small></article>
+      <article><span>Ready</span><strong id="kpiReady">0</strong><small>Prepared for sales</small></article>
+      <article><span>Queued</span><strong id="kpiQueued">0</strong><small>Scheduled for release</small></article>
+      <article><span>Released</span><strong id="kpiReleased">0</strong><small>Now in the CRM</small></article>
+    </section>
+
+    <section class="prospect-next-card">
+      <div><span>NEXT DAILY BATCH</span><h2>Next 15 ready prospects</h2><p>The automation will eventually use this same ready queue. For now you can review and release manually.</p></div>
+      <div class="prospect-next-count"><strong id="next15Count">0</strong><span>/ 15 ready</span></div>
+    </section>
+
+    <section class="prospect-board">
+      <div class="prospect-toolbar">
+        <div class="prospect-tabs" id="prospectTabs"><button class="is-active" data-status="">All</button><button data-status="Ready">Ready</button><button data-status="Queued">Queued</button><button data-status="Research Needed">Research</button><button data-status="Released">Released</button></div>
+        <div class="prospect-tools"><label class="prospect-search"><i class="fa-solid fa-magnifying-glass"></i><input id="prospectSearch" type="search" placeholder="Search business, contact, industry or location…" /></label><select id="industryFilter"><option value="">All industries</option></select></div>
+      </div>
+
+      <div class="prospect-bulkbar" id="prospectBulkbar" hidden><strong id="selectedCount">0 selected</strong><span>Prepare the selected prospects for Lloyd or another Sales staff member.</span><button class="prospect-btn prospect-btn-secondary" id="markResearch" type="button">Research</button><button class="prospect-btn prospect-btn-secondary" id="markReady" type="button">Mark ready</button><button class="prospect-btn prospect-btn-primary" id="queueSelected" type="button">Queue</button><button class="prospect-btn prospect-btn-primary" id="releaseSelected" type="button">Release now</button></div>
+
+      <div class="prospect-table-head"><div><span>PROSPECT RESERVE</span><h2>Potential businesses</h2></div><span id="prospectCount">0 prospects</span></div>
+      <div class="prospect-table-wrap"><table class="prospect-table"><thead><tr><th class="check"><input id="selectAllProspects" type="checkbox" aria-label="Select all visible prospects" /></th><th>Prospect</th><th>Business</th><th>Contact</th><th>Industry</th><th>Location</th><th>Status</th><th>Release</th><th>Assigned</th><th></th></tr></thead><tbody id="prospectRows"><tr><td colspan="10" class="prospect-empty">Loading prospects…</td></tr></tbody></table></div>
+    </section>
+  </main>
+</div>
+
+<div class="prospect-drawer-backdrop" id="prospectBackdrop" hidden></div>
+<aside class="prospect-drawer" id="prospectDrawer" hidden><div class="prospect-drawer-head"><div><span id="drawerProspectId">PROSPECT</span><h2 id="drawerTitle">Prospect details</h2></div><button id="closeProspectDrawer" type="button"><i class="fa-solid fa-xmark"></i></button></div><div class="prospect-drawer-body" id="prospectDrawerBody"></div></aside>
+
+<dialog class="prospect-dialog" id="prospectDialog"><form id="prospectForm" method="dialog"><div class="prospect-dialog-head"><div><span>PROSPECT RECORD</span><h2 id="prospectDialogTitle">Add prospect</h2></div><button type="button" class="prospect-dialog-close" data-close-prospect><i class="fa-solid fa-xmark"></i></button></div><input id="editProspectId" type="hidden" /><div class="prospect-form-grid"><label>Business name<input id="pBusiness" required maxlength="160" /></label><label>Contact name<input id="pContact" maxlength="120" placeholder="Unknown" /></label><label>Email<input id="pEmail" maxlength="180" placeholder="Unknown" /></label><label>Phone<input id="pPhone" maxlength="60" /></label><label class="wide">Website / social<input id="pWebsite" maxlength="500" placeholder="Website, Instagram, Facebook or Google listing" /></label><label>Industry<input id="pIndustry" maxlength="120" /></label><label>Location<input id="pLocation" maxlength="160" /></label><label>Source<input id="pSource" maxlength="120" placeholder="Google Maps, Instagram, referral…" /></label><label class="wide">Screenshot / reference<input id="pReference" maxlength="800" placeholder="Optional link or reference" /></label><label class="wide">Opportunity notes<textarea id="pNotes" rows="4" maxlength="2000" placeholder="Why this business may need Bodibe Digital…"></textarea></label></div><div class="prospect-dialog-actions"><button type="button" class="prospect-btn prospect-btn-secondary" data-close-prospect>Cancel</button><button class="prospect-btn prospect-btn-primary" id="saveProspect">Save prospect</button></div></form></dialog>
+
+<dialog class="prospect-dialog prospect-queue-dialog" id="queueDialog"><form id="queueForm" method="dialog"><div class="prospect-dialog-head"><div><span>DAILY RELEASE QUEUE</span><h2>Queue selected prospects</h2></div><button type="button" class="prospect-dialog-close" data-close-queue><i class="fa-solid fa-xmark"></i></button></div><p class="prospect-dialog-copy">Choose the Sales staff member and the date these prospects should enter the live CRM.</p><div class="prospect-form-grid"><label>Release date<input id="queueDate" type="date" required /></label><label>Assign to<select id="queueAssignee" required></select></label></div><div class="prospect-dialog-actions"><button type="button" class="prospect-btn prospect-btn-secondary" data-close-queue>Cancel</button><button class="prospect-btn prospect-btn-primary">Queue prospects</button></div></form></dialog>
+
+<dialog class="prospect-dialog prospect-queue-dialog" id="releaseDialog"><form id="releaseForm" method="dialog"><div class="prospect-dialog-head"><div><span>MOVE TO LIVE CRM</span><h2>Release selected prospects</h2></div><button type="button" class="prospect-dialog-close" data-close-release><i class="fa-solid fa-xmark"></i></button></div><p class="prospect-dialog-copy">This creates real CRM leads. Unknown contact names or emails are allowed when another contact route such as phone or social/website is available.</p><div class="prospect-form-grid"><label class="wide">Assign to<select id="releaseAssignee" required></select></label></div><div class="prospect-dialog-actions"><button type="button" class="prospect-btn prospect-btn-secondary" data-close-release>Cancel</button><button class="prospect-btn prospect-btn-primary">Release to CRM</button></div></form></dialog>
+
+<script src="portal-effects.js"></script><script src="portal-access.js"></script><script src="staff-portal-shell.js"></script><script src="staff-prospects.js"></script>
+</body>
+</html>
