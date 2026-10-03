@@ -1,170 +1,79 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard | Bodibe Digital</title>
-    <meta name="robots" content="noindex, nofollow" />
-
-    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    />
-
-    <!-- Theme: apply saved/system preference before first paint (no flash) -->
-    <script>
-      (function () {
-        try {
-          var t = localStorage.getItem("theme");
-          if (t !== "dark" && t !== "light") {
-            t =
-              window.matchMedia &&
-              window.matchMedia("(prefers-color-scheme: light)").matches
-                ? "light"
-                : "dark";
-          }
-          document.documentElement.setAttribute("data-theme", t);
-        } catch (e) {
-          document.documentElement.setAttribute("data-theme", "dark");
-        }
-      })();
-    </script>
-    <script src="theme.js" defer></script>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="staff-dashboard.css" />
-  <link rel="stylesheet" href="css/system.css">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Bodibe Digital</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script>
+    (function(){try{var t=localStorage.getItem("theme");if(t!=="dark"&&t!=="light")t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t)}catch(e){document.documentElement.setAttribute("data-theme","dark")}})();
+  </script>
+  <script src="theme.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff-dashboard.css" />
+  <link rel="stylesheet" href="css/system.css" />
 </head>
+<body class="portal-body portal-shell-body bodibe-system" data-system-page="dashboard">
+  <a href="#main" class="skip-link">Skip to content</a>
 
-  <body class="portal-body portal-shell-body bodibe-system" data-system-page="dashboard">
+  <div class="portal-topbar">
+    <button type="button" class="portal-nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar"><span class="portal-burger" aria-hidden="true"><span></span><span></span><span></span></span></button>
+    <a href="index.html" class="portal-topbar-brand"><span class="logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" /></span><span>Bodibe Digital <strong>Staff Portal</strong></span></a>
+    <button type="button" class="theme-toggle" aria-label="Switch theme" aria-pressed="false"><i class="fa-regular fa-moon" aria-hidden="true"></i></button>
+  </div>
 
-<a href="#main" class="skip-link">Skip to content</a>
+  <div class="portal-backdrop" id="navBackdrop" hidden></div>
+  <div class="portal-layout">
+    <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+      <div class="portal-sidebar-head">
+        <a href="index.html" class="portal-brand"><span class="portal-brand-mark logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" /></span><span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span></a>
+        <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <div class="portal-sidebar-scroll">
+        <ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading" aria-hidden="true">MAIN</li><li><a href="staff-dashboard.html" class="portal-nav-link is-current" aria-current="page"><span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul>
+        <div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul><p class="portal-nav-note" id="navModulesNote"></p></div>
+        <div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div>
+      </div>
+      <div class="portal-sidebar-foot">
+        <div class="portal-whoami" id="whoAmI"><span class="portal-avatar" id="whoAvatar" aria-hidden="true">—</span><span class="portal-whoami-text"><strong id="whoName">Loading…</strong><small id="whoRole"></small></span></div>
+        <button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span>Sign out</span></button>
+      </div>
+    </nav>
 
-    <!-- Mobile top bar: only surface for the drawer toggle below the sidebar breakpoint -->
-    <div class="portal-topbar">
-      <button type="button" class="portal-nav-toggle" id="navToggle"
-              aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar">
-        <span class="portal-burger" aria-hidden="true"><span></span><span></span><span></span></span>
-      </button>
-      <a href="index.html" class="portal-topbar-brand">
-        <span class="logo-mark" aria-hidden="true">
-          <img src="assets/images/logo.svg" alt="" class="logo-mark-dark">
-          <img src="assets/images/logo.svg" alt="" class="logo-mark-light">
-        </span>
-        <span>Bodibe Digital <strong>Staff Portal</strong></span>
-      </a>
-      <button type="button" class="theme-toggle" aria-label="Switch to light mode" aria-pressed="false">
-        <svg class="theme-toggle-icon theme-toggle-icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="1.5" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22.5" y2="12"/><line x1="4.4" y1="4.4" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.6" y2="19.6"/><line x1="4.4" y1="19.6" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.6" y2="4.4"/></g></svg>
-        <svg class="theme-toggle-icon theme-toggle-icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1z"/></svg>
-      </button>
-    </div>
-
-    <!-- Click-away backdrop for the mobile drawer -->
-    <div class="portal-backdrop" id="navBackdrop" hidden></div>
-
-    <div class="portal-layout">
-
-      <!-- ================= SIDEBAR ================= -->
-      <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
-        <div class="portal-sidebar-head">
-          <a href="index.html" class="portal-brand">
-            <span class="portal-brand-mark logo-mark" aria-hidden="true">
-              <img src="assets/images/logo.svg" alt="" class="logo-mark-dark">
-              <img src="assets/images/logo.svg" alt="" class="logo-mark-light">
-            </span>
-            <span class="portal-brand-text">
-              <strong>BODIBE DIGITAL</strong>
-              <small>STAFF PORTAL</small>
-            </span>
-          </a>
-          <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-          </button>
-        </div>
-
-        <div class="portal-sidebar-scroll">
-          <!-- Always available to any signed-in employee -->
-          <ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading" aria-hidden="true">MAIN</li>
-            <li>
-              <a href="staff-dashboard.html" class="portal-nav-link is-current" aria-current="page">
-                <span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span>
-                <span class="portal-nav-label">Dashboard</span>
-              </a>
-            </li>
-          </ul>
-
-          <!-- Built entirely from GET /staff/my-permissions. Never hardcoded. -->
-          <div class="portal-nav-section" id="navModulesSection" hidden>
-            <h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2>
-            <ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul>
-            <p class="portal-nav-note" id="navModulesNote"></p>
+    <main id="main" class="portal-main dash-page">
+      <div class="dash-header">
+        <div class="dash-greeting"><span>DASHBOARD</span><h1 id="greetingName">Welcome back</h1><p class="dash-role" id="roleLine"></p></div>
+        <div class="dash-actions" aria-label="Dashboard controls">
+          <button type="button" class="dash-action theme-toggle" aria-label="Switch theme" title="Switch light or dark mode"><i class="fa-regular fa-moon" aria-hidden="true"></i><span>Mode</span></button>
+          <div class="dash-action-wrap">
+            <button type="button" class="dash-action" id="dashNotificationsBtn" aria-haspopup="true" aria-expanded="false" aria-controls="dashNotificationsPanel"><i class="fa-regular fa-bell" aria-hidden="true"></i><span>Notifications</span><b class="dash-action-badge" id="dashNotificationBadge" hidden>0</b></button>
+            <div class="dash-popover" id="dashNotificationsPanel" hidden><div class="dash-popover-head"><strong>Notifications</strong><span>Based on your current work</span></div><div id="dashNotificationsList"><p class="dash-popover-empty">Loading notifications…</p></div></div>
           </div>
-
-          <div class="portal-nav-section" id="navEmptySection" hidden>
-            <p class="portal-nav-note" id="navEmptyNote"></p>
+          <div class="dash-action-wrap">
+            <button type="button" class="dash-action" id="dashHelpBtn" aria-haspopup="true" aria-expanded="false" aria-controls="dashHelpPanel"><i class="fa-regular fa-circle-question" aria-hidden="true"></i><span>Help</span></button>
+            <div class="dash-popover dash-help-popover" id="dashHelpPanel" hidden><div class="dash-popover-head"><strong>Help & resources</strong><span>Quick ways to get unstuck</span></div><a href="staff-resources.html"><i class="fa-solid fa-book-open"></i><span>Sales resources<small>Scripts, discovery and follow-up guidance</small></span></a><a href="staff-support.html#knowledge"><i class="fa-solid fa-headset"></i><span>Support workspace<small>Open support tools and knowledge</small></span></a><a href="staff-profile.html"><i class="fa-solid fa-user"></i><span>Your profile<small>Check your staff details and access</small></span></a></div>
           </div>
+          <button type="button" class="dash-action" id="dashFocusBtn" aria-pressed="false" title="Full screen workspace"><i class="fa-solid fa-expand" aria-hidden="true"></i><span>Full screen</span></button>
+          <button type="button" class="dash-action dash-action-signout" id="logoutBtnTop"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span>Sign out</span></button>
         </div>
+      </div>
 
-        <div class="portal-sidebar-foot">
-          <div class="portal-whoami" id="whoAmI">
-            <span class="portal-avatar" id="whoAvatar" aria-hidden="true">&mdash;</span>
-            <span class="portal-whoami-text">
-              <strong id="whoName">Loading&hellip;</strong>
-              <small id="whoRole"></small>
-            </span>
-          </div>
-          <button type="button" class="portal-signout" id="logoutBtn">
-            <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
-            <span>Sign out</span>
-          </button>
-        </div>
-      </nav>
+      <div class="portal-mode-notice" id="modeNotice" role="status" hidden><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span id="modeNoticeText"></span></div>
+      <div class="portal-notice" id="portalNotice" role="status" hidden></div>
+      <div id="dashContent"><div class="dash-loading">Loading your work…</div></div>
+    </main>
+  </div>
 
-      <!-- ================= MAIN ================= -->
-      <main id="main" class="portal-main dash-page">
-        <div class="dash-header">
-          <div class="dash-greeting">
-            <span>DASHBOARD</span>
-            <h1 id="greetingName">Welcome back</h1>
-            <p class="dash-role" id="roleLine"></p>
-          </div>
-          <button class="dash-logout" id="logoutBtnTop">
-            <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
-            Sign Out
-          </button>
-        </div>
-
-        <!-- Which workspace this device gets. Present on mobile/tablet only. -->
-        <div class="portal-mode-notice" id="modeNotice" role="status" hidden>
-          <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
-          <span id="modeNoticeText"></span>
-        </div>
-
-        <!-- Non-blocking notice strip: permissions unavailable, degraded mode, etc. -->
-        <div class="portal-notice" id="portalNotice" role="status" hidden></div>
-
-        <div id="dashContent">
-          <div class="dash-loading">Loading your work&hellip;</div>
-        </div>
-      </main>
-
-    </div>
-
-    <script src="portal-effects.js"></script>
-    <!-- Device capability policy. Loaded first: the portal shell composes it
-         with RBAC. It is a business rule, never a security boundary. -->
-    <script src="portal-access.js"></script>
-    <!-- Session, identity, permissions, navigation, drawer, sign-out. -->
-    <script src="staff-portal-shell.js"></script>
-<script src="js/system-ui.js"></script>
-<script src="js/system-modules.js"></script>
-    <script src="staff-dashboard.js"></script>
-  </body>
+  <script src="portal-effects.js"></script>
+  <script src="portal-access.js"></script>
+  <script src="staff-portal-shell.js"></script>
+  <script src="js/system-ui.js"></script>
+  <script src="js/system-modules.js"></script>
+  <script src="staff-dashboard.js"></script>
+</body>
 </html>
