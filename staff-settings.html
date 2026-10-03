@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Settings | Bodibe Digital</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script>
+    (function(){
+      try {
+        var p=localStorage.getItem('bd_theme_preference');
+        var t=localStorage.getItem('theme');
+        if(p==='system'||(p!=='light'&&p!=='dark')) t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+        else t=p;
+        if(t!=='light'&&t!=='dark') t='dark';
+        document.documentElement.setAttribute('data-theme',t);
+      } catch(e){document.documentElement.setAttribute('data-theme','dark');}
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff-dashboard.css" />
+  <link rel="stylesheet" href="staff-settings.css" />
+  <script src="theme.js" defer></script>
+</head>
+<body class="portal-body portal-shell-body">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="portal-topbar">
+    <button id="navToggle" type="button" class="portal-nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar"><span class="portal-burger"><span></span><span></span><span></span></span></button>
+    <a href="index.html" class="portal-topbar-brand"><span class="logo-mark"><img src="assets/images/logo.svg" alt="" /></span><span>Bodibe Digital <strong>Staff Portal</strong></span></a>
+    <button type="button" class="theme-toggle" aria-label="Switch theme"><i class="fa-regular fa-moon"></i></button>
+  </div>
+  <div class="portal-backdrop" id="navBackdrop" hidden></div>
+
+  <div class="portal-layout">
+    <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+      <div class="portal-sidebar-head">
+        <a href="index.html" class="portal-brand"><span class="portal-brand-mark logo-mark"><img src="assets/images/logo.svg" alt="" /></span><span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span></a>
+        <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="portal-sidebar-scroll">
+        <ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading">MAIN</li><li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul>
+        <div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules"></ul><p class="portal-nav-note" id="navModulesNote"></p></div>
+        <div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div>
+      </div>
+      <div class="portal-sidebar-foot">
+        <div class="portal-whoami"><span class="portal-avatar" id="whoAvatar">—</span><span class="portal-whoami-text"><strong id="whoName">Loading…</strong><small id="whoRole"></small></span></div>
+        <button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign out</span></button>
+      </div>
+    </nav>
+
+    <main id="main" class="portal-main settings-workspace">
+      <div class="settings-inner">
+        <header class="settings-header">
+          <div><span class="settings-eyebrow">PORTAL PREFERENCES</span><h1>Settings</h1><p>Control how the Bodibe Digital staff portal looks and behaves on this device.</p></div>
+          <div class="settings-state"><span>Current theme</span><strong id="currentTheme">—</strong></div>
+        </header>
+
+        <div class="portal-notice" id="portalNotice" hidden></div>
+
+        <section class="settings-grid">
+          <article class="settings-card settings-card-wide">
+            <div class="settings-card-head"><div><span>APPEARANCE</span><h2>Theme</h2><p>Light and dark mode use the same layout, spacing and features. Only the colour system changes.</p></div><i class="fa-solid fa-circle-half-stroke"></i></div>
+            <div class="settings-choice-grid" id="themeChoices">
+              <label class="settings-choice" data-theme-choice="system"><input type="radio" name="theme" value="system" /><span class="settings-choice-icon"><i class="fa-solid fa-display"></i></span><span><strong>System</strong><small>Follow this device</small></span><span class="settings-check"><i class="fa-solid fa-check"></i></span></label>
+              <label class="settings-choice" data-theme-choice="light"><input type="radio" name="theme" value="light" /><span class="settings-choice-icon theme-light-preview"><i class="fa-regular fa-sun"></i></span><span><strong>Light</strong><small>Professional daylight interface</small></span><span class="settings-check"><i class="fa-solid fa-check"></i></span></label>
+              <label class="settings-choice" data-theme-choice="dark"><input type="radio" name="theme" value="dark" /><span class="settings-choice-icon theme-dark-preview"><i class="fa-regular fa-moon"></i></span><span><strong>Dark</strong><small>Bodibe night workspace</small></span><span class="settings-check"><i class="fa-solid fa-check"></i></span></label>
+            </div>
+          </article>
+
+          <article class="settings-card">
+            <div class="settings-card-head"><div><span>ACCESSIBILITY</span><h2>Motion</h2><p>Choose how much interface animation this device uses.</p></div><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <div class="settings-stack" id="motionChoices">
+              <label class="settings-row"><span><strong>Follow device</strong><small>Use your operating-system motion preference.</small></span><input type="radio" name="motion" value="system" /></label>
+              <label class="settings-row"><span><strong>Full motion</strong><small>Use normal transitions and micro-interactions.</small></span><input type="radio" name="motion" value="full" /></label>
+              <label class="settings-row"><span><strong>Reduce motion</strong><small>Minimise animation throughout the portal.</small></span><input type="radio" name="motion" value="reduced" /></label>
+            </div>
+          </article>
+
+          <article class="settings-card">
+            <div class="settings-card-head"><div><span>WORKSPACE DEFAULTS</span><h2>Business display</h2><p>These are company-wide operating defaults and are shown here for clarity.</p></div><i class="fa-solid fa-building"></i></div>
+            <div class="settings-info-list">
+              <div><span>Currency</span><strong>ZAR · South African Rand</strong></div>
+              <div><span>Operational timezone</span><strong>Africa/Johannesburg</strong></div>
+              <div><span>Date style</span><strong>DD/MM/YYYY</strong></div>
+              <div><span>Theme coverage</span><strong>All staff portal workspaces</strong></div>
+            </div>
+          </article>
+
+          <article class="settings-card settings-card-wide">
+            <div class="settings-card-head"><div><span>SESSION</span><h2>This staff session</h2><p>Your account identity comes from the live staff directory. Interface preferences are saved only in this browser.</p></div><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="settings-session-grid">
+              <div><span>Staff member</span><strong id="settingsStaffName">Loading…</strong></div>
+              <div><span>Role</span><strong id="settingsStaffRole">—</strong></div>
+              <div><span>Department</span><strong id="settingsStaffDepartment">—</strong></div>
+              <div><span>Device mode</span><strong id="settingsDevice">—</strong></div>
+            </div>
+            <div class="settings-actions">
+              <button type="button" class="settings-btn settings-btn-secondary" id="resetPreferences"><i class="fa-solid fa-arrow-rotate-left"></i>Reset interface preferences</button>
+              <button type="button" class="settings-btn settings-btn-danger" id="settingsSignOut"><i class="fa-solid fa-arrow-right-from-bracket"></i>Sign out</button>
+            </div>
+          </article>
+        </section>
+
+        <p class="settings-footnote"><i class="fa-solid fa-circle-info"></i> Theme changes apply immediately and do not alter permissions, data, calculations or workflow logic.</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="portal-access.js"></script>
+  <script src="portal-effects.js"></script>
+  <script src="staff-portal-shell.js"></script>
+  <script src="staff-settings.js"></script>
+</body>
+</html>
