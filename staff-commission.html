@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commission | Bodibe Digital</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script>
+    (function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();
+  </script>
+  <script src="theme.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff-dashboard.css" />
+  <link rel="stylesheet" href="staff-commission.css" />
+</head>
+<body class="portal-body portal-shell-body">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="portal-topbar">
+    <button type="button" class="portal-nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar"><span class="portal-burger" aria-hidden="true"><span></span><span></span><span></span></span></button>
+    <a href="index.html" class="portal-topbar-brand"><span class="logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" class="logo-mark-dark"><img src="assets/images/logo.svg" alt="" class="logo-mark-light"></span><span>Bodibe Digital <strong>Staff Portal</strong></span></a>
+    <button type="button" class="theme-toggle" aria-label="Switch theme" aria-pressed="false"><svg class="theme-toggle-icon theme-toggle-icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/></svg><svg class="theme-toggle-icon theme-toggle-icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1z"/></svg></button>
+  </div>
+  <div class="portal-backdrop" id="navBackdrop" hidden></div>
+
+  <div class="portal-layout">
+    <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+      <div class="portal-sidebar-head">
+        <a href="index.html" class="portal-brand"><span class="portal-brand-mark logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" class="logo-mark-dark"><img src="assets/images/logo.svg" alt="" class="logo-mark-light"></span><span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span></a>
+        <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="portal-sidebar-scroll">
+        <ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading" aria-hidden="true">MAIN</li><li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul>
+        <div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul><p class="portal-nav-note" id="navModulesNote"></p></div>
+        <div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div>
+      </div>
+      <div class="portal-sidebar-foot"><div class="portal-whoami" id="whoAmI"><span class="portal-avatar" id="whoAvatar">&mdash;</span><span class="portal-whoami-text"><strong id="whoName">Loading&hellip;</strong><small id="whoRole"></small></span></div><button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign out</span></button></div>
+    </nav>
+
+    <main id="main" class="portal-main commission-workspace">
+      <div class="commission-inner">
+        <div class="commission-header">
+          <div><span class="commission-eyebrow">SALES COMPENSATION</span><h1>Commission</h1><p>Track accepted sales, estimated commission and recorded payouts.</p></div>
+          <button type="button" id="refreshCommission" class="commission-btn commission-btn-primary"><i class="fa-solid fa-rotate"></i><span>Refresh</span></button>
+        </div>
+
+        <div class="portal-mode-notice" id="modeNotice" role="status" hidden><i class="fa-solid fa-mobile-screen-button"></i><span id="modeNoticeText"></span></div>
+        <div class="portal-notice" id="portalNotice" role="status" hidden></div>
+
+        <div class="commission-note"><i class="fa-solid fa-circle-info"></i><div><strong>How this page reads commission</strong><span>Estimated commission is based on accepted sales at the configured rate. A payout only becomes “Paid” here when it has been formally recorded.</span></div></div>
+
+        <section class="commission-kpis" aria-label="Commission summary">
+          <article class="commission-kpi"><span>Accepted sales</span><strong id="kpiSales">R0.00</strong><small>Total sale value</small></article>
+          <article class="commission-kpi"><span>Estimated commission</span><strong id="kpiEstimated">R0.00</strong><small id="kpiRate">At 10%</small></article>
+          <article class="commission-kpi"><span>Recorded payouts</span><strong id="kpiPaid">R0.00</strong><small>Commission paid</small></article>
+          <article class="commission-kpi"><span>Outstanding</span><strong id="kpiOutstanding">R0.00</strong><small>Estimated less recorded payouts</small></article>
+        </section>
+
+        <section class="commission-chart-grid">
+          <article class="commission-card commission-card-wide"><div class="commission-card-head"><div><span>6-MONTH VIEW</span><h2>Commission trend</h2></div><div class="commission-legend"><span><i class="legend-estimated"></i>Estimated</span><span><i class="legend-paid"></i>Paid</span></div></div><div class="commission-chart"><canvas id="commissionTrendChart"></canvas></div></article>
+          <article class="commission-card"><div class="commission-card-head"><div><span>PAYOUT HEALTH</span><h2>Commission status</h2></div></div><div class="commission-chart"><canvas id="payoutStatusChart"></canvas></div></article>
+          <article class="commission-card"><div class="commission-card-head"><div><span>CLIENT PAYMENTS</span><h2>Invoice status</h2></div></div><div class="commission-chart"><canvas id="paymentStatusChart"></canvas></div></article>
+        </section>
+
+        <section class="commission-ledger">
+          <div class="commission-filter-strip">
+            <select id="filterAgent" aria-label="Filter by sales agent"><option value="">All agents</option></select>
+            <select id="filterMonth" aria-label="Filter by sale month"><option value="">All months</option></select>
+            <select id="filterStatus" aria-label="Filter by payout status"><option value="">All payout statuses</option><option>Pending</option><option>Part paid</option><option>Paid</option></select>
+            <div class="commission-search"><i class="fa-solid fa-magnifying-glass"></i><input id="commissionSearch" type="search" placeholder="Search client, quote or invoice" /></div>
+            <button type="button" id="clearCommissionFilters" class="commission-clear">Clear filters</button>
+          </div>
+
+          <div class="commission-table-head"><div><span>COMMISSION LEDGER</span><h2>Accepted sales</h2></div><span id="commissionCount" class="commission-count">0 sales</span></div>
+          <div class="commission-table-wrap"><table class="commission-table"><thead><tr><th>Quote</th><th>Client</th><th>Agent</th><th>Sale date</th><th>Sale value</th><th>Rate</th><th>Commission</th><th>Paid</th><th>Outstanding</th><th>Payout</th><th>Invoice</th><th></th></tr></thead><tbody id="commissionRows"><tr><td colspan="12" class="commission-empty">Loading commission&hellip;</td></tr></tbody></table></div>
+        </section>
+
+        <section class="commission-payout-history">
+          <div class="commission-table-head"><div><span>AUDIT TRAIL</span><h2>Recorded payouts</h2></div><span id="payoutCount" class="commission-count">0 payouts</span></div>
+          <div class="commission-table-wrap"><table class="commission-table compact"><thead><tr><th>Date</th><th>Quote</th><th>Agent</th><th>Amount</th><th>Reference</th></tr></thead><tbody id="payoutRows"><tr><td colspan="5" class="commission-empty">No payouts recorded yet.</td></tr></tbody></table></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="payoutDialog" class="commission-dialog">
+    <form id="payoutForm" method="dialog">
+      <div class="commission-dialog-head"><div><span>RECORD PAYOUT</span><h2 id="payoutTitle">Commission payout</h2></div><button type="button" id="closePayoutDialog" class="commission-dialog-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="commission-payout-summary" id="payoutSummary"></div>
+      <label><span>Amount *</span><input id="payoutAmount" inputmode="decimal" required /></label>
+      <label><span>Paid date *</span><input id="payoutDate" type="date" required /></label>
+      <label><span>Payment reference *</span><input id="payoutReference" maxlength="150" required placeholder="EFT / bank reference" /></label>
+      <div class="commission-dialog-actions"><button type="button" id="cancelPayout" class="commission-btn commission-btn-secondary">Cancel</button><button type="submit" id="confirmPayout" class="commission-btn commission-btn-primary">Record payout</button></div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="portal-effects.js"></script>
+  <script src="staff-portal-shell.js"></script>
+  <script src="staff-commission.js"></script>
+</body>
+</html>
