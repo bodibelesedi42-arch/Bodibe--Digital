@@ -64,6 +64,14 @@
     el("settingsDevice").textContent = mobile ? "Mobile / compact navigation" : "Desktop / full navigation";
   }
 
+  function markSettingsNav() {
+    var link = document.querySelector('a[href^="staff-coming-soon.html?feature=Settings"], a[href="staff-settings.html"]');
+    if (!link) return;
+    link.href = "staff-settings.html";
+    link.classList.add("is-current");
+    link.setAttribute("aria-current", "page");
+  }
+
   function bindPreferences() {
     document.querySelectorAll('input[name="theme"]').forEach(function (input) {
       input.addEventListener("change", function () {
@@ -127,13 +135,20 @@
     syncThemeUi();
     syncMotionUi();
     syncDevice();
+    markSettingsNav();
     bindPreferences();
 
     window.addEventListener("bodibe:themechange", syncThemeUi);
     window.addEventListener("resize", syncDevice);
 
     if (window.BodibePortal) {
-      window.BodibePortal.onReady(function (ctx) { fillIdentity(ctx && ctx.staff); });
+      window.BodibePortal.onReady(function (ctx) {
+        fillIdentity(ctx && ctx.staff);
+        // The portal shell may render the navigation after this script starts.
+        // Patch the owner Settings item after the shell is ready so the current
+        // page is highlighted like every other workspace.
+        markSettingsNav();
+      });
       window.BodibePortal.onFail(function () {
         if (el("settingsStaffName")) el("settingsStaffName").textContent = "Session unavailable";
       });
