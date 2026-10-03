@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Staff Portal | Bodibe Digital</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <script>
+    (function(){
+      var params=new URLSearchParams(location.search);
+      if((params.get('feature')||'').toLowerCase()==='settings'){
+        location.replace('staff-settings.html');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff-dashboard.css" />
+  <script src="theme.js" defer></script>
+</head>
+<body class="portal-body">
+  <main style="min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center">
+    <div>
+      <h1>Workspace not available yet</h1>
+      <p style="margin-top:10px;color:var(--text-muted)">This staff portal section has not been enabled.</p>
+      <p style="margin-top:18px"><a href="staff-dashboard.html" style="color:var(--accent-primary)">Return to dashboard</a></p>
+    </div>
+  </main>
+</body>
+</html>
