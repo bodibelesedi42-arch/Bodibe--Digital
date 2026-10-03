@@ -44,7 +44,7 @@
           <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
         </div>
         <div class="portal-sidebar-scroll">
-          <ul class="portal-nav-list" id="navPrimary"><li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul>
+          <ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading" aria-hidden="true">MAIN</li><li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul>
           <div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul><p class="portal-nav-note" id="navModulesNote"></p></div>
           <div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div>
         </div>
@@ -55,10 +55,10 @@
       </nav>
 
       <main id="main" class="portal-main finance-page">
-        <header class="finance-header">
-          <div><span class="finance-eyebrow">FINANCE</span><h1>Invoices & payments</h1><p>One financial workspace for invoicing, PayFast, verified bank transfers and reporting.</p></div>
+        <div class="dash-header">
+          <div class="dash-greeting"><span>FINANCE</span><h1>Invoices & payments</h1><p class="dash-role">One financial workspace for invoicing, PayFast, verified bank transfers and reporting.</p></div>
           <div id="financeHeaderActions"></div>
-        </header>
+        </div>
 
         <div class="portal-mode-notice" id="modeNotice" role="status" hidden><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span id="modeNoticeText"></span></div>
         <div class="portal-notice" id="portalNotice" role="status" hidden></div>

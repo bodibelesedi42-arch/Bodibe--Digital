@@ -4,30 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Bodibe Digital | Professional Web Design</title>
+    <title>Bodibe Digital | Premium Web Design & Development, South Africa</title>
 
     <!-- SEO -->
     <meta name="description"
-          content="Bodibe Digital builds professional, responsive websites for businesses across South Africa.">
+          content="Bodibe Digital designs and builds premium, conversion-focused websites for South African businesses — fixed transparent pricing, real portfolio work, and support after launch.">
 
     <meta name="keywords"
-          content="Web Design, Website Development, South Africa, Bodibe Digital, Business Websites">
+          content="Web Design, Website Development, South Africa, Bodibe Digital, Business Websites, Website Maintenance, Brand Identity">
 
-    <meta name="author"
-          content="Bodibe Digital">
+    <meta name="author" content="Bodibe Digital">
+    <link rel="canonical" href="https://bodibedigital.co.za/index.html">
 
-    <!-- Open Graph (Step 5) -->
-    <meta property="og:title"
-          content="Bodibe Digital | Professional Web Design">
-
-    <meta property="og:description"
-          content="Professional websites that help businesses grow online.">
-
-    <meta property="og:image"
-          content="assets/images/kanyo-preview.jpg">
-
-    <meta property="og:type"
-          content="website">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bodibe Digital | Premium Web Design & Development, South Africa">
+    <meta property="og:description" content="Websites that grow, convert, connect, and scale your business online.">
+    <meta property="og:image" content="assets/images/kanyo-preview.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bodibedigital.co.za/index.html">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
@@ -35,18 +29,52 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <!-- Main CSS -->
+    <!-- Theme: apply saved/system preference before first paint (no flash) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t !== "dark" && t !== "light") {
+            t =
+              window.matchMedia &&
+              window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark";
+          }
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+    <script src="theme.js" defer></script>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Structured data: Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Bodibe Digital",
+        "url": "https://bodibedigital.co.za/",
+        "logo": "https://bodibedigital.co.za/assets/images/logo.svg",
+        "description": "Bodibe Digital designs and builds premium, conversion-focused websites for South African businesses.",
+        "email": "bodibedigital@gmail.com",
+        "telephone": "+27817483597",
+        "address": { "@type": "PostalAddress", "addressCountry": "ZA" }
+    }
+    </script>
 </head>
 
 <body>
+
+<a href="#main" class="skip-link">Skip to content</a>
 
 <!-- =========================
      BODIBE DIGITAL COVER
@@ -124,10 +152,11 @@
 
     <nav class="navbar">
 
-        <a href="#" class="logo">
+        <a href="index.html" class="logo">
 
     <div class="logo-mark">
-    <img src="assets/images/logo.svg" alt="Bodibe Digital Logo">
+    <img src="assets/images/logo.svg" alt="Bodibe Digital Logo" class="logo-mark-dark">
+    <img src="assets/images/logo.svg" alt="Bodibe Digital Logo" class="logo-mark-light">
 </div>
     <div class="logo-details">
 
@@ -140,22 +169,28 @@
 </a>
 
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">Services</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="our-work.html">Our Work</a></li>
             <li><a href="pricing.html">Pricing</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
 
-        <a href="#contact" class="btn">Get a Quote</a>
-        <div class="menu-toggle">
+        <a href="contact.html" class="btn">Get a Quote</a>
+        <button type="button" class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
     ☰
-</div>
+</button>
 
+        <button type="button" class="theme-toggle" aria-label="Switch to light mode" aria-pressed="false">
+          <svg class="theme-toggle-icon theme-toggle-icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="1.5" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22.5" y2="12"/><line x1="4.4" y1="4.4" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.6" y2="19.6"/><line x1="4.4" y1="19.6" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.6" y2="4.4"/></g></svg>
+          <svg class="theme-toggle-icon theme-toggle-icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1z"/></svg>
+        </button>
     </nav>
 
 </header>
+
+<main id="main">
 
 <!-- =========================
      HERO SECTION
@@ -166,51 +201,82 @@
         <span class="hero-tag">Premium Web Design for Modern Businesses</span>
 
         <h1>
-            We build websites that feel as strong as your brand.
+            We build websites that<br>
+            <span class="hero-grow">GROW</span> businesses.
         </h1>
 
         <p>
-            We create elegant, high-performing websites that help businesses
-            stand out, build trust, and turn visitors into customers.
+            We design and build elegant, high-performing websites that help South
+            African businesses stand out, build trust, and turn visitors into
+            customers — backed by fixed, transparent pricing.
         </p>
 
         <div class="hero-buttons">
-            <a href="#contact" class="btn">Get Started</a>
-            <a href="#portfolio" class="btn-secondary">See Our Work</a>
+            <a href="contact.html" class="btn">Get a Quote</a>
+            <a href="our-work.html" class="btn-secondary">View Our Work</a>
         </div>
 
-        <div class="hero-trust">
-            <span><i class="fa-solid fa-check"></i> Fast & Responsive</span>
-            <span><i class="fa-solid fa-check"></i> Mobile First</span>
-            <span><i class="fa-solid fa-check"></i> SEO Ready</span>
-        </div>
+        <p style="margin-top:18px;">
+            <a href="pricing.html" style="color:#64748b;font-size:13px;text-decoration:underline;">See package pricing →</a>
+        </p>
     </div>
 
     <div class="hero-image">
-        <div class="hero-card">
-            <h3>Bodibe Digital</h3>
-            <p>Premium Web Experiences</p>
+        <div class="hero-orbit-scene" aria-hidden="true">
+            <div class="orbit-starfield">
+                <span class="orbit-star" style="top:4%; left:10%; animation-delay:0s;"></span>
+                <span class="orbit-star" style="top:2%; left:32%; animation-delay:0.6s;"></span>
+                <span class="orbit-star" style="top:6%; left:70%; animation-delay:1.2s;"></span>
+                <span class="orbit-star" style="top:3%; left:88%; animation-delay:0.3s;"></span>
+                <span class="orbit-star" style="top:16%; left:4%; animation-delay:1.6s;"></span>
+                <span class="orbit-star" style="top:22%; left:92%; animation-delay:0.9s;"></span>
+                <span class="orbit-star" style="top:40%; left:2%; animation-delay:2.0s;"></span>
+                <span class="orbit-star" style="top:46%; left:95%; animation-delay:0.4s;"></span>
+                <span class="orbit-star" style="top:62%; left:6%; animation-delay:1.4s;"></span>
+                <span class="orbit-star" style="top:66%; left:90%; animation-delay:1.9s;"></span>
+                <span class="orbit-star" style="top:80%; left:14%; animation-delay:0.7s;"></span>
+                <span class="orbit-star" style="top:84%; left:80%; animation-delay:1.1s;"></span>
+                <span class="orbit-star" style="top:12%; left:50%; animation-delay:2.3s;"></span>
+                <span class="orbit-star" style="top:30%; left:20%; animation-delay:0.2s;"></span>
+            </div>
 
-            <div class="hero-stats">
-                <div>
-                    <h2>100%</h2>
-                    <span>Responsive</span>
+            <div class="hero-orbit">
+                <div class="orbit-ring-group orbit-ring-1">
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-node"></div>
                 </div>
-                <div>
-                    <h2>24/7</h2>
-                    <span>Support</span>
+                <div class="orbit-ring-group orbit-ring-2">
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-node orbit-node-2"></div>
                 </div>
-                <div>
-                    <h2>Fast</h2>
-                    <span>Performance</span>
-                </div>
+                <div class="orbit-core"></div>
+            </div>
+
+            <span class="orbit-shooting-star orbit-shoot-b"></span>
+            <span class="orbit-shooting-star orbit-shoot-d"></span>
+            <span class="orbit-impact orbit-impact-b"></span>
+            <span class="orbit-impact orbit-impact-d"></span>
+
+            <div class="orbit-wordmark">
+                <span class="orbit-letter-b">B</span><span class="orbit-fill-odibe">odibe</span><span class="orbit-gap"></span><span class="orbit-letter-d">D</span><span class="orbit-fill-igital">igital</span>
             </div>
         </div>
     </div>
 </section>
 
 <!-- =========================
-     SERVICES SECTION
+     TRUST / PROOF STRIP
+========================== -->
+
+<section class="trust-strip" aria-label="Why businesses choose Bodibe Digital">
+    <div class="trust-item"><i class="fa-solid fa-location-dot"></i> Based in South Africa</div>
+    <div class="trust-item"><i class="fa-solid fa-mobile-screen-button"></i> Mobile-first, responsive builds</div>
+    <div class="trust-item"><i class="fa-solid fa-tag"></i> Fixed, transparent package pricing</div>
+    <div class="trust-item"><i class="fa-solid fa-lock"></i> Secure checkout via PayFast</div>
+</section>
+
+<!-- =========================
+     SERVICES PREVIEW
 ========================== -->
 
 <section class="services" id="services">
@@ -233,7 +299,7 @@
                 <i class="fas fa-laptop-code"></i>
             </div>
 
-            <h3>Website Design</h3>
+            <h3>Website Design &amp; Development</h3>
             <p>
                 Beautiful, responsive websites designed to convert visitors
                 into customers.
@@ -248,20 +314,21 @@
 
             <h3>Website Maintenance</h3>
             <p>
-                We keep your website updated, secure, and running smoothly.
+                We keep your website updated, secure, and running smoothly
+                after launch.
             </p>
         </div>
 
 
         <div class="service-card">
             <div class="service-icon">
-                <i class="fas fa-chart-line"></i>
+                <i class="fas fa-map-location-dot"></i>
             </div>
 
-            <h3>Digital Growth</h3>
+            <h3>Google Business Setup</h3>
             <p>
-                Strategies that help your business increase visibility and
-                attract more customers online.
+                We help configure your Google Business Profile so customers
+                can find and contact you.
             </p>
         </div>
 
@@ -271,19 +338,23 @@
                 <i class="fas fa-palette"></i>
             </div>
 
-            <h3>Creative Design</h3>
+            <h3>Brand Identity</h3>
             <p>
-                Professional branding and designs that make your business
-                stand out.
+                Professional visual direction and brand assets that make
+                your business stand out.
             </p>
         </div>
 
 
     </div>
 
+    <div style="text-align:center;margin-top:50px;">
+        <a href="services.html" class="btn-secondary">Explore Services</a>
+    </div>
+
 </section>
 <!-- =========================
-     PORTFOLIO SECTION
+     FEATURED WORK
 ========================== -->
 
 <section class="portfolio" id="portfolio">
@@ -292,146 +363,164 @@
         <span>OUR WORK</span>
         <h2>Websites We've Built</h2>
         <p>
-            Explore some of the digital experiences we've created for businesses
-            looking to build a stronger online presence.
+            Real projects for real businesses — explore the digital experiences
+            we've created for companies looking to build a stronger online presence.
         </p>
     </div>
 
-    <div class="portfolio-grid">
+    <div class="work-showcase" data-work-showcase aria-roledescription="carousel" aria-label="Featured work">
 
-        <div class="portfolio-card">
+        <div class="work-showcase-frame">
 
-    <div class="portfolio-image">
+            <div class="work-slides">
 
-    <div class="project-tag">
-        Security Website
-    </div>
+                <article class="work-slide is-active" data-index="0" aria-hidden="false">
 
-    <div class="laptop">
-
-        <div class="laptop-screen">
-
-            <picture>
-                <source srcset="assets/images/kanyo-preview.webp" type="image/webp">
-                <img src="assets/images/kanyo-preview.jpg"
-                     alt="Kanyo 24hrs Response"
-                     width="1887" height="908"
-                     loading="lazy">
-            </picture>
-
-        </div>
-
-        <div class="laptop-base"></div>
-
-    </div>
-
-</div>
-
-
-    <div class="portfolio-content">
-
-        <h3>Kanyo 24hrs Response</h3>
-
-        <p>
-            Professional security company website featuring modern design,
-            responsive layouts and online contact forms.
-        </p>
-
-
-        <div class="tech-stack">
-
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-
-        </div>
-
-
-        <a href="kanyo-project.html" 
-            class="portfolio-btn">
-    View Project →
-</a>
-    </div>
-
-</div>
-
-</div>
-
-            
-
-        <!-- =========================
-             818 KHANGEZIWE SERVICES
-        ========================== -->
-
-        <div class="portfolio-card">
-
-            <div class="portfolio-image">
-
-                <div class="project-tag">
-                    Business Website
-                </div>
-
-                <div class="laptop">
-
-                    <div class="laptop-screen">
-
+                    <div class="work-slide-visual">
                         <picture>
-                            <source srcset="assets/images/818-preview.webp" type="image/webp">
-                            <img
-                                src="assets/images/818-preview.jpg"
-                                alt="818 Khangeziwe Services website preview"
-                                width="1901" height="897"
-                                loading="lazy"
-                            >
+                            <source srcset="assets/images/kanyo-preview.webp" type="image/webp">
+                            <img src="assets/images/kanyo-preview.jpg"
+                                 alt="Kanyo 24hrs Response website homepage preview"
+                                 width="1887" height="908"
+                                 loading="eager" fetchpriority="high" decoding="async">
                         </picture>
-
+                        <button type="button" class="work-nav work-nav-prev" data-work-prev aria-label="Previous project">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"/></svg>
+                        </button>
+                        <button type="button" class="work-nav work-nav-next" data-work-next aria-label="Next project">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"/></svg>
+                        </button>
                     </div>
 
-                    <div class="laptop-base"></div>
+                    <div class="work-slide-info">
+                        <div class="work-slide-meta">
+                            <span class="work-counter"><span class="work-counter-current">01</span> / <span class="work-counter-total">02</span></span>
+                            <span class="work-slide-tag">Security Website</span>
+                        </div>
 
-                </div>
+                        <h3>Kanyo 24hrs Response</h3>
 
-            </div>
+                        <p>
+                            Professional security company website featuring modern design,
+                            responsive layouts and online contact forms.
+                        </p>
 
+                        <div class="tech-stack">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
 
-            <div class="portfolio-content">
+                        <a href="kanyo-project.html" class="portfolio-btn work-slide-cta">View Case Study →</a>
+                    </div>
 
-                <h3>818 Khangeziwe Services</h3>
+                </article>
 
-                <p>
-                    A modern business website created for a mobile hire company,
-                    showcasing their services and making it easier for customers
-                    to discover and contact the business online.
-                </p>
+                <article class="work-slide" data-index="1" aria-hidden="true">
 
+                    <div class="work-slide-visual">
+                        <picture>
+                            <source srcset="assets/images/818-preview.webp" type="image/webp">
+                            <img src="assets/images/818-preview.jpg"
+                                 alt="818 Khangeziwe Services website preview"
+                                 width="1901" height="897"
+                                 loading="lazy" decoding="async">
+                        </picture>
+                        <button type="button" class="work-nav work-nav-prev" data-work-prev aria-label="Previous project">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 18l-6-6 6-6"/></svg>
+                        </button>
+                        <button type="button" class="work-nav work-nav-next" data-work-next aria-label="Next project">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"/></svg>
+                        </button>
+                    </div>
 
-                <div class="tech-stack">
+                    <div class="work-slide-info">
+                        <div class="work-slide-meta">
+                            <span class="work-counter"><span class="work-counter-current">02</span> / <span class="work-counter-total">02</span></span>
+                            <span class="work-slide-tag">Business Website</span>
+                        </div>
 
-                    <span>HTML</span>
+                        <h3>818 Khangeziwe Services</h3>
 
-                    <span>CSS</span>
+                        <p>
+                            A modern business website created for a mobile hire company,
+                            showcasing their services and making it easier for customers
+                            to discover and contact the business online.
+                        </p>
 
-                    <span>JavaScript</span>
+                        <div class="tech-stack">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
 
-                </div>
+                        <a href="818-project.html" class="portfolio-btn work-slide-cta">View Case Study →</a>
+                    </div>
 
-
-                <a
-                    href="https://bodibelesedi42-arch.github.io/818-khangeziwe-services/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="portfolio-btn"
-                >
-                    View Live Website →
-                </a>
+                </article>
 
             </div>
 
         </div>
 
+        <div class="work-showcase-controls">
+            <div class="work-progress" aria-hidden="true"><div class="work-progress-fill" data-work-progress></div></div>
+
+            <div class="work-indicators" role="tablist" aria-label="Select featured project">
+                <button type="button" class="work-indicator is-active" role="tab" aria-selected="true" aria-label="View Kanyo 24hrs Response project" data-work-index="0"></button>
+                <button type="button" class="work-indicator" role="tab" aria-selected="false" aria-label="View 818 Khangeziwe Services project" data-work-index="1"></button>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:50px;">
+        <a href="our-work.html" class="btn-secondary">View All Work</a>
     </div>
 
 </section>
+
+<!-- =========================
+     PROCESS PREVIEW
+========================== -->
+
+<section class="services" id="process-preview" aria-label="Our process">
+    <div class="section-title">
+        <span>HOW WE WORK</span>
+        <h2>A Clear Process, Start to Finish</h2>
+        <p>
+            No guesswork — every project moves through the same proven stages.
+        </p>
+    </div>
+
+    <div class="why-grid">
+        <div class="why-card">
+            <div class="why-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <h3>01 Discover</h3>
+            <p>We learn your business, audience, and goals.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+            <h3>02–03 Plan &amp; Design</h3>
+            <p>We map the structure, then design the look and feel.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon"><i class="fa-solid fa-code"></i></div>
+            <h3>04–05 Develop &amp; Review</h3>
+            <p>We build it, then test and refine with you.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon"><i class="fa-solid fa-rocket"></i></div>
+            <h3>06–07 Launch &amp; Support</h3>
+            <p>We deploy your site and support you afterward.</p>
+        </div>
+    </div>
+
+    <div style="text-align:center;margin-top:50px;">
+        <a href="process.html" class="btn-secondary">How We Work</a>
+    </div>
+</section>
+
 <section class="why-us">
 
     <div class="section-title">
@@ -457,10 +546,10 @@
                 <i class="fas fa-bolt"></i>
             </div>
 
-            <h3>Fast Performance</h3>
+            <h3>Performance-Minded</h3>
 
             <p>
-                Every website is optimized to load quickly and provide
+                Every website is built to load quickly and provide
                 visitors with a smooth browsing experience.
             </p>
 
@@ -485,19 +574,19 @@
         </div>
 
 
-        <!-- SECURE -->
+        <!-- TRANSPARENT PACKAGES -->
 
         <div class="why-card">
 
             <div class="why-icon">
-                <i class="fas fa-shield-halved"></i>
+                <i class="fas fa-receipt"></i>
             </div>
 
-            <h3>Secure & Reliable</h3>
+            <h3>Transparent Packages</h3>
 
             <p>
-                We use modern development practices to create websites
-                that are dependable and easy to maintain.
+                Fixed, published pricing with no hidden costs — you know
+                exactly what you're paying for before you start.
             </p>
 
         </div>
@@ -524,63 +613,8 @@
 
 </section>
 <!-- =========================
-     ABOUT SECTION
+     CLIENT PROOF
 ========================== -->
-
-<section class="about" id="about">
-
-    <div class="about-text">
-
-        <span>ABOUT US</span>
-
-        <h2>
-            Helping Businesses Build a Strong Online Presence
-        </h2>
-
-        <p>
-            At Bodibe Digital, we design modern, fast, and responsive websites
-            that help businesses stand out online. Our goal is to create
-            professional websites that attract customers, build trust, and help
-            businesses grow.
-        </p>
-
-        <div class="about-features">
-
-            <div>✔ Modern Responsive Design</div>
-            <div>✔ Fast Loading Websites</div>
-            <div>✔ Mobile Friendly</div>
-            <div>✔ SEO Ready</div>
-
-        </div>
-
-        <a href="#contact" class="btn">
-            Work With Us
-        </a>
-
-    </div>
-
-    <div class="about-card">
-
-        <h2>Why Choose Us?</h2>
-
-        <div class="about-stat">
-            <h3>Fast</h3>
-            <p>Quick turnaround times.</p>
-        </div>
-
-        <div class="about-stat">
-            <h3>Professional</h3>
-            <p>Clean, modern designs that build trust.</p>
-        </div>
-
-        <div class="about-stat">
-            <h3>Support</h3>
-            <p>We're here even after your website goes live.</p>
-        </div>
-
-    </div>
-
-</section>
 
 <section class="testimonial" id="testimonial">
     <div class="section-title">
@@ -595,133 +629,135 @@
         </p>
         <strong>— Kanyo 24hrs Response</strong>
     </div>
+
+    <div class="testimonial-placeholder" style="margin-top:24px;">
+        <i class="fa-solid fa-quote-left"></i>
+        More client stories are on the way. We only publish genuine feedback
+        from real projects — this space grows as our client list does.
+    </div>
 </section>
 
 <!-- =========================
-     CONTACT SECTION
+     FINAL CTA
 ========================== -->
 
-<section class="contact" id="contact">
-    <div class="section-title">
-        <span>LET'S BUILD</span>
-        <h2>Your next website starts here</h2>
-        <p>
-            Ready to elevate your business online? Let’s create something impressive.
-        </p>
+<section class="cta-panel">
+    <h2>Ready to build something that grows your business?</h2>
+    <p>
+        Tell us about your project and we'll get back to you with a clear,
+        honest quote — no pressure, no jargon.
+    </p>
+    <div class="cta-actions">
+        <a href="contact.html" class="btn">Start Your Project</a>
+        <a href="pricing.html" class="btn-secondary">See Pricing</a>
     </div>
-
-    <form class="contact-form" action="https://script.google.com/macros/s/AKfycbwidS8oUrA-1K59OQ8EcBpZ8fkKRHOfj4Yyzi9ya02owvtwMwSzJU03SZKteRn50CkR/exec" method="POST">
-
-        <input
-            type="hidden"
-            name="_subject"
-            value="New Client Enquiry | Bodibe Digital"
-        >
-
-        <input type="hidden" name="_captcha" value="false">
-
-        <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            required
-        >
-
-        <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            required
-        >
-
-        <input
-            type="tel"
-            name="phone"
-            placeholder="Phone Number"
-        >
-
-        <select name="project_type" required>
-            <option value="" disabled selected>Select Project Type</option>
-            <option value="Website Design">Website Design</option>
-            <option value="Website Redesign">Website Redesign</option>
-            <option value="Website Maintenance">Website Maintenance</option>
-            <option value="Google Business Setup">Google Business Setup</option>
-            <option value="Brand Identity">Brand Identity</option>
-            <option value="Other">Other</option>
-        </select>
-
-        <textarea
-            name="message"
-            rows="6"
-            placeholder="Tell us about your project..."
-        ></textarea>
-
-        <button type="submit" class="btn">Send Enquiry</button>
-
-        <p class="form-note">We reply within 24 hours.</p>
-
-    </form>
 </section>
+
+</main>
+
 <!-- =========================
      FOOTER
 ========================== -->
 
-<footer>
+    <footer>
 
-    <div class="footer-container">
+        <div class="footer-top">
 
-        <div class="footer-brand">
+            <div class="footer-brand">
 
-            <h2>Bodibe Digital</h2>
+                <div class="footer-logo">
+                    <div class="logo-mark">
+                        <img src="assets/images/logo.svg" alt="" class="logo-mark-dark">
+                        <img src="assets/images/logo.svg" alt="" class="logo-mark-light">
+                    </div>
+                    <span>Bodibe Digital</span>
+                </div>
 
-            <p>
-                Modern websites that help businesses grow online.
-            </p>
+                <p class="footer-tagline">Websites That Grow Businesses.</p>
+
+                <p>Premium, conversion-focused websites for South African businesses.</p>
+
+                <a href="contact.html" class="btn footer-cta">Get a Quote</a>
+
+            </div>
+
+            <nav class="footer-links" aria-label="Services">
+
+                <h3>Services</h3>
+
+                <a href="services.html#website-design">Website Design &amp; Development</a>
+                <a href="services.html#maintenance">Website Maintenance</a>
+                <a href="services.html#google-business">Google Business Setup</a>
+                <a href="services.html#brand-identity">Brand Identity</a>
+
+            </nav>
+
+            <nav class="footer-links" aria-label="Explore">
+
+                <h3>Explore</h3>
+
+                <a href="index.html">Home</a>
+                <a href="our-work.html">Our Work</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="process.html">Process</a>
+                <a href="faq.html">FAQ</a>
+
+            </nav>
+
+            <nav class="footer-links" aria-label="Company">
+
+                <h3>Company</h3>
+
+                <a href="about.html">About</a>
+                <a href="careers.html">Careers</a>
+                <a href="contact.html">Contact</a>
+
+            </nav>
+
+            <nav class="footer-links" aria-label="Support and legal">
+
+                <h3>Support &amp; Legal</h3>
+
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="refund-policy.html">Refund &amp; Cancellation Policy</a>
+
+                <div class="footer-contact-links">
+                    <a href="mailto:bodibedigital@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i>bodibedigital@gmail.com</a>
+                    <a href="tel:+27817483597"><i class="fa-solid fa-phone" aria-hidden="true"></i>+27 81 748 3597</a>
+                    <a href="https://wa.me/27817483597" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i>WhatsApp Us</a>
+                </div>
+
+                <a href="staff-login.html" class="footer-staff-link">Staff Login</a>
+
+            </nav>
 
         </div>
 
-        <div class="footer-links">
+        <hr class="footer-divider">
 
-            <h3>Quick Links</h3>
+        <div class="footer-bottom">
 
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-            <a href="careers.html">Careers</a>
+            <p class="footer-copyright">&copy; 2026 Bodibe Digital. All rights reserved.</p>
 
-        </div>
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="refund-policy.html">Refund Policy</a>
+            </div>
 
-        <div class="footer-contact">
-
-            <h3>Contact</h3>
-
-            <p> bodibedigital@gmail.com</p>
-
-            <p> +27 0835686995</p>
-
-            <p> South Africa</p>
+            <button type="button" class="back-to-top">&uarr; Back to Top</button>
 
         </div>
 
-    </div>
-
-    <div class="copyright">
-
-        <p>© 2026 Bodibe Digital. All rights reserved.</p>
-
-    </div>
-
-</footer>
-<a href="https://wa.me/27835686995"
+    </footer>
+<a href="https://wa.me/27817483597"
 class="whatsapp-btn"
 target="_blank">
 
     <i class="fab fa-whatsapp"></i>
 
 </a>
-<script src="contact-form.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

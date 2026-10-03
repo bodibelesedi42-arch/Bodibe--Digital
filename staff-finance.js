@@ -69,6 +69,11 @@
     }
     function apiError(data, fallback) { return data && data.message ? data.message : fallback; }
 
+    function tabFromHash() {
+        var h = String(window.location.hash || "").replace(/^#/, "").toLowerCase();
+        return ["invoices", "payments", "reports"].indexOf(h) !== -1 ? h : null;
+    }
+
     function availableTabs() {
         var tabs = [];
         if (Portal.can("Finance", "View Invoices")) tabs.push({ id: "invoices", label: "Invoices", icon: "fa-file-invoice-dollar" });
@@ -299,9 +304,21 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") { if (!modal.hidden) closeModal(); else if (!drawer.hidden) closeDrawer(); } });
 
     Portal.onReady(function () {
+        var requestedTab = tabFromHash();
+        if (requestedTab) state.activeTab = requestedTab;
         renderTabs(); renderHeaderActions();
         Promise.all([loadInvoices(), loadPayments(), loadReport()]);
     });
+    window.addEventListener("hashchange", function () {
+        var requestedTab = tabFromHash();
+        if (!requestedTab) return;
+        if (!availableTabs().some(function (x) { return x.id === requestedTab; })) return;
+        state.activeTab = requestedTab;
+        renderTabs();
+        renderViews();
+        renderHeaderActions();
+    });
+
     Portal.onFail(function () { tabsEl.innerHTML = ""; headerActionsEl.innerHTML = ""; });
     Portal.onModeChange(function () { renderHeaderActions(); if (!drawer.hidden) renderDrawer(); });
 })(window, document);

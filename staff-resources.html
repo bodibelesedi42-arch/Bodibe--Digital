@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales Resources | Bodibe Digital</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+  <script src="theme.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff-dashboard.css" />
+  <link rel="stylesheet" href="staff-resources.css" />
+</head>
+<body class="portal-body portal-shell-body">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="portal-topbar">
+    <button type="button" class="portal-nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar"><span class="portal-burger" aria-hidden="true"><span></span><span></span><span></span></span></button>
+    <a href="index.html" class="portal-topbar-brand"><span class="logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" class="logo-mark-dark"><img src="assets/images/logo.svg" alt="" class="logo-mark-light"></span><span>Bodibe Digital <strong>Staff Portal</strong></span></a>
+    <button type="button" class="theme-toggle" aria-label="Switch theme" aria-pressed="false"><svg class="theme-toggle-icon theme-toggle-icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/></svg><svg class="theme-toggle-icon theme-toggle-icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1z"/></svg></button>
+  </div>
+  <div class="portal-backdrop" id="navBackdrop" hidden></div>
+  <div class="portal-layout">
+    <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+      <div class="portal-sidebar-head"><a href="index.html" class="portal-brand"><span class="portal-brand-mark logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" class="logo-mark-dark"><img src="assets/images/logo.svg" alt="" class="logo-mark-light"></span><span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span></a><button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="portal-sidebar-scroll"><ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading" aria-hidden="true">MAIN</li><li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul><div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul><p class="portal-nav-note" id="navModulesNote"></p></div><div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div></div>
+      <div class="portal-sidebar-foot"><div class="portal-whoami" id="whoAmI"><span class="portal-avatar" id="whoAvatar">&mdash;</span><span class="portal-whoami-text"><strong id="whoName">Loading&hellip;</strong><small id="whoRole"></small></span></div><button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign out</span></button></div>
+    </nav>
+    <main id="main" class="portal-main resources-workspace">
+      <div class="resources-inner">
+        <div class="resources-header"><div><span class="resources-eyebrow">SALES ENABLEMENT</span><h1>Sales resources</h1><p>Your practical playbook for prospecting, discovery, follow-ups, quoting and closing.</p></div><div class="resources-search"><i class="fa-solid fa-magnifying-glass"></i><input id="resourceSearch" type="search" placeholder="Search resources" /></div></div>
+        <div class="portal-mode-notice" id="modeNotice" role="status" hidden><i class="fa-solid fa-mobile-screen-button"></i><span id="modeNoticeText"></span></div>
+        <div class="portal-notice" id="portalNotice" role="status" hidden></div>
+        <section class="resource-hero-grid">
+          <article class="resource-focus"><span>START HERE</span><h2>Daily sales workflow</h2><ol><li>Complete today’s scheduled follow-ups first.</li><li>Claim and contact your company lead target.</li><li>Add your self-sourced leads and record full contact details.</li><li>Log every meaningful contact outcome in CRM.</li><li>Set the next follow-up date or close the lead correctly.</li></ol></article>
+          <article class="resource-stat"><i class="fa-solid fa-user-plus"></i><strong>15</strong><span>Company leads daily target</span></article>
+          <article class="resource-stat"><i class="fa-solid fa-seedling"></i><strong>5+</strong><span>Self-sourced leads minimum</span></article>
+        </section>
+        <section class="resource-toolbar"><div class="resource-tabs" id="resourceTabs"><button class="is-active" data-category="all">All</button><button data-category="prospecting">Prospecting</button><button data-category="discovery">Discovery</button><button data-category="follow-up">Follow-up</button><button data-category="quoting">Quoting</button><button data-category="closing">Closing</button></div></section>
+        <section class="resource-grid" id="resourceGrid" aria-live="polite"></section>
+      </div>
+    </main>
+  </div>
+  <dialog class="resource-dialog" id="resourceDialog"><div class="resource-dialog-head"><div><span id="resourceDialogCategory">RESOURCE</span><h2 id="resourceDialogTitle">Resource</h2></div><button type="button" id="closeResourceDialog" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div><div id="resourceDialogBody" class="resource-dialog-body"></div></dialog>
+  <script src="portal-access.js"></script><script src="portal-effects.js"></script><script src="staff-portal-shell.js"></script><script src="staff-resources.js"></script>
+</body>
+</html>

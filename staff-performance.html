@@ -8,42 +8,70 @@
   <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t !== "dark" && t !== "light") {
+          t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+  <script src="theme.js" defer></script>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="staff-dashboard.css" />
   <link rel="stylesheet" href="staff-performance.css" />
 </head>
-<body class="portal-body portal-shell-body performance-shell">
+<body class="portal-body portal-shell-body">
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <div class="portal-topbar performance-topbar">
+  <div class="portal-topbar">
     <button type="button" class="portal-nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar">
       <span class="portal-burger" aria-hidden="true"><span></span><span></span><span></span></span>
     </button>
     <a href="index.html" class="portal-topbar-brand">
-      <span class="logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" /></span>
+      <span class="logo-mark" aria-hidden="true">
+        <img src="assets/images/logo.svg" alt="" class="logo-mark-dark" />
+        <img src="assets/images/logo.svg" alt="" class="logo-mark-light" />
+      </span>
       <span>Bodibe Digital <strong>Staff Portal</strong></span>
     </a>
-    <div class="performance-topbar-date"><i class="fa-regular fa-calendar"></i><span id="todayLabel"></span></div>
+    <button type="button" class="theme-toggle" aria-label="Switch to light mode" aria-pressed="false">
+      <svg class="theme-toggle-icon theme-toggle-icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="1.5" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22.5" y2="12"/><line x1="4.4" y1="4.4" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.6" y2="19.6"/><line x1="4.4" y1="19.6" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.6" y2="4.4"/></g></svg>
+      <svg class="theme-toggle-icon theme-toggle-icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1z"/></svg>
+    </button>
   </div>
 
   <div class="portal-backdrop" id="navBackdrop" hidden></div>
 
   <div class="portal-layout">
-    <nav class="portal-sidebar performance-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+    <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
       <div class="portal-sidebar-head">
         <a href="index.html" class="portal-brand">
-          <span class="portal-brand-mark logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" /></span>
+          <span class="portal-brand-mark logo-mark" aria-hidden="true">
+            <img src="assets/images/logo.svg" alt="" class="logo-mark-dark" />
+            <img src="assets/images/logo.svg" alt="" class="logo-mark-light" />
+          </span>
           <span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span>
         </a>
-        <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+        </button>
       </div>
+
       <div class="portal-sidebar-scroll">
         <ul class="portal-nav-list" id="navPrimary">
-          <li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li>
-          <li><a href="staff-performance.html" class="portal-nav-link is-current" aria-current="page"><span class="portal-nav-icon"><i class="fa-solid fa-chart-line"></i></span><span class="portal-nav-label">Performance</span></a></li>
+          <li class="portal-nav-group-heading" aria-hidden="true">MAIN</li>
+          <li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li>
+          <li><a href="staff-performance.html" class="portal-nav-link is-current" aria-current="page"><span class="portal-nav-icon" aria-hidden="true"><i class="fa-solid fa-chart-simple"></i></span><span class="portal-nav-label">My Performance</span></a></li>
         </ul>
+
         <div class="portal-nav-section" id="navModulesSection" hidden>
           <h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2>
           <ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul>
@@ -51,104 +79,107 @@
         </div>
         <div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div>
       </div>
+
       <div class="portal-sidebar-foot">
         <div class="portal-whoami" id="whoAmI">
           <span class="portal-avatar" id="whoAvatar" aria-hidden="true">&mdash;</span>
           <span class="portal-whoami-text"><strong id="whoName">Loading&hellip;</strong><small id="whoRole"></small></span>
         </div>
-        <button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign out</span></button>
+        <button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span>Sign out</span></button>
       </div>
     </nav>
 
-    <main id="main" class="portal-main performance-page">
-      <div class="performance-header">
-        <div>
-          <span class="performance-eyebrow">PERFORMANCE ANALYTICS</span>
-          <h1>Performance dashboard</h1>
-          <p>Live operational performance from Bodibe Digital's staff, CRM, tasks and support activity.</p>
-        </div>
-        <div class="performance-controls">
-          <label><span>Employee</span><select id="staffSelect" aria-label="Choose employee"></select></label>
-          <label><span>Month</span><input id="periodSelect" type="month" aria-label="Choose month" /></label>
-          <button type="button" id="refreshPerformance" class="performance-refresh"><i class="fa-solid fa-rotate"></i><span>Refresh</span></button>
-        </div>
-      </div>
-
-      <div class="portal-mode-notice" id="modeNotice" role="status" hidden><i class="fa-solid fa-mobile-screen-button"></i><span id="modeNoticeText"></span></div>
-      <div class="portal-notice" id="portalNotice" role="status" hidden></div>
-
-      <section class="performance-person" aria-label="Selected employee">
-        <div class="performance-person-copy">
-          <span id="selectedDepartment">Performance overview</span>
-          <h2 id="selectedEmployee">Loading employee&hellip;</h2>
-          <p id="selectedRole"></p>
-        </div>
-        <div class="performance-period-tabs" role="group" aria-label="Dashboard view">
-          <button type="button" class="is-active" disabled>Month</button>
-          <button type="button" title="Trend is shown below" disabled>6-month trend</button>
-        </div>
-      </section>
-
-      <section class="performance-kpis" id="kpiGrid" aria-label="Performance indicators">
-        <article class="performance-kpi is-loading"></article>
-        <article class="performance-kpi is-loading"></article>
-        <article class="performance-kpi is-loading"></article>
-        <article class="performance-kpi is-loading"></article>
-      </section>
-
-      <section class="performance-main-grid">
-        <article class="performance-panel performance-trend-panel">
-          <div class="performance-panel-head">
-            <div><span>6-MONTH TREND</span><h3>Activity trend</h3></div>
-            <div class="performance-legend"><span><i class="legend-primary"></i>Contacts</span><span><i class="legend-secondary"></i>Calls</span></div>
+    <main id="main" class="portal-main performance-workspace">
+      <div class="performance-inner">
+        <div class="performance-header">
+          <div>
+            <span class="performance-eyebrow">PERFORMANCE ANALYTICS</span>
+            <h1>Performance dashboard</h1>
+            <p>Live operational performance from Bodibe Digital's staff, CRM, tasks and support activity.</p>
           </div>
-          <div class="performance-chart-wrap"><canvas id="trendChart" aria-label="Six month activity trend"></canvas></div>
-        </article>
-
-        <article class="performance-panel performance-target-panel">
-          <div class="performance-panel-head"><div><span>CURRENT MONTH</span><h3>Target progress</h3></div></div>
-          <div id="targetProgress" class="performance-target-list"><p class="performance-empty">Loading targets&hellip;</p></div>
-        </article>
-      </section>
-
-      <section class="performance-lower-grid">
-        <article class="performance-panel">
-          <div class="performance-panel-head"><div><span>DELIVERY</span><h3>Task health</h3></div></div>
-          <div class="performance-task-health" id="taskHealth"></div>
-        </article>
-        <article class="performance-panel">
-          <div class="performance-panel-head"><div><span>OPERATIONS</span><h3>Monthly snapshot</h3></div></div>
-          <div class="performance-snapshot" id="snapshot"></div>
-        </article>
-      </section>
-
-      <section class="performance-panel performance-review-panel">
-        <div class="performance-panel-head performance-review-head">
-          <div><span>MONTHLY REVIEW</span><h3>Feedback & next steps</h3></div>
-          <span class="performance-review-status" id="reviewStatus">No review</span>
+          <div class="performance-controls">
+            <label><span>Employee</span><select id="staffSelect" aria-label="Choose employee"></select></label>
+            <label><span>Month</span><input id="periodSelect" type="month" aria-label="Choose month" /></label>
+            <button type="button" id="refreshPerformance" class="performance-refresh"><i class="fa-solid fa-rotate"></i><span>Refresh</span></button>
+          </div>
         </div>
-        <div id="reviewContent"><p class="performance-empty">Loading review&hellip;</p></div>
-      </section>
 
-      <section class="performance-panel performance-manager-panel" id="managerPanel" hidden>
-        <div class="performance-panel-head"><div><span>MANAGEMENT</span><h3>Set targets & review</h3></div></div>
-        <div class="performance-manager-grid">
-          <form id="targetForm" class="performance-form">
-            <h4>Set monthly target</h4>
-            <label><span>Metric</span><select id="targetMetric"></select></label>
-            <label><span>Target value</span><input id="targetValue" type="number" min="1" step="1" required /></label>
-            <label><span>Note</span><textarea id="targetNote" rows="3" placeholder="Optional target context"></textarea></label>
-            <button type="submit">Save target</button>
-          </form>
-          <form id="reviewForm" class="performance-form">
-            <h4>Monthly review</h4>
-            <label><span>Strengths</span><textarea id="reviewStrengths" rows="3"></textarea></label>
-            <label><span>Improvement areas</span><textarea id="reviewImprovements" rows="3"></textarea></label>
-            <label><span>Next steps</span><textarea id="reviewNextSteps" rows="3"></textarea></label>
-            <div class="performance-form-actions"><button type="button" id="saveDraftReview" class="is-secondary">Save draft</button><button type="button" id="publishReview">Publish review</button></div>
-          </form>
-        </div>
-      </section>
+        <div class="portal-mode-notice" id="modeNotice" role="status" hidden><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span id="modeNoticeText"></span></div>
+        <div class="portal-notice" id="portalNotice" role="status" hidden></div>
+
+        <section class="performance-person" aria-label="Selected employee">
+          <div class="performance-person-copy">
+            <span id="selectedDepartment">Performance overview</span>
+            <h2 id="selectedEmployee">Loading employee&hellip;</h2>
+            <p id="selectedRole"></p>
+          </div>
+          <div class="performance-period-tabs" role="group" aria-label="Dashboard view">
+            <button type="button" class="is-active" disabled>Month</button>
+            <button type="button" title="Trend is shown below" disabled>6-month trend</button>
+          </div>
+        </section>
+
+        <section class="performance-kpis" id="kpiGrid" aria-label="Performance indicators">
+          <article class="performance-kpi is-loading"></article>
+          <article class="performance-kpi is-loading"></article>
+          <article class="performance-kpi is-loading"></article>
+          <article class="performance-kpi is-loading"></article>
+        </section>
+
+        <section class="performance-main-grid">
+          <article class="performance-panel performance-trend-panel">
+            <div class="performance-panel-head">
+              <div><span>6-MONTH TREND</span><h3>Activity trend</h3></div>
+              <div class="performance-legend"><span><i class="legend-primary"></i>Contacts</span><span><i class="legend-secondary"></i>Calls</span></div>
+            </div>
+            <div class="performance-chart-wrap"><canvas id="trendChart" aria-label="Six month activity trend"></canvas></div>
+          </article>
+
+          <article class="performance-panel performance-target-panel">
+            <div class="performance-panel-head"><div><span>CURRENT MONTH</span><h3>Target progress</h3></div></div>
+            <div id="targetProgress" class="performance-target-list"><p class="performance-empty">Loading targets&hellip;</p></div>
+          </article>
+        </section>
+
+        <section class="performance-lower-grid">
+          <article class="performance-panel">
+            <div class="performance-panel-head"><div><span>DELIVERY</span><h3>Task health</h3></div></div>
+            <div class="performance-task-health" id="taskHealth"></div>
+          </article>
+          <article class="performance-panel">
+            <div class="performance-panel-head"><div><span>OPERATIONS</span><h3>Monthly snapshot</h3></div></div>
+            <div class="performance-snapshot" id="snapshot"></div>
+          </article>
+        </section>
+
+        <section class="performance-panel performance-review-panel">
+          <div class="performance-panel-head performance-review-head">
+            <div><span>MONTHLY REVIEW</span><h3>Feedback &amp; next steps</h3></div>
+            <span class="performance-review-status" id="reviewStatus">No review</span>
+          </div>
+          <div id="reviewContent"><p class="performance-empty">Loading review&hellip;</p></div>
+        </section>
+
+        <section class="performance-panel performance-manager-panel" id="managerPanel" hidden>
+          <div class="performance-panel-head"><div><span>MANAGEMENT</span><h3>Set targets &amp; review</h3></div></div>
+          <div class="performance-manager-grid">
+            <form id="targetForm" class="performance-form">
+              <h4>Set monthly target</h4>
+              <label><span>Metric</span><select id="targetMetric"></select></label>
+              <label><span>Target value</span><input id="targetValue" type="number" min="1" step="1" required /></label>
+              <label><span>Note</span><textarea id="targetNote" rows="3" placeholder="Optional target context"></textarea></label>
+              <button type="submit">Save target</button>
+            </form>
+            <form id="reviewForm" class="performance-form">
+              <h4>Monthly review</h4>
+              <label><span>Strengths</span><textarea id="reviewStrengths" rows="3"></textarea></label>
+              <label><span>Improvement areas</span><textarea id="reviewImprovements" rows="3"></textarea></label>
+              <label><span>Next steps</span><textarea id="reviewNextSteps" rows="3"></textarea></label>
+              <div class="performance-form-actions"><button type="button" id="saveDraftReview" class="is-secondary">Save draft</button><button type="button" id="publishReview">Publish review</button></div>
+            </form>
+          </div>
+        </section>
+      </div>
     </main>
   </div>
 

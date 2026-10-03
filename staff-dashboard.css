@@ -40,51 +40,28 @@
     font-size: 14px;
 }
 
-.dash-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.dash-performance-link,
 .dash-logout {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 11px 20px;
     border-radius: 50px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface-glass);
+    color: var(--text-secondary);
     font-family: inherit;
     font-size: 13px;
     font-weight: 600;
+    cursor: pointer;
     transition: 0.3s ease;
     height: fit-content;
 }
 
-.dash-performance-link {
-    border: 1px solid rgba(96, 165, 250, 0.28);
-    background: rgba(59, 130, 246, 0.11);
-    color: #93c5fd;
-    text-decoration: none;
-}
-
-.dash-performance-link:hover {
-    border-color: rgba(96, 165, 250, 0.55);
-    background: rgba(59, 130, 246, 0.18);
-    color: #dbeafe;
-    transform: translateY(-1px);
-}
-
-.dash-logout {
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.03);
-    color: #cbd5e1;
-    cursor: pointer;
-}
-
-.dash-logout:hover {
-    border-color: rgba(248, 113, 113, 0.4);
-    color: #fca5a5;
+.dash-logout:hover,
+.dash-logout:focus-visible {
+    border-color: var(--error-border);
+    color: var(--error);
+    background: var(--error-bg);
 }
 
 .dash-grid {
@@ -162,12 +139,13 @@
 .dash-item-name {
     font-size: 14px;
     font-weight: 600;
-    color: #f1f5f9;
+    /* Was #f1f5f9 — near-white, invisible in light theme. */
+    color: var(--text);
 }
 
 .dash-item-meta {
     font-size: 12px;
-    color: #64748b;
+    color: var(--text-muted);
 }
 
 .dash-badge {
@@ -246,14 +224,6 @@
     .dash-stats {
         flex-direction: column;
     }
-    .dash-header-actions {
-        width: 100%;
-    }
-    .dash-performance-link,
-    .dash-logout {
-        flex: 1;
-        justify-content: center;
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -262,4 +232,862 @@
     .dash-item {
         transition: none !important;
     }
+}
+
+/* ==========================================================================
+   STAFF PORTAL SHELL
+   Sidebar + drawer around the existing .dash-* dashboard, which is unchanged.
+   All colour comes from the tokens in style.css so dark/light both work.
+   This is a working surface, not a marketing page: no parallax, no reveal
+   animations, nothing that delays reading data.
+   ========================================================================== */
+
+.portal-shell-body {
+  /* The shell manages its own scrolling regions. */
+  min-height: 100vh;
+}
+
+.portal-layout {
+  display: flex;
+  align-items: stretch;
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+.portal-sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 var(--portal-sidebar-w, 248px);
+  width: var(--portal-sidebar-w, 248px);
+  min-height: 100vh;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+}
+
+.portal-sidebar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 1.15rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.portal-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.portal-brand-mark img {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+
+.portal-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  min-width: 0;
+}
+
+.portal-brand-text strong {
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.portal-brand-text small {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.portal-sidebar-scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 0.9rem 0.7rem 1.2rem;
+}
+
+.portal-nav-section {
+  margin-top: 1.4rem;
+}
+
+.portal-nav-heading {
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 600;
+  margin: 0 0 0.5rem 0.6rem;
+}
+
+.portal-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+/* Anchors for reachable destinations, buttons for nothing — a disabled module
+   is a plain <span> so it is never focusable or clickable. */
+.portal-nav-link,
+.portal-nav-static {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  /* 44px minimum touch target. */
+  min-height: 44px;
+  padding: 0.55rem 0.65rem;
+  border-radius: 9px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.portal-nav-link:hover,
+.portal-nav-link:focus-visible {
+  background: var(--surface-glass);
+  color: var(--text);
+}
+
+.portal-nav-link.is-current {
+  background: var(--accent-glow-soft);
+  border-color: var(--accent-glow-medium);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.portal-nav-icon {
+  flex: 0 0 20px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--accent-secondary);
+}
+
+.portal-nav-link.is-current .portal-nav-icon {
+  color: var(--accent-primary);
+}
+
+.portal-nav-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A module the employee is entitled to but which has no screen yet. Stated
+   plainly rather than dressed up as a working link. */
+.portal-nav-static {
+  color: var(--text-faint);
+  cursor: default;
+}
+
+.portal-nav-static .portal-nav-icon {
+  color: var(--text-faint);
+}
+
+.portal-nav-tag {
+  margin-left: auto;
+  flex: 0 0 auto;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.18rem 0.4rem;
+  border-radius: 999px;
+  background: var(--surface-glass-strong);
+  border: 1px solid var(--border);
+  color: var(--text-faint);
+}
+
+
+.portal-nav-group-heading {
+  list-style: none;
+  margin: 1.2rem 0 0.45rem 0.6rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-weight: 700;
+}
+
+.portal-nav-group-heading:first-child {
+  margin-top: 0;
+}
+
+.portal-nav-button {
+  width: 100%;
+  border: 1px solid transparent;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.portal-nav-button:hover,
+.portal-nav-button:focus-visible {
+  background: var(--surface-glass);
+  color: var(--text);
+}
+
+#follow-ups,
+#commission,
+#sales-resources,
+#invoices,
+#payments,
+#reports {
+  scroll-margin-top: 1.25rem;
+}
+.portal-nav-note {
+  margin: 0.7rem 0.6rem 0;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--text-faint);
+}
+
+/* ---------- Sidebar footer ---------- */
+.portal-sidebar-foot {
+  flex: 0 0 auto;
+  border-top: 1px solid var(--border);
+  padding: 0.8rem 0.7rem;
+}
+
+.portal-whoami {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.5rem 0.7rem;
+  min-width: 0;
+}
+
+.portal-avatar {
+  flex: 0 0 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent-glow-medium);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.portal-whoami-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.portal-whoami-text strong {
+  font-size: 0.82rem;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portal-whoami-text small {
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portal-signout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.8rem;
+  border-radius: 9px;
+  background: var(--surface-glass);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.portal-signout:hover,
+.portal-signout:focus-visible {
+  border-color: var(--error-border);
+  color: var(--error);
+  background: var(--error-bg);
+}
+
+/* ---------- Main region ---------- */
+.portal-main {
+  flex: 1 1 auto;
+  min-width: 0;   /* lets long tables shrink instead of pushing the page wide */
+}
+
+/* ---------- Notice strip ---------- */
+/* A class that sets `display` beats the [hidden] attribute's UA rule, so an
+   element toggled with el.hidden would stay visible as an empty bar. */
+.portal-notice[hidden] {
+  display: none;
+}
+
+.portal-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 0 0 1.4rem;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  background: var(--surface-glass);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.portal-notice.is-warning {
+  background: var(--error-bg);
+  border-color: var(--error-border);
+  color: var(--error);
+}
+
+/* ---------- Mobile top bar and drawer ---------- */
+.portal-topbar {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  backdrop-filter: blur(10px);
+}
+
+.portal-nav-toggle,
+.portal-nav-close {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 9px;
+  background: var(--surface-glass);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.portal-nav-close {
+  display: none;
+}
+
+.portal-burger {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 18px;
+}
+
+.portal-burger span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.portal-topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.8rem;
+  min-width: 0;
+  margin-right: auto;
+  /* It is a link, so it needs a real touch target, not just text height. */
+  min-height: 44px;
+  padding-right: 0.25rem;
+}
+
+/* style.css sizes the shared theme toggle at 38px, which is fine on a page you
+   read and small for one you work in. Enlarged here only — the public site
+   keeps its own sizing. */
+.portal-topbar .theme-toggle {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+}
+
+.portal-topbar-brand img {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+}
+
+.portal-topbar-brand span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.portal-topbar-brand strong {
+  color: var(--accent-secondary);
+}
+
+.portal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 70;
+}
+
+/* 1024px is also the capability boundary in portal-access.js, so the rule
+   is one an employee can see: full sidebar == full operational workspace. */
+@media (max-width: 1024px) {
+  .portal-topbar {
+    display: flex;
+  }
+
+  .portal-nav-close {
+    display: grid;
+  }
+
+  .portal-layout {
+    min-height: auto;
+  }
+
+  /* Off-canvas drawer. Kept out of the tab order while closed via inert-like
+     handling in JS (the whole sidebar is hidden from AT when shut). */
+  .portal-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 80;
+    width: min(84vw, 300px);
+    flex-basis: auto;
+    max-height: none;
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+    box-shadow: 0 0 40px var(--shadow-elevated);
+  }
+
+  .portal-sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .portal-main {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1025px) {
+  /* The drawer controls never exist on desktop, so the sidebar is always open
+     and never needs hiding from assistive tech. */
+  .portal-backdrop {
+    display: none !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .portal-sidebar-scroll {
+    padding: 0.8rem 0.55rem 1rem;
+  }
+
+  .portal-notice {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Focus must always be visible — this is a keyboard-heavy admin surface. */
+.portal-nav-link:focus-visible,
+.portal-signout:focus-visible,
+.portal-nav-toggle:focus-visible,
+.portal-nav-close:focus-visible,
+.portal-brand:focus-visible,
+.portal-topbar-brand:focus-visible {
+  outline: 2px solid var(--accent-secondary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-sidebar {
+    transition: none;
+  }
+}
+
+/* ---------- Device mode notice (mobile / tablet) ---------- */
+.portal-mode-notice[hidden] {
+  display: none;
+}
+
+.portal-mode-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 0 0 1.2rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  background: var(--accent-glow-soft);
+  border: 1px solid var(--accent-glow-medium);
+  color: var(--text-secondary);
+}
+
+.portal-mode-notice i {
+  color: var(--accent-secondary);
+  margin-top: 0.12rem;
+}
+
+/* A control that exists on desktop but is not offered here. Used by module
+   screens in Phase 2 in place of a disabled button, so the reason is always
+   stated rather than left as a dead control. */
+.portal-desktop-only {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 9px;
+  border: 1px dashed var(--border-strong);
+  background: var(--surface-glass-soft);
+  color: var(--text-faint);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+/* ---------- Mobile dashboard density ----------
+   The pre-existing rule stacked the three counts vertically, which pushed the
+   actual work below the fold on a phone. They are short numbers: three across
+   reads faster and keeps assigned work visible. */
+@media (max-width: 800px) {
+  .dash-stats {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .dash-stat {
+    padding: 12px 6px;
+    border-radius: 14px;
+    min-width: 0;
+  }
+
+  .dash-stat strong {
+    font-size: 1.35rem;
+  }
+
+  .dash-stat span {
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* .dash-page's 130px top padding was clearing the public site's fixed header.
+   The portal has no fixed header: a sidebar on desktop, a sticky top bar on
+   mobile. Left as-is it wastes the most valuable part of a phone screen, so
+   the page starts near the top. Scoped to .portal-main so only the portal
+   shell is affected. */
+.portal-main.dash-page {
+  padding-top: 2.5rem;
+}
+
+@media (max-width: 1024px) {
+  .portal-main.dash-page {
+    padding-top: 1.25rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .portal-main.dash-page {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .dash-header {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+  }
+}
+
+/* ==========================================================================
+   WORKLOAD RING CHART
+
+   Native SVG, no charting library. Three concentric rings, each on its own
+   track, scaled against the largest value in the set.
+
+   Colour is never the only carrier of meaning: the legend always prints the
+   label and the count as text, and the chart's aria-label speaks the real
+   numbers. The swatches are an aid, not the message.
+   ========================================================================== */
+
+:root {
+    /* Ring accents. Dark-theme values are the brand blue/cyan/violet. */
+    --ring-projects: #3b82f6;
+    --ring-tasks: #38bdf8;
+    --ring-done: #8b5cf6;
+    --ring-track: rgba(255, 255, 255, 0.07);
+}
+
+[data-theme="light"] {
+    /* Deepened to hold contrast against a light surface — the same three
+       hues as the light-theme brand accents, not a different palette. */
+    --ring-projects: #2563eb;
+    --ring-tasks: #0891b2;
+    --ring-done: #7c3aed;
+    --ring-track: rgba(15, 23, 42, 0.08);
+}
+
+.ring-card {
+    margin-bottom: 24px;
+}
+
+.ring-card-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+}
+
+.ring-eyebrow {
+    font-size: 10px;
+    letter-spacing: 1.4px;
+    font-weight: 600;
+    color: var(--text-faint);
+    order: -1;
+    flex-basis: 100%;
+}
+
+.ring-card-head h2 {
+    margin-bottom: 0;
+    flex: 1 1 auto;
+}
+
+.ring-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface-glass);
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+}
+
+.ring-live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ring-tasks);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring-tasks) 20%, transparent);
+}
+
+/* ---------------------------------------------------------------- layout */
+
+.ring-body {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-top: 22px;
+}
+
+.ring-chart {
+    position: relative;
+    flex: 0 0 auto;
+    width: 220px;
+    height: 220px;
+    max-width: 100%;
+}
+
+.ring-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    /* Start every arc at twelve o'clock. */
+    transform: rotate(-90deg);
+    overflow: visible;
+}
+
+.ring-track {
+    stroke: var(--ring-track);
+}
+
+.ring-arc {
+    transition: stroke-dashoffset 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------------------------------------------------------------- centre */
+
+.ring-centre {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+    /* Kept inside the innermost ring. */
+    padding: 0 18%;
+}
+
+.ring-centre-value {
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text);
+}
+
+.ring-centre-label {
+    margin-top: 5px;
+    font-size: 9.5px;
+    letter-spacing: 0.9px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+
+/* ---------------------------------------------------------------- legend */
+
+.ring-legend {
+    flex: 1 1 auto;
+    /* Capped so the label and its number stay near each other on a wide
+       card instead of drifting to opposite edges. */
+    max-width: 460px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
+
+.ring-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface-glass-soft);
+}
+
+.ring-legend-dot {
+    flex: 0 0 auto;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+}
+
+.ring-legend-label {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+    overflow-wrap: anywhere;
+}
+
+.ring-legend-value {
+    flex: 0 0 auto;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------- tablet and phone */
+
+@media (max-width: 800px) {
+    .ring-body {
+        flex-direction: column;
+        gap: 24px;
+    }
+    .ring-legend {
+        width: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+    .ring-chart {
+        width: 190px;
+        height: 190px;
+    }
+    .ring-centre-value {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 360px) {
+    .ring-chart {
+        width: 164px;
+        height: 164px;
+    }
+    /* The clear circle inside the innermost ring shrinks with the chart, so
+       the label has to come down with it or it grazes the ring. */
+    .ring-centre-value {
+        font-size: 26px;
+    }
+    .ring-centre-label {
+        font-size: 8.5px;
+        letter-spacing: 0.5px;
+    }
+    .ring-legend-item {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+    .ring-legend-label {
+        font-size: 12px;
+    }
+}
+
+/* The reveal is decoration. Asked to sit still, the chart arrives finished. */
+@media (prefers-reduced-motion: reduce) {
+    .ring-arc {
+        transition: none !important;
+    }
+}
+
+#logoutBtn[hidden] { display: none !important; }
+
+/* Shared section spacing: identical header alignment to the dashboard. */
+.portal-shell-body .portal-main:not(.dash-page) { padding: 2.5rem 20px 60px; }
+@media (max-width:1024px) { .portal-shell-body .portal-main:not(.dash-page) { padding-top:1.25rem; } }
+@media (max-width:800px) { .portal-shell-body .portal-main:not(.dash-page) { padding-left:1rem; padding-right:1rem; padding-bottom:2.5rem; } }
+/* Workspace cards are navigation links using the existing portal theme. */
+.dash-workspace-link,
+.dash-workspace-link:visited {
+    display: block;
+    min-width: 0;
+    color: var(--text);
+    text-decoration: none;
+}
+.dash-workspace-link h2 { color: var(--text); }
+.dash-workspace-link p { color: var(--text-secondary); }
+.dash-workspace-link:focus-visible {
+    outline: 3px solid #3b82f6;
+    outline-offset: 4px;
 }

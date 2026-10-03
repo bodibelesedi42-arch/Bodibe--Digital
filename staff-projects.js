@@ -433,6 +433,10 @@
             listEl.innerHTML = '<div class="projects-empty"><strong>No project access</strong><span>Your current role does not include View Projects.</span></div>';
             return;
         }
+        try {
+            var requestedClient = new URLSearchParams(window.location.search).get("client");
+            if (requestedClient && searchEl) searchEl.value = requestedClient;
+        } catch (e) {}
         loadProjects();
     });
 

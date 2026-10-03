@@ -25,7 +25,7 @@
 
     border: 1px solid rgba(96, 165, 250, 0.2);
 
-    color: #60a5fa;
+    color: var(--secondary);
 
     font-size: 13px;
 
@@ -67,7 +67,7 @@
 
     margin: auto;
 
-    color: #94a3b8;
+    color: var(--text-muted);
 
     font-size: 18px;
 
@@ -116,11 +116,11 @@
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,0.075),
-            rgba(255,255,255,0.025)
+            var(--card-glass-1),
+            var(--card-glass-2)
         );
 
-    border: 1px solid rgba(255,255,255,0.09);
+    border: 1px solid var(--card-border);
 
     border-radius: 26px;
 
@@ -131,7 +131,7 @@
     -webkit-backdrop-filter: blur(18px);
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,0.28);
+        0 25px 70px var(--card-shadow);
 
     transition:
         transform 0.4s ease,
@@ -175,7 +175,7 @@
         linear-gradient(
             145deg,
             rgba(59,130,246,0.14),
-            rgba(255,255,255,0.045)
+            var(--card-glass-1)
         );
 
     box-shadow:
@@ -254,7 +254,7 @@
 ========================== */
 
 .pricing-label {
-    color: #60a5fa;
+    color: var(--secondary);
 
     font-size: 12px;
 
@@ -270,7 +270,7 @@
 }
 
 .pricing-header p {
-    color: #94a3b8;
+    color: var(--text-muted);
 
     font-size: 14px;
 
@@ -291,7 +291,7 @@
 
     margin-top: 30px;
 
-    color: white;
+    color: var(--text);
 }
 
 .pricing-price > span {
@@ -301,7 +301,7 @@
 
     margin-top: 12px;
 
-    color: #60a5fa;
+    color: var(--secondary);
 }
 
 .pricing-price strong {
@@ -319,7 +319,7 @@
 
     font-weight: 700;
 
-    color: #60a5fa;
+    color: var(--secondary);
 
     margin-top: 4px;
 }
@@ -331,7 +331,7 @@
 
     margin-left: 23px;
 
-    color: #64748b;
+    color: var(--text-faint);
 
     font-size: 12px;
 }
@@ -344,8 +344,7 @@
 .pricing-divider {
     height: 1px;
 
-    background:
-        rgba(255,255,255,0.08);
+    background: var(--border);
 
     margin: 35px 0 25px;
 }
@@ -374,7 +373,7 @@
 
     gap: 10px;
 
-    color: #cbd5e1;
+    color: var(--text-secondary);
 
     font-size: 14px;
 
@@ -382,7 +381,7 @@
 }
 
 .pricing-features i {
-    color: #60a5fa;
+    color: var(--secondary);
 
     font-size: 13px;
 
@@ -409,7 +408,7 @@
 
     border: 1px solid rgba(96,165,250,0.35);
 
-    color: white;
+    color: var(--text);
 
     text-decoration: none;
 
@@ -480,7 +479,7 @@
 
     border-radius: 30px;
 
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid var(--border);
 
     background:
         radial-gradient(
@@ -488,14 +487,14 @@
             rgba(59,130,246,0.18),
             transparent 45%
         ),
-        rgba(255,255,255,0.035);
+        var(--surface-glass-soft);
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,0.25);
+        0 30px 80px var(--card-shadow);
 }
 
 .custom-content > span {
-    color: #60a5fa;
+    color: var(--secondary);
 
     font-size: 12px;
 
@@ -511,7 +510,7 @@
 }
 
 .custom-content h2 strong {
-    color: #60a5fa;
+    color: var(--secondary);
 }
 
 .custom-content p {
@@ -519,7 +518,7 @@
 
     margin: 0 auto 30px;
 
-    color: #94a3b8;
+    color: var(--text-muted);
 
     line-height: 1.8;
 }
@@ -530,7 +529,7 @@
 ========================== */
 
 .nav-links a.active {
-    color: #60a5fa;
+    color: var(--secondary);
 }
 
 
@@ -673,7 +672,7 @@
 
     text-align: center;
 
-    color: #64748b;
+    color: var(--text-faint);
 
     font-size: 12px;
 
@@ -740,3 +739,4 @@
     }
 
 }
+#maintenance{scroll-margin-top:100px}.maintenance-billing{display:inline-flex;gap:5px;border:1px solid var(--border);padding:6px;border-radius:40px;background:var(--surface-glass);margin:22px 0 8px}.maintenance-billing button{border:0;border-radius:30px;padding:12px 20px;background:transparent;color:var(--text);font:inherit;font-size:14px;cursor:pointer}.maintenance-billing button[aria-pressed="true"]{background:#087eb8;color:#fff;box-shadow:0 4px 12px #087eb833}.maintenance-billing button span{font-size:11px;margin-left:6px}.maintenance-billing-note{font-size:12px!important;color:var(--text-muted)}.maintenance-card{display:flex;flex-direction:column;position:relative}.maintenance-card .pricing-header p{font-size:13px;line-height:1.7;color:var(--text-muted)}.maintenance-card .pricing-price strong{font-size:clamp(30px,3vw,46px);letter-spacing:-.04em}.maintenance-card .pricing-price p{font-size:12px}.maintenance-eyebrow{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--text-muted)}.maintenance-card .pricing-features{flex:1;min-height:168px}.maintenance-saving{font-size:12px;line-height:1.7;color:var(--accent-primary);min-height:42px}.maintenance-card .pricing-badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:#087eb8;color:white;border-radius:20px;padding:7px 18px;font-size:10px;font-weight:700;white-space:nowrap;letter-spacing:.08em}.maintenance-terms{max-width:1000px;margin:44px auto 0;line-height:1.9;font-size:12px;color:var(--text-muted)}#maintenance .pricing-hero h2{font-size:clamp(28px,4vw,46px)}@media(max-width:800px){#maintenance .pricing-card{transform:none}.maintenance-card .pricing-features{min-height:0}}

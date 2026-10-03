@@ -79,11 +79,11 @@
 
     background: linear-gradient(
         145deg,
-        rgba(255, 255, 255, 0.08),
-        rgba(255, 255, 255, 0.025)
+        var(--card-glass-1),
+        var(--card-glass-2)
     );
 
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--card-border);
     border-radius: 26px;
     padding: 48px 40px;
 
@@ -110,7 +110,7 @@
 }
 
 .staff-label {
-    color: #60a5fa;
+    color: var(--secondary);
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -125,7 +125,7 @@
 }
 
 .staff-subtitle {
-    color: #94a3b8;
+    color: var(--text-muted);
     font-size: 13px;
     text-align: center;
     line-height: 1.55;
@@ -146,7 +146,7 @@
 }
 
 .staff-field label {
-    color: #cbd5e1;
+    color: var(--text-secondary);
     font-size: 12px;
     font-weight: 600;
 }
@@ -157,13 +157,13 @@
     gap: 12px;
     padding: 0 15px;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
     transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .staff-input-shell i {
-    color: #64748b;
+    color: var(--text-faint);
     font-size: 13px;
     transition: color 0.3s ease;
 }
@@ -176,7 +176,7 @@
 }
 
 .staff-input-shell:focus-within i {
-    color: #60a5fa;
+    color: var(--secondary);
 }
 
 .staff-field input {
@@ -184,7 +184,7 @@
     padding: 14px 0;
     border: none;
     background: transparent;
-    color: white;
+    color: var(--text);
     font-family: inherit;
     font-size: 14px;
     outline: none;
@@ -245,14 +245,14 @@
     display: block;
     text-align: center;
     margin-top: 26px;
-    color: #64748b;
+    color: var(--text-faint);
     text-decoration: none;
     font-size: 13px;
     transition: 0.3s ease;
 }
 
 .staff-back:hover {
-    color: #60a5fa;
+    color: var(--secondary);
 }
 
 @media (prefers-reduced-motion: reduce) {

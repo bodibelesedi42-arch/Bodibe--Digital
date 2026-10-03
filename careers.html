@@ -9,6 +9,13 @@
       name="description"
       content="Apply to join the Bodibe Digital team — tell us about your skills, experience and availability."
     />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://bodibedigital.co.za/careers.html" />
+
+    <meta property="og:title" content="Careers | Bodibe Digital" />
+    <meta property="og:description" content="Apply to join the Bodibe Digital team — tell us about your skills, experience and availability." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bodibedigital.co.za/careers.html" />
 
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
 
@@ -23,12 +30,33 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
 
+    <!-- Theme: apply saved/system preference before first paint (no flash) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t !== "dark" && t !== "light") {
+            t =
+              window.matchMedia &&
+              window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark";
+          }
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+    <script src="theme.js" defer></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="checkout.css" />
     <link rel="stylesheet" href="careers.css" />
   </head>
 
   <body>
+
+<a href="#main" class="skip-link">Skip to content</a>
     <div class="background-animation">
       <span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
@@ -37,7 +65,8 @@
       <nav class="navbar">
         <a href="index.html" class="logo">
           <div class="logo-mark">
-            <img src="assets/images/logo.svg" alt="Bodibe Digital Logo" />
+            <img src="assets/images/logo.svg" alt="Bodibe Digital Logo" class="logo-mark-dark">
+            <img src="assets/images/logo.svg" alt="Bodibe Digital Logo" class="logo-mark-light">
           </div>
           <div class="logo-details">
             <h2>Bodibe</h2>
@@ -45,24 +74,37 @@
           </div>
         </a>
         <a href="index.html" class="checkout-back">← Back to website</a>
+        <button type="button" class="theme-toggle" aria-label="Switch to light mode" aria-pressed="false">
+          <svg class="theme-toggle-icon theme-toggle-icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="1.5" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22.5" y2="12"/><line x1="4.4" y1="4.4" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.6" y2="19.6"/><line x1="4.4" y1="19.6" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.6" y2="4.4"/></g></svg>
+          <svg class="theme-toggle-icon theme-toggle-icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1z"/></svg>
+        </button>
       </nav>
     </header>
 
-    <main class="careers-page">
+    <main id="main" class="careers-page">
       <section class="careers-hero">
         <span class="checkout-label">BODIBE DIGITAL</span>
         <h1>Join the team.</h1>
         <p class="checkout-intro">
-          Rate yourself honestly across a few skill areas — it helps us find where you'd fit best.
-          We read every application.
+          A few short steps — takes about 2–3 minutes. Tell us a bit about
+          yourself and where you'd fit best. We read every application.
         </p>
       </section>
 
+      <div class="careers-progress">
+        <div class="careers-progress-bar" id="careersProgressBar"></div>
+      </div>
+      <p class="careers-step-label" id="careersStepLabel">Step 1 of 3 — Personal Information</p>
+
+      <section id="careersVacancies" class="careers-section" aria-label="Current vacancies"><h2>Current vacancies</h2><p>Loading vacancies…</p></section>
       <form class="careers-form" id="careersForm">
+
+        <!-- STEP 1 -->
+        <div class="careers-step" data-step-title="Personal Information">
 
         <!-- PERSONAL -->
         <div class="careers-section">
-          <h2><i class="fa-solid fa-user"></i> Personal Information</h2>
+          <h2><i class="fa-solid fa-user"></i> Personal Information</h2><div class="form-group"><label for="vacancyId">Vacancy</label><select id="vacancyId" name="vacancyId"><option value="">General application</option></select></div><div class="form-group"><label for="applicantCV">CV (optional PDF, up to 1 MB)</label><input id="applicantCV" type="file" accept="application/pdf"><p>Your CV is available only to authorised recruitment staff.</p></div>
 
           <div class="form-row">
             <div class="form-group">
@@ -86,6 +128,12 @@
             </div>
           </div>
         </div>
+
+        </div>
+        <!-- END STEP 1 -->
+
+        <!-- STEP 2 -->
+        <div class="careers-step" data-step-title="About You &amp; Your Fit">
 
         <!-- ABOUT YOU -->
         <div class="careers-section">
@@ -113,166 +161,8 @@
           </div>
 
           <div class="form-group">
-            <label for="aboutYou">Tell us about yourself</label>
-            <textarea id="aboutYou" name="aboutYou" rows="3"></textarea>
-          </div>
-
-          <div class="form-group">
             <label for="strongestSkills">What are your strongest skills?</label>
             <input type="text" id="strongestSkills" name="strongestSkills" />
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="workEnjoyed">What type of work do you enjoy most?</label>
-              <input type="text" id="workEnjoyed" name="workEnjoyed" />
-            </div>
-            <div class="form-group">
-              <label for="workDisliked">What type of work do you dislike?</label>
-              <input type="text" id="workDisliked" name="workDisliked" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="skillToDevelop">What skill would you like to develop?</label>
-            <input type="text" id="skillToDevelop" name="skillToDevelop" />
-          </div>
-        </div>
-
-        <!-- DEVELOPMENT -->
-        <div class="careers-section">
-          <h2><i class="fa-solid fa-code"></i> Development</h2>
-          <p class="careers-section-note">Rate yourself 1 (needs work) to 5 (strong) on each.</p>
-          <div class="skills-grid">
-            <div class="form-group"><label for="devWebDev">Web development</label><select id="devWebDev" name="devWebDev"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="devProblemSolving">Problem solving</label><select id="devProblemSolving" name="devProblemSolving"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="devNewSoftware">Learning new software</label><select id="devNewSoftware" name="devNewSoftware"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="devTroubleshooting">Technical troubleshooting</label><select id="devTroubleshooting" name="devTroubleshooting"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="devWorkspace">Google Workspace / MS Office</label><select id="devWorkspace" name="devWorkspace"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-          </div>
-        </div>
-
-        <!-- DESIGN -->
-        <div class="careers-section">
-          <h2><i class="fa-solid fa-palette"></i> Design</h2>
-          <div class="skills-grid">
-            <div class="form-group"><label for="desCreativity">Creativity</label><select id="desCreativity" name="desCreativity"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="desGraphicDesign">Graphic design</label><select id="desGraphicDesign" name="desGraphicDesign"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="desUiUx">UI/UX</label><select id="desUiUx" name="desUiUx"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="desBranding">Branding</label><select id="desBranding" name="desBranding"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="desPhotoVideo">Photography / video</label><select id="desPhotoVideo" name="desPhotoVideo"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="desContent">Content creation</label><select id="desContent" name="desContent"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-          </div>
-          <div class="form-group">
-            <label for="desTools">Have you used any design tools? Which ones?</label>
-            <input type="text" id="desTools" name="desTools" placeholder="e.g. Photoshop, Canva, Figma" />
-          </div>
-        </div>
-
-        <!-- SALES & MARKETING -->
-        <div class="careers-section">
-          <h2><i class="fa-solid fa-bullhorn"></i> Sales &amp; Marketing</h2>
-          <div class="skills-grid">
-            <div class="form-group"><label for="salesCommunication">Communication</label><select id="salesCommunication" name="salesCommunication"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="salesPersuasion">Persuasion</label><select id="salesPersuasion" name="salesPersuasion"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="salesPublicSpeaking">Public speaking</label><select id="salesPublicSpeaking" name="salesPublicSpeaking"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="salesSocialMedia">Social media</label><select id="salesSocialMedia" name="salesSocialMedia"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="salesMarketing">Marketing</label><select id="salesMarketing" name="salesMarketing"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="salesFindingCustomers">Finding potential customers</label><select id="salesFindingCustomers" name="salesFindingCustomers"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="salesHandlingRejection">Handling rejection</label><select id="salesHandlingRejection" name="salesHandlingRejection"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-          </div>
-          <div class="form-group">
-            <label for="salesComfortable">Would you be comfortable approaching a business and explaining Bodibe Digital's services?</label>
-            <select id="salesComfortable" name="salesComfortable">
-              <option>Definitely</option><option>Probably</option><option>Not sure</option><option>Probably not</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- FINANCE & ADMIN -->
-        <div class="careers-section">
-          <h2><i class="fa-solid fa-file-invoice-dollar"></i> Finance &amp; Admin</h2>
-          <div class="skills-grid">
-            <div class="form-group"><label for="finOrganisation">Organisation</label><select id="finOrganisation" name="finOrganisation"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="finAttentionToDetail">Attention to detail</label><select id="finAttentionToDetail" name="finAttentionToDetail"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="finTimeManagement">Time management</label><select id="finTimeManagement" name="finTimeManagement"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="finRecordKeeping">Record keeping</label><select id="finRecordKeeping" name="finRecordKeeping"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="finNumbers">Working with numbers</label><select id="finNumbers" name="finNumbers"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="finSheetsExcel">Google Sheets / Excel</label><select id="finSheetsExcel" name="finSheetsExcel"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="finAccuracy">Accuracy</label><select id="finAccuracy" name="finAccuracy"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="finDocumentation">Documentation</label><select id="finDocumentation" name="finDocumentation"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-          </div>
-        </div>
-
-        <!-- OPERATIONS -->
-        <div class="careers-section">
-          <h2><i class="fa-solid fa-diagram-project"></i> Operations</h2>
-          <div class="skills-grid">
-            <div class="form-group"><label for="opsPlanning">Planning</label><select id="opsPlanning" name="opsPlanning"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="opsMeetingDeadlines">Meeting deadlines</label><select id="opsMeetingDeadlines" name="opsMeetingDeadlines"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="opsCoordinating">Coordinating people</label><select id="opsCoordinating" name="opsCoordinating"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="opsProblemSolving">Problem solving</label><select id="opsProblemSolving" name="opsProblemSolving"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="opsMultitasking">Multitasking</label><select id="opsMultitasking" name="opsMultitasking"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="opsInitiative">Taking initiative</label><select id="opsInitiative" name="opsInitiative"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="opsManagingProjects">Managing projects</label><select id="opsManagingProjects" name="opsManagingProjects"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="opsKeepingTrack">Keeping track of tasks</label><select id="opsKeepingTrack" name="opsKeepingTrack"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-          </div>
-        </div>
-
-        <!-- CLIENT SERVICES -->
-        <div class="careers-section">
-          <h2><i class="fa-solid fa-headset"></i> Client Services</h2>
-          <div class="skills-grid">
-            <div class="form-group"><label for="csCommunication">Communication</label><select id="csCommunication" name="csCommunication"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="csListening">Listening</label><select id="csListening" name="csListening"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="csPatience">Patience</label><select id="csPatience" name="csPatience"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="csCustomerService">Customer service</label><select id="csCustomerService" name="csCustomerService"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="csConflictResolution">Conflict resolution</label><select id="csConflictResolution" name="csConflictResolution"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="csProfessionalism">Professionalism</label><select id="csProfessionalism" name="csProfessionalism"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="csHandlingComplaints">Handling complaints</label><select id="csHandlingComplaints" name="csHandlingComplaints"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-          </div>
-          <div class="form-group">
-            <label for="scenarioUnhappyClient">A client is unhappy with their website. What would you do?</label>
-            <textarea id="scenarioUnhappyClient" name="scenarioUnhappyClient" rows="3"></textarea>
-          </div>
-        </div>
-
-        <!-- LEADERSHIP -->
-        <div class="careers-section">
-          <h2><i class="fa-solid fa-crown"></i> Leadership</h2>
-          <div class="skills-grid">
-            <div class="form-group"><label for="ldDecisionMaking">Decision making</label><select id="ldDecisionMaking" name="ldDecisionMaking"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="ldTakingResponsibility">Taking responsibility</label><select id="ldTakingResponsibility" name="ldTakingResponsibility"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="ldLeadership">Leadership</label><select id="ldLeadership" name="ldLeadership"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="ldDelegation">Delegation</label><select id="ldDelegation" name="ldDelegation"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="ldAccountability">Accountability</label><select id="ldAccountability" name="ldAccountability"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="ldInitiative">Initiative</label><select id="ldInitiative" name="ldInitiative"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-            <div class="form-group"><label for="ldTeamwork">Teamwork</label><select id="ldTeamwork" name="ldTeamwork"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-          </div>
-          <div class="form-group">
-            <label for="scenarioLeadOrSpecialise">Would you rather lead a team or become highly skilled in one particular area? Why?</label>
-            <textarea id="scenarioLeadOrSpecialise" name="scenarioLeadOrSpecialise" rows="3"></textarea>
-          </div>
-        </div>
-
-        <!-- MORE SCENARIOS -->
-        <div class="careers-section">
-          <h2><i class="fa-solid fa-comments"></i> A Few More Scenarios</h2>
-          <div class="form-group">
-            <label for="scenarioUnfamiliarTask">You're given a task you've never done before, and the person who normally helps you is unavailable. What do you do?</label>
-            <textarea id="scenarioUnfamiliarTask" name="scenarioUnfamiliarTask" rows="3"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="scenarioColleagueMistake">You notice a colleague has made an important mistake. What do you do?</label>
-            <textarea id="scenarioColleagueMistake" name="scenarioColleagueMistake" rows="3"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="scenarioPriceObjection">A client says Bodibe Digital's price is too expensive. How would you respond?</label>
-            <textarea id="scenarioPriceObjection" name="scenarioPriceObjection" rows="3"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="scenarioDeadlineCrunch">Your team has a deadline tomorrow but the project is behind schedule. What would you do?</label>
-            <textarea id="scenarioDeadlineCrunch" name="scenarioDeadlineCrunch" rows="3"></textarea>
           </div>
         </div>
 
@@ -306,6 +196,12 @@
             <textarea id="whyGoodFit" name="whyGoodFit" rows="3"></textarea>
           </div>
         </div>
+
+        </div>
+        <!-- END STEP 2 -->
+
+        <!-- STEP 3 -->
+        <div class="careers-step" data-step-title="Availability &amp; Final Notes">
 
         <!-- AVAILABILITY -->
         <div class="careers-section">
@@ -345,27 +241,126 @@
           </div>
         </div>
 
+        </div>
+        <!-- END STEP 3 -->
+
         <div class="careers-error" id="careersError"></div>
 
-        <button type="submit" class="checkout-submit" id="careersSubmit">
-          Submit Application
-          <i class="fa-solid fa-arrow-right"></i>
-        </button>
+        <div class="careers-nav">
+          <button type="button" class="careers-nav-back" id="careersBack">
+            <i class="fa-solid fa-arrow-left"></i> Back
+          </button>
+          <button type="button" class="checkout-submit careers-nav-next" id="careersNext">
+            Next <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <button type="submit" class="checkout-submit" id="careersSubmit" style="display:none;">
+            Submit Application
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
 
         <p class="secure-note">
           <i class="fa-solid fa-lock"></i>
-          We'll only use this to review your application.
+          We'll only use this to review your application, as described in our
+          <a href="privacy.html" style="color:#60a5fa;text-decoration:underline;">Privacy Policy</a>.
         </p>
       </form>
     </main>
 
-    <footer>
-      <div class="copyright">
-        © 2026 Bodibe Digital. All rights reserved.
-      </div>
+        <footer>
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    <div class="logo-mark">
+                        <img src="assets/images/logo.svg" alt="" class="logo-mark-dark">
+                        <img src="assets/images/logo.svg" alt="" class="logo-mark-light">
+                    </div>
+                    <span>Bodibe Digital</span>
+                </div>
+
+                <p class="footer-tagline">Websites That Grow Businesses.</p>
+
+                <p>Premium, conversion-focused websites for South African businesses.</p>
+
+                <a href="contact.html" class="btn footer-cta">Get a Quote</a>
+
+            </div>
+
+            <nav class="footer-links" aria-label="Services">
+
+                <h3>Services</h3>
+
+                <a href="services.html#website-design">Website Design &amp; Development</a>
+                <a href="services.html#maintenance">Website Maintenance</a>
+                <a href="services.html#google-business">Google Business Setup</a>
+                <a href="services.html#brand-identity">Brand Identity</a>
+
+            </nav>
+
+            <nav class="footer-links" aria-label="Explore">
+
+                <h3>Explore</h3>
+
+                <a href="index.html">Home</a>
+                <a href="our-work.html">Our Work</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="process.html">Process</a>
+                <a href="faq.html">FAQ</a>
+
+            </nav>
+
+            <nav class="footer-links" aria-label="Company">
+
+                <h3>Company</h3>
+
+                <a href="about.html">About</a>
+                <a href="careers.html">Careers</a>
+                <a href="contact.html">Contact</a>
+
+            </nav>
+
+            <nav class="footer-links" aria-label="Support and legal">
+
+                <h3>Support &amp; Legal</h3>
+
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="refund-policy.html">Refund &amp; Cancellation Policy</a>
+
+                <div class="footer-contact-links">
+                    <a href="mailto:bodibedigital@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i>bodibedigital@gmail.com</a>
+                    <a href="tel:+27817483597"><i class="fa-solid fa-phone" aria-hidden="true"></i>+27 81 748 3597</a>
+                    <a href="https://wa.me/27817483597" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i>WhatsApp Us</a>
+                </div>
+
+                <a href="staff-login.html" class="footer-staff-link">Staff Login</a>
+
+            </nav>
+
+        </div>
+
+        <hr class="footer-divider">
+
+        <div class="footer-bottom">
+
+            <p class="footer-copyright">&copy; 2026 Bodibe Digital. All rights reserved.</p>
+
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="refund-policy.html">Refund Policy</a>
+            </div>
+
+            <button type="button" class="back-to-top">&uarr; Back to Top</button>
+
+        </div>
+
     </footer>
 
-    <a href="https://wa.me/27835686995" class="whatsapp-btn" target="_blank" aria-label="Chat with Bodibe Digital on WhatsApp">
+    <a href="https://wa.me/27817483597" class="whatsapp-btn" target="_blank" aria-label="Chat with Bodibe Digital on WhatsApp">
       <i class="fab fa-whatsapp"></i>
     </a>
 

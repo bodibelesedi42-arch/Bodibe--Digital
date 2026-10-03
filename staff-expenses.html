@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expenses | Bodibe Digital</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t !== "dark" && t !== "light") {
+          t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { document.documentElement.setAttribute("data-theme", "dark"); }
+    })();
+  </script>
+  <script src="theme.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff-dashboard.css" />
+  <link rel="stylesheet" href="staff-expenses.css" />
+</head>
+<body class="portal-body portal-shell-body">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="portal-topbar">
+    <button type="button" class="portal-nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar">
+      <span class="portal-burger" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+    <a href="index.html" class="portal-topbar-brand">
+      <span class="logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" class="logo-mark-dark"><img src="assets/images/logo.svg" alt="" class="logo-mark-light"></span>
+      <span>Bodibe Digital <strong>Staff Portal</strong></span>
+    </a>
+    <button type="button" class="theme-toggle" aria-label="Switch theme" aria-pressed="false">
+      <svg class="theme-toggle-icon theme-toggle-icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/></svg>
+      <svg class="theme-toggle-icon theme-toggle-icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1z"/></svg>
+    </button>
+  </div>
+
+  <div class="portal-backdrop" id="navBackdrop" hidden></div>
+
+  <div class="portal-layout">
+    <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+      <div class="portal-sidebar-head">
+        <a href="index.html" class="portal-brand">
+          <span class="portal-brand-mark logo-mark" aria-hidden="true"><img src="assets/images/logo.svg" alt="" class="logo-mark-dark"><img src="assets/images/logo.svg" alt="" class="logo-mark-light"></span>
+          <span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span>
+        </a>
+        <button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="portal-sidebar-scroll">
+        <ul class="portal-nav-list" id="navPrimary">
+          <li class="portal-nav-group-heading" aria-hidden="true">MAIN</li>
+          <li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li>
+        </ul>
+        <div class="portal-nav-section" id="navModulesSection" hidden>
+          <h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2>
+          <ul class="portal-nav-list" id="navModules" aria-labelledby="navModulesHeading"></ul>
+          <p class="portal-nav-note" id="navModulesNote"></p>
+        </div>
+        <div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div>
+      </div>
+      <div class="portal-sidebar-foot">
+        <div class="portal-whoami" id="whoAmI">
+          <span class="portal-avatar" id="whoAvatar">&mdash;</span>
+          <span class="portal-whoami-text"><strong id="whoName">Loading&hellip;</strong><small id="whoRole"></small></span>
+        </div>
+        <button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign out</span></button>
+      </div>
+    </nav>
+
+    <main id="main" class="portal-main expenses-workspace">
+      <div class="expenses-inner">
+        <div class="expenses-header">
+          <div>
+            <span class="expenses-eyebrow">FINANCE CONTROL</span>
+            <h1>Expenses</h1>
+            <p>Track company spend, approvals, reimbursements and project costs in one place.</p>
+          </div>
+          <div class="expenses-header-actions">
+            <button class="expense-btn expense-btn-secondary" id="exportExpenses" type="button"><i class="fa-solid fa-arrow-down"></i> Export</button>
+            <button class="expense-btn expense-btn-primary" id="newExpense" type="button"><i class="fa-solid fa-plus"></i> New expense</button>
+          </div>
+        </div>
+
+        <div class="portal-mode-notice" id="modeNotice" role="status" hidden><i class="fa-solid fa-mobile-screen-button"></i><span id="modeNoticeText"></span></div>
+        <div class="portal-notice" id="portalNotice" role="status" hidden></div>
+
+        <section class="expense-kpis" aria-label="Expense summary">
+          <article class="expense-kpi"><span>This month</span><strong id="kpiMonth">R0.00</strong><small>Recorded spend</small></article>
+          <article class="expense-kpi"><span>Pending approval</span><strong id="kpiPending">R0.00</strong><small>Awaiting decision</small></article>
+          <article class="expense-kpi"><span>Approved unpaid</span><strong id="kpiApproved">R0.00</strong><small>Ready for payment</small></article>
+          <article class="expense-kpi"><span>Paid</span><strong id="kpiPaid">R0.00</strong><small>Settled expenses</small></article>
+        </section>
+
+        <section class="expense-chart-grid">
+          <article class="expense-card">
+            <div class="expense-card-head"><div><span>SPEND MIX</span><h2>Top categories</h2></div></div>
+            <div class="expense-chart"><canvas id="categoryChart"></canvas></div>
+          </article>
+          <article class="expense-card">
+            <div class="expense-card-head"><div><span>ORGANISATION</span><h2>Spend by department</h2></div></div>
+            <div class="expense-chart"><canvas id="departmentChart"></canvas></div>
+          </article>
+          <article class="expense-card expense-card-wide">
+            <div class="expense-card-head"><div><span>6-MONTH VIEW</span><h2>Expense trend</h2></div></div>
+            <div class="expense-chart"><canvas id="trendChart"></canvas></div>
+          </article>
+        </section>
+
+        <section class="expense-ledger">
+          <div class="expense-filter-strip">
+            <div class="expense-filter-row">
+              <select id="filterStatus" aria-label="Filter by status"><option value="">All statuses</option></select>
+              <select id="filterCategory" aria-label="Filter by category"><option value="">All categories</option></select>
+              <input id="filterFrom" type="date" aria-label="From date" />
+              <input id="filterTo" type="date" aria-label="To date" />
+              <div class="expense-search"><i class="fa-solid fa-magnifying-glass"></i><input id="expenseSearch" type="search" placeholder="Search expenses" /></div>
+              <button id="clearExpenseFilters" class="expense-filter-clear" type="button">Clear filters</button>
+            </div>
+          </div>
+
+          <div class="expense-table-head">
+            <div><span>EXPENSE LEDGER</span><h2>All expenses</h2></div>
+            <span class="expense-count" id="expenseCount">0 records</span>
+          </div>
+
+          <div class="expense-table-wrap">
+            <table class="expense-table">
+              <thead><tr><th>ID</th><th>Date</th><th>Supplier</th><th>Category</th><th>Department</th><th>Project</th><th>Total</th><th>Status</th><th></th></tr></thead>
+              <tbody id="expenseRows"><tr><td colspan="9" class="expense-empty">Loading expenses&hellip;</td></tr></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="expense-drawer-backdrop" id="expenseDrawerBackdrop" hidden></div>
+  <aside class="expense-drawer" id="expenseDrawer" aria-hidden="true" aria-label="Expense details">
+    <div class="expense-drawer-head">
+      <div><span>EXPENSE DETAIL</span><h2 id="drawerTitle">Expense</h2></div>
+      <button type="button" id="closeExpenseDrawer" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="expense-drawer-body" id="expenseDrawerBody"></div>
+  </aside>
+
+  <dialog class="expense-dialog" id="expenseDialog">
+    <form method="dialog" id="expenseForm">
+      <div class="expense-dialog-head"><div><span id="expenseDialogEyebrow">NEW EXPENSE</span><h2 id="expenseDialogTitle">Record expense</h2></div><button type="button" class="expense-dialog-close" data-close-expense-dialog><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="expense-form-grid">
+        <label><span>Supplier *</span><input id="expenseSupplier" required maxlength="200" /></label>
+        <label><span>Date *</span><input id="expenseDate" type="date" required /></label>
+        <label><span>Category *</span><select id="expenseCategory" required></select></label>
+        <label><span>Department</span><input id="expenseDepartment" maxlength="80" /></label>
+        <label><span>Amount excl. VAT *</span><input id="expenseAmount" inputmode="decimal" placeholder="0.00" required /></label>
+        <label><span>VAT amount</span><input id="expenseVat" inputmode="decimal" placeholder="0.00" value="0.00" /></label>
+        <label><span>Project</span><select id="expenseProject"><option value="">No project</option></select></label>
+        <label><span>Payment method</span><input id="expensePaymentMethod" maxlength="80" placeholder="Card, EFT, cash..." /></label>
+        <label class="expense-form-wide"><span>Description *</span><textarea id="expenseDescription" rows="3" required maxlength="2000"></textarea></label>
+        <label class="expense-form-wide"><span>Reference</span><input id="expenseReference" maxlength="120" /></label>
+        <label class="expense-form-wide"><span>Notes</span><textarea id="expenseNotes" rows="3" maxlength="4000"></textarea></label>
+        <label class="expense-form-wide expense-checkbox"><input id="expenseReimbursement" type="checkbox" /><span>Record as reimbursement</span></label>
+        <label class="expense-form-wide" id="approvalReferenceWrap" hidden><span>Prior approval reference</span><input id="expenseApprovalReference" maxlength="200" /></label>
+        <label class="expense-form-wide" id="editReasonWrap" hidden><span>Reason for correction *</span><textarea id="expenseEditReason" rows="2" maxlength="1000"></textarea></label>
+      </div>
+      <div class="expense-dialog-actions"><button type="button" class="expense-btn expense-btn-secondary" data-close-expense-dialog>Cancel</button><button type="submit" class="expense-btn expense-btn-primary" id="saveExpense">Save expense</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="expense-dialog expense-action-dialog" id="actionDialog">
+    <form method="dialog" id="actionForm">
+      <div class="expense-dialog-head"><div><span>ACTION</span><h2 id="actionTitle">Update expense</h2></div><button type="button" class="expense-dialog-close" data-close-action-dialog><i class="fa-solid fa-xmark"></i></button></div>
+      <p class="expense-action-copy" id="actionCopy"></p>
+      <label id="actionReasonWrap"><span>Reason</span><textarea id="actionReason" rows="3" maxlength="2000"></textarea></label>
+      <label id="actionPaymentRefWrap" hidden><span>Payment reference</span><input id="actionPaymentRef" maxlength="160" /></label>
+      <label id="actionPaidDateWrap" hidden><span>Paid date</span><input id="actionPaidDate" type="date" /></label>
+      <div class="expense-dialog-actions"><button type="button" class="expense-btn expense-btn-secondary" data-close-action-dialog>Cancel</button><button type="submit" class="expense-btn expense-btn-primary" id="confirmAction">Confirm</button></div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="portal-effects.js"></script>
+  <script src="portal-access.js"></script>
+  <script src="staff-portal-shell.js"></script>
+  <script src="staff-expenses.js"></script>
+</body>
+</html>

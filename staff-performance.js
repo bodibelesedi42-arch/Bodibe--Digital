@@ -28,7 +28,6 @@
   var targetMetric = document.getElementById("targetMetric");
   var targetValue = document.getElementById("targetValue");
   var targetNote = document.getElementById("targetNote");
-  var reviewForm = document.getElementById("reviewForm");
   var reviewStrengths = document.getElementById("reviewStrengths");
   var reviewImprovements = document.getElementById("reviewImprovements");
   var reviewNextSteps = document.getElementById("reviewNextSteps");
@@ -80,14 +79,6 @@
     if (!isFinite(current) || !isFinite(previous)) return null;
     if (previous === 0) return current === 0 ? 0 : null;
     return Math.round(((current - previous) / Math.abs(previous)) * 1000) / 10;
-  }
-
-  function setTodayLabel() {
-    var el = document.getElementById("todayLabel");
-    if (!el) return;
-    el.textContent = new Intl.DateTimeFormat("en-ZA", {
-      timeZone: "Africa/Johannesburg", day: "numeric", month: "long", year: "numeric"
-    }).format(new Date());
   }
 
   async function json(path, options) {
@@ -365,6 +356,5 @@
   saveDraftReview.addEventListener("click", function () { saveReview(false); });
   publishReview.addEventListener("click", function () { saveReview(true); });
 
-  setTodayLabel();
   Portal.onReady(loadOptions);
 })(window, document);
