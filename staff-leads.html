@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Leads | Bodibe Digital</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=window.matchMedia&&window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();</script>
+  <script src="theme.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff-dashboard.css" />
+  <link rel="stylesheet" href="staff-leads.css" />
+</head>
+<body class="portal-body portal-shell-body">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="portal-topbar">
+    <button id="navToggle" class="portal-nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar"><span class="portal-burger"><span></span><span></span><span></span></span></button>
+    <a href="index.html" class="portal-topbar-brand"><span class="logo-mark"><img src="assets/images/logo.svg" alt="" /></span><span>Bodibe Digital <strong>Staff Portal</strong></span></a>
+    <button type="button" class="theme-toggle" aria-label="Switch theme"><i class="fa-regular fa-moon"></i></button>
+  </div>
+  <div class="portal-backdrop" id="navBackdrop" hidden></div>
+  <div class="portal-layout">
+    <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+      <div class="portal-sidebar-head"><a href="index.html" class="portal-brand"><span class="portal-brand-mark logo-mark"><img src="assets/images/logo.svg" alt="" /></span><span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span></a><button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="portal-sidebar-scroll"><ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading">MAIN</li><li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul><div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules"></ul><p class="portal-nav-note" id="navModulesNote"></p></div><div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div></div>
+      <div class="portal-sidebar-foot"><div class="portal-whoami"><span class="portal-avatar" id="whoAvatar">—</span><span class="portal-whoami-text"><strong id="whoName">Loading…</strong><small id="whoRole"></small></span></div><button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign out</span></button></div>
+    </nav>
+
+    <main id="main" class="portal-main crm-page">
+      <header class="crm-header">
+        <div><span class="crm-eyebrow">CRM / SALES PIPELINE</span><h1>My Leads</h1><p class="crm-subtitle" id="crmSubtitle">Loading your pipeline…</p></div>
+        <div class="crm-header-actions" id="crmHeaderActions"></div>
+      </header>
+      <div class="portal-mode-notice" id="modeNotice" hidden><i class="fa-solid fa-mobile-screen-button"></i><span id="modeNoticeText"></span></div>
+      <div class="portal-notice" id="portalNotice" hidden></div>
+
+      <section class="crm-followups" id="crmFollowUps" aria-label="Follow-ups" hidden>
+        <h2 class="crm-section-heading">Contact priority</h2>
+        <div class="crm-followup-row" id="crmFollowUpRow"></div>
+      </section>
+
+      <section class="crm-toolbar" aria-label="Filter leads">
+        <div class="crm-search"><i class="fa-solid fa-magnifying-glass"></i><label class="crm-visually-hidden" for="crmSearch">Search leads</label><input id="crmSearch" type="search" placeholder="Search lead, client, business, email or phone…" autocomplete="off" /></div>
+        <label class="crm-filter"><span>Status</span><select id="crmStatus"><option value="">All</option></select></label>
+        <label class="crm-filter"><span>Follow-up</span><select id="crmFollowUp"><option value="">All</option><option value="overdue">Overdue</option><option value="today">Today</option><option value="upcoming">Upcoming</option><option value="none">No date set</option></select></label>
+        <label class="crm-filter"><span>Package</span><select id="crmPackage"><option value="">All</option></select></label>
+        <label class="crm-filter"><span>Project type</span><select id="crmProjectType"><option value="">All</option></select></label>
+        <button id="crmClear" class="crm-btn" type="button" hidden><i class="fa-solid fa-xmark"></i>Clear</button>
+      </section>
+      <p class="crm-result-count" id="crmResultCount" role="status"></p>
+      <section id="crmList" aria-label="Leads"><p class="crm-empty">Loading leads…</p></section>
+    </main>
+  </div>
+
+  <div class="crm-drawer-backdrop" id="leadBackdrop" hidden></div>
+  <aside class="crm-drawer" id="leadDrawer" role="dialog" aria-modal="true" aria-labelledby="leadDrawerTitle" hidden>
+    <div class="crm-drawer-head"><div><span class="crm-drawer-eyebrow" id="leadDrawerId"></span><h2 id="leadDrawerTitle">Lead</h2></div><button type="button" id="leadClose" class="crm-drawer-close" aria-label="Close lead details"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="crm-drawer-body" id="leadDrawerBody"></div>
+  </aside>
+
+  <script src="portal-effects.js"></script>
+  <script src="portal-access.js"></script>
+  <script src="staff-portal-shell.js"></script>
+  <script src="lead-allocation-control.js"></script>
+  <script src="staff-leads.js"></script>
+</body>
+</html>
