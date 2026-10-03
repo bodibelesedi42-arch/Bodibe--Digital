@@ -5,6 +5,7 @@
   var THEME_KEY = "theme";                 // effective theme used by legacy inline boot scripts
   var PREF_KEY = "bd_theme_preference";    // light | dark | system
   var MOTION_KEY = "bd_motion_preference"; // full | reduced | system
+  var NAV_CACHE_KEY = "bd_staff_sidebar_cache_v1";
   var BRIDGE_ID = "bodibe-staff-theme";
 
   function safeGet(key) {
@@ -15,6 +16,15 @@
   }
   function safeRemove(key) {
     try { localStorage.removeItem(key); } catch (e) { /* ignore */ }
+  }
+  function sessionGet(key) {
+    try { return sessionStorage.getItem(key); } catch (e) { return null; }
+  }
+  function sessionSet(key, value) {
+    try { sessionStorage.setItem(key, value); } catch (e) { /* ignore */ }
+  }
+  function sessionRemove(key) {
+    try { sessionStorage.removeItem(key); } catch (e) { /* ignore */ }
   }
 
   function systemTheme() {
@@ -27,8 +37,6 @@
   function getPreference() {
     var pref = safeGet(PREF_KEY);
     if (pref === "light" || pref === "dark" || pref === "system") return pref;
-
-    // Preserve the portal's existing saved theme as an explicit preference.
     var legacy = safeGet(THEME_KEY);
     if (legacy === "light" || legacy === "dark") return legacy;
     return "system";
@@ -50,8 +58,6 @@
   }
 
   function ensureStaffThemeBridge() {
-    // Portal pages all load theme.js. Loading this stylesheet here makes the
-    // final colour pass come after each module's own CSS without editing every page.
     if (document.getElementById(BRIDGE_ID)) return;
     var link = document.createElement("link");
     link.id = BRIDGE_ID;
@@ -67,9 +73,6 @@
       button.setAttribute("aria-label", "Switch to " + next + " mode");
       button.setAttribute("title", "Switch to " + next + " mode");
       button.setAttribute("aria-pressed", current === "light" ? "true" : "false");
-
-      // Older portal pages use a single Font Awesome icon instead of the
-      // two SVG icons used by newer pages. Keep both variants working.
       var icon = button.querySelector("i");
       if (icon && !button.querySelector("svg")) {
         icon.className = current === "dark" ? "fa-regular fa-sun" : "fa-regular fa-moon";
@@ -125,8 +128,98 @@
     applyMotion("system");
   }
 
-  // Apply before wiring controls. Newer pages may already have set data-theme
-  // in an inline pre-paint script; this simply makes the preference model consistent.
+  /* -----------------------------------------------------------------------
+     FAST SIDEBAR HYDRATION
+
+     Role navigation is still rebuilt from the server by staff-portal-shell.js.
+     This cache is presentation-only: it keeps the last confirmed menu visible
+     while /auth/me and /staff/my-permissions are loading on the next page.
+     Backend permissions remain the security boundary and replace this cached
+     markup as soon as the live response arrives.
+     ----------------------------------------------------------------------- */
+  function pageName(value) {
+    try {
+      var url = new URL(value || window.location.href, window.location.href);
+      return url.pathname.split("/").pop() || "staff-dashboard.html";
+    } catch (e) { return ""; }
+  }
+
+  function markCachedCurrent(list) {
+    if (!list) return;
+    var here = pageName(window.location.href);
+    list.querySelectorAll(".portal-nav-link").forEach(function (link) {
+      var current = pageName(link.href) === here;
+      link.classList.toggle("is-current", current);
+      if (current) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+  }
+
+  function restoreSidebarCache() {
+    if (!document.body || !document.body.classList.contains("portal-shell-body")) return;
+    var raw = sessionGet(NAV_CACHE_KEY);
+    if (!raw) return;
+    var cached;
+    try { cached = JSON.parse(raw); } catch (e) { return; }
+    if (!cached || !cached.html) return;
+
+    var list = document.getElementById("navModules");
+    var section = document.getElementById("navModulesSection");
+    var heading = document.getElementById("navModulesHeading");
+    var note = document.getElementById("navModulesNote");
+    if (list && !list.innerHTML.trim()) {
+      list.innerHTML = cached.html;
+      markCachedCurrent(list);
+      if (section) section.hidden = false;
+      if (heading && typeof cached.headingHidden === "boolean") heading.hidden = cached.headingHidden;
+      if (note && typeof cached.note === "string") note.textContent = cached.note;
+    }
+
+    var whoName = document.getElementById("whoName");
+    var whoRole = document.getElementById("whoRole");
+    var whoAvatar = document.getElementById("whoAvatar");
+    if (whoName && cached.name) whoName.textContent = cached.name;
+    if (whoRole && cached.role) whoRole.textContent = cached.role;
+    if (whoAvatar && cached.avatar) whoAvatar.textContent = cached.avatar;
+  }
+
+  function saveSidebarCache() {
+    var list = document.getElementById("navModules");
+    var section = document.getElementById("navModulesSection");
+    if (!list || !section || section.hidden || !list.innerHTML.trim()) return;
+    var heading = document.getElementById("navModulesHeading");
+    var note = document.getElementById("navModulesNote");
+    var whoName = document.getElementById("whoName");
+    var whoRole = document.getElementById("whoRole");
+    var whoAvatar = document.getElementById("whoAvatar");
+    sessionSet(NAV_CACHE_KEY, JSON.stringify({
+      html: list.innerHTML,
+      headingHidden: heading ? heading.hidden : false,
+      note: note ? note.textContent : "",
+      name: whoName ? whoName.textContent : "",
+      role: whoRole ? whoRole.textContent : "",
+      avatar: whoAvatar ? whoAvatar.textContent : ""
+    }));
+  }
+
+  function watchSidebar() {
+    var list = document.getElementById("navModules");
+    var section = document.getElementById("navModulesSection");
+    if (!list || !section || !window.MutationObserver) return;
+    var timer = null;
+    var observer = new MutationObserver(function () {
+      clearTimeout(timer);
+      timer = setTimeout(saveSidebarCache, 40);
+    });
+    observer.observe(list, { childList: true, subtree: true, attributes: true });
+    observer.observe(section, { attributes: true, attributeFilter: ["hidden"] });
+
+    document.addEventListener("click", function (event) {
+      var logout = event.target.closest && event.target.closest('#logoutBtn,#logoutBtnTop,[data-portal-action="logout"]');
+      if (logout) sessionRemove(NAV_CACHE_KEY);
+    });
+  }
+
   ensureStaffThemeBridge();
   applyTheme(getPreference(), { persistPreference: false });
   applyMotion(getMotionPreference(), { persistPreference: false });
@@ -143,8 +236,14 @@
     syncToggleButtons();
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindToggles);
-  else bindToggles();
+  function bootUiHelpers() {
+    restoreSidebarCache();
+    watchSidebar();
+    bindToggles();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bootUiHelpers);
+  else bootUiHelpers();
 
   if (window.matchMedia) {
     var themeMedia = window.matchMedia("(prefers-color-scheme: light)");
@@ -168,6 +267,6 @@
     getMotionPreference: getMotionPreference,
     setMotionPreference: applyMotion,
     resetPreferences: resetPreferences,
-    sync: function () { applyTheme(getPreference(), { persistPreference: false }); applyMotion(getMotionPreference(), { persistPreference: false }); },
+    sync: function () { applyTheme(getPreference(), { persistPreference: false }); applyMotion(getMotionPreference(), { persistPreference: false }); }
   };
 })(window, document);
