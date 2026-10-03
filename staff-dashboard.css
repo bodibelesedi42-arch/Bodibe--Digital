@@ -40,21 +40,46 @@
     font-size: 14px;
 }
 
+.dash-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.dash-performance-link,
 .dash-logout {
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 11px 20px;
     border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.03);
-    color: #cbd5e1;
     font-family: inherit;
     font-size: 13px;
     font-weight: 600;
-    cursor: pointer;
     transition: 0.3s ease;
     height: fit-content;
+}
+
+.dash-performance-link {
+    border: 1px solid rgba(96, 165, 250, 0.28);
+    background: rgba(59, 130, 246, 0.11);
+    color: #93c5fd;
+    text-decoration: none;
+}
+
+.dash-performance-link:hover {
+    border-color: rgba(96, 165, 250, 0.55);
+    background: rgba(59, 130, 246, 0.18);
+    color: #dbeafe;
+    transform: translateY(-1px);
+}
+
+.dash-logout {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+    color: #cbd5e1;
+    cursor: pointer;
 }
 
 .dash-logout:hover {
@@ -220,6 +245,14 @@
     }
     .dash-stats {
         flex-direction: column;
+    }
+    .dash-header-actions {
+        width: 100%;
+    }
+    .dash-performance-link,
+    .dash-logout {
+        flex: 1;
+        justify-content: center;
     }
 }
 
