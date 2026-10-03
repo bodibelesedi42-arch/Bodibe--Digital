@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sales Workspace | Bodibe Digital</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <script>
+    (function(){try{var p=localStorage.getItem('bd_theme_preference'),t=localStorage.getItem('theme');if(p==='system'||(p!=='light'&&p!=='dark'))t=window.matchMedia&&window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';else t=p;if(t!=='light'&&t!=='dark')t='dark';document.documentElement.setAttribute('data-theme',t)}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();
+  </script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff-dashboard.css" />
+  <link rel="stylesheet" href="staff-sales.css" />
+  <script src="theme.js" defer></script>
+</head>
+<body class="portal-body portal-shell-body">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="portal-topbar">
+    <button id="navToggle" type="button" class="portal-nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="portalSidebar"><span class="portal-burger"><span></span><span></span><span></span></span></button>
+    <a href="index.html" class="portal-topbar-brand"><span class="logo-mark"><img src="assets/images/logo.svg" alt="" /></span><span>Bodibe Digital <strong>Staff Portal</strong></span></a>
+    <button type="button" class="theme-toggle" aria-label="Switch theme"><i class="fa-regular fa-moon"></i></button>
+  </div>
+  <div class="portal-backdrop" id="navBackdrop" hidden></div>
+
+  <div class="portal-layout">
+    <nav class="portal-sidebar" id="portalSidebar" aria-label="Staff portal navigation">
+      <div class="portal-sidebar-head"><a href="index.html" class="portal-brand"><span class="portal-brand-mark logo-mark"><img src="assets/images/logo.svg" alt="" /></span><span class="portal-brand-text"><strong>BODIBE DIGITAL</strong><small>STAFF PORTAL</small></span></a><button type="button" class="portal-nav-close" id="navClose" aria-label="Close navigation menu"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="portal-sidebar-scroll"><ul class="portal-nav-list" id="navPrimary"><li class="portal-nav-group-heading">MAIN</li><li><a href="staff-dashboard.html" class="portal-nav-link"><span class="portal-nav-icon"><i class="fa-solid fa-gauge-high"></i></span><span class="portal-nav-label">Dashboard</span></a></li></ul><div class="portal-nav-section" id="navModulesSection" hidden><h2 class="portal-nav-heading" id="navModulesHeading">Your modules</h2><ul class="portal-nav-list" id="navModules"></ul><p class="portal-nav-note" id="navModulesNote"></p></div><div class="portal-nav-section" id="navEmptySection" hidden><p class="portal-nav-note" id="navEmptyNote"></p></div></div>
+      <div class="portal-sidebar-foot"><div class="portal-whoami"><span class="portal-avatar" id="whoAvatar">—</span><span class="portal-whoami-text"><strong id="whoName">Loading…</strong><small id="whoRole"></small></span></div><button type="button" class="portal-signout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign out</span></button></div>
+    </nav>
+
+    <main id="main" class="portal-main sales-workspace">
+      <div class="sales-inner">
+        <header class="sales-header">
+          <div><span class="sales-eyebrow">SALES OPERATIONS</span><h1>Sales Workspace</h1><p>Work the pipeline, complete follow-ups and keep every client conversation recorded.</p></div>
+          <div class="sales-header-actions"><a class="sales-btn sales-btn-secondary" href="staff-leads.html"><i class="fa-solid fa-address-book"></i>Open CRM</a><button class="sales-btn sales-btn-primary" id="refreshSales"><i class="fa-solid fa-rotate"></i>Refresh</button></div>
+        </header>
+        <div class="portal-notice" id="portalNotice" hidden></div>
+
+        <section class="sales-kpis" aria-label="Sales summary">
+          <article class="sales-kpi"><span>My leads</span><strong id="kpiLeads">0</strong><small>Current owned pipeline</small></article>
+          <article class="sales-kpi"><span>Follow-ups due</span><strong id="kpiFollowUps">0</strong><small>Overdue + today</small></article>
+          <article class="sales-kpi"><span>Quotes</span><strong id="kpiQuoted">0</strong><small>Leads currently quoted</small></article>
+          <article class="sales-kpi"><span>Deals won</span><strong id="kpiWon">0</strong><small id="kpiConversion">0% conversion</small></article>
+          <article class="sales-kpi"><span>Activities logged</span><strong id="kpiActivities">0</strong><small>Calls, WhatsApp, email and meetings</small></article>
+          <article class="sales-kpi"><span>Est. commission</span><strong id="kpiCommission">R0</strong><small>Accepted sales estimate</small></article>
+        </section>
+
+        <section class="sales-grid sales-grid-top">
+          <article class="sales-card sales-pipeline-card">
+            <div class="sales-card-head"><div><span>PIPELINE</span><h2>My sales funnel</h2></div><a href="staff-leads.html">View all leads</a></div>
+            <div class="sales-funnel" id="salesFunnel"></div>
+          </article>
+          <article class="sales-card">
+            <div class="sales-card-head"><div><span>TODAY</span><h2>Activity mix</h2></div></div>
+            <div class="sales-activity-mix" id="activityMix"></div>
+          </article>
+        </section>
+
+        <section class="sales-card sales-followups" id="follow-ups">
+          <div class="sales-card-head sales-card-head-wrap"><div><span>FOLLOW-UPS</span><h2>Follow-up queue</h2><p>Work overdue items first, then today, then upcoming conversations.</p></div><div class="sales-segment" id="followupTabs"><button class="is-active" data-filter="all">All <b id="followAllCount">0</b></button><button data-filter="overdue">Overdue <b id="followOverdueCount">0</b></button><button data-filter="today">Today <b id="followTodayCount">0</b></button><button data-filter="upcoming">Upcoming <b id="followUpcomingCount">0</b></button></div></div>
+          <div class="sales-table-wrap"><table class="sales-table"><thead><tr><th>Lead</th><th>Business</th><th>Stage</th><th>Follow-up date</th><th>Last contact</th><th></th></tr></thead><tbody id="followupRows"><tr><td colspan="6" class="sales-empty">Loading follow-ups…</td></tr></tbody></table></div>
+        </section>
+
+        <section class="sales-grid sales-grid-bottom">
+          <article class="sales-card">
+            <div class="sales-card-head"><div><span>RECENT ACTIVITY</span><h2>Conversation history</h2></div><span class="sales-count" id="activityCount">0 entries</span></div>
+            <div class="sales-timeline" id="recentActivity"></div>
+          </article>
+          <article class="sales-card" id="availablePoolCard">
+            <div class="sales-card-head"><div><span>AVAILABLE</span><h2>Lead pool</h2></div><a href="staff-allocation.html">Allocation</a></div>
+            <div class="sales-pool" id="leadPool"></div>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="sales-dialog" id="activityDialog">
+    <form id="activityForm" method="dialog">
+      <div class="sales-dialog-head"><div><span>SALES ACTIVITY</span><h2 id="activityDialogTitle">Log activity</h2><p id="activityLeadLabel"></p></div><button type="button" id="closeActivityDialog" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="sales-form-grid">
+        <label>Activity type<select id="activityType" required></select></label>
+        <label>Outcome<select id="activityOutcome" required></select></label>
+        <label>Lead status<select id="activityStatus"><option value="">Keep current status</option><option>Contacted</option><option>Quoted</option><option>Won</option><option>Lost</option></select></label>
+        <label>Next follow-up<input id="activityFollowUp" type="date" /></label>
+        <label class="is-wide">Notes<textarea id="activityNote" rows="4" maxlength="800" placeholder="What happened and what should happen next?"></textarea></label>
+      </div>
+      <div class="sales-dialog-actions"><button type="button" class="sales-btn sales-btn-secondary" id="cancelActivity">Cancel</button><button type="submit" class="sales-btn sales-btn-primary" id="saveActivity">Save activity</button></div>
+    </form>
+  </dialog>
+
+  <script src="portal-access.js"></script>
+  <script src="portal-effects.js"></script>
+  <script src="staff-portal-shell.js"></script>
+  <script src="staff-sales.js"></script>
+</body>
+</html>
