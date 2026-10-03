@@ -11,11 +11,14 @@ The public marketing site for Bodibe Digital, plus an internal staff/business po
 | `checkout.html` + `checkout.js` | Package checkout — reads `?plan=starter\|business\|premium`, submits to the backend's `/create-payment` |
 | `kanyo-project.html` | Portfolio case study: Kanyo 24hrs Response |
 | `818-project.html` | Portfolio case study: 818 Khangeziwe Services |
+| `privacy.html` | Privacy Policy |
+| `terms.html` | Terms of Service |
+| `refund-policy.html` | Refund & Cancellation Policy |
 | `staff-login.html` + `staff-login.js` | Staff/business portal sign-in — posts to the backend's `/auth/login` |
 | `staff-dashboard.html` + `staff-dashboard.js` | Post-login landing page — shows "My Work" (active projects, open tasks) via `/staff/my-work` |
 | `portal-effects.js` | Shared 3D tilt/depth presentation layer for the staff portal (login card tilt, dashboard card hover-lift). Purely visual — no auth or data logic lives here |
 
-`style.css` is the shared site stylesheet (also defines the `.portal-chip` badge shared by the two staff pages). `checkout.css`, `pricing.css`, `staff-login.css`, `staff-dashboard.css` layer on page-specific styles. `script.js` powers the shared header/scroll/menu behaviour on the public pages.
+`style.css` is the shared site stylesheet (also defines the `.portal-chip` badge shared by the two staff pages, and the `.legal-footer-links` row used on the simple-footer pages). `checkout.css`, `pricing.css`, `staff-login.css`, `staff-dashboard.css`, `legal.css` layer on page-specific styles — `legal.css` is shared by `privacy.html`, `terms.html`, and `refund-policy.html`. `script.js` powers the shared header/scroll/menu behaviour on the public pages.
 
 ## Structure
 

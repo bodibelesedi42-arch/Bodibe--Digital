@@ -5,7 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A polished project showcase for the Kanyo 24hrs Response website, highlighting modern security company branding and a professional digital experience.">
     <title>Kanyo 24hrs Response | Project Showcase</title>
+    <link rel="canonical" href="https://bodibedigital.co.za/kanyo-project.html">
+
+    <meta property="og:title" content="Kanyo 24hrs Response | Project Showcase">
+    <meta property="og:description" content="A polished project showcase for the Kanyo 24hrs Response website, highlighting modern security company branding.">
+    <meta property="og:image" content="assets/images/kanyo-preview.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bodibedigital.co.za/kanyo-project.html">
+
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <!-- Theme: apply saved/system preference before first paint (no flash) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t !== "dark" && t !== "light") {
+            t =
+              window.matchMedia &&
+              window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark";
+          }
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+
 
     <style>
         :root {
@@ -19,7 +46,7 @@
             --soft: #f8fafc;
         }
 
-        body[data-theme="dark"] {
+        [data-theme="dark"] {
             --bg: #020617;
             --card: #0f172a;
             --text: #f8fafc;
@@ -47,7 +74,7 @@
             transition: background 0.3s ease, color 0.3s ease;
         }
 
-        body[data-theme="dark"] {
+        [data-theme="dark"] {
             background: radial-gradient(circle at top, #111827 0%, #020617 60%, #01040b 100%);
         }
 
@@ -84,7 +111,7 @@
             transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        body[data-theme="dark"] .project-card {
+        [data-theme="dark"] .project-card {
             box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
             border-color: rgba(255, 255, 255, 0.08);
         }
@@ -239,7 +266,7 @@
             font-size: 0.9rem;
         }
 
-        body[data-theme="dark"] .tech-stack span {
+        [data-theme="dark"] .tech-stack span {
             background: rgba(96, 165, 250, 0.16);
             color: #bae6fd;
         }
@@ -275,7 +302,7 @@
             border: 1px solid var(--border);
         }
 
-        body[data-theme="dark"] .secondary-btn {
+        [data-theme="dark"] .secondary-btn {
             background: rgba(255, 255, 255, 0.04);
         }
 
@@ -312,9 +339,9 @@
             transition: background 0.3s ease, border-color 0.3s ease;
         }
 
-        body[data-theme="dark"] .result-card,
-        body[data-theme="dark"] .gallery-card,
-        body[data-theme="dark"] .related-card {
+        [data-theme="dark"] .result-card,
+        [data-theme="dark"] .gallery-card,
+        [data-theme="dark"] .related-card {
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
@@ -330,7 +357,7 @@
             background: linear-gradient(90deg, rgba(240, 253, 250, 0.8) 0%, var(--card) 100%);
         }
 
-        body[data-theme="dark"] .testimonial {
+        [data-theme="dark"] .testimonial {
             background: linear-gradient(90deg, rgba(45, 212, 191, 0.16) 0%, rgba(15, 23, 42, 0.85) 100%);
         }
 
@@ -448,11 +475,120 @@
                 width: 100%;
             }
         }
+
+        /* ==========================================================
+           PROJECT FOOTER -- brought in line with the sitewide
+           premium footer system (brand + CTA / divider / bottom row
+           with copyright + Back to Top). This page is self-contained
+           (its own tokens/theme script, not the shared style.css), so
+           the structure is rebuilt locally rather than migrating the
+           whole page onto the shared design system.
+           ========================================================== */
+
+        .project-footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-footer-logo img {
+            width: 30px;
+            height: 30px;
+            display: block;
+        }
+
+        .project-footer-logo span {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #fff;
+        }
+
+        .project-footer-brand p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .project-footer-links {
+            margin-top: 1.2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            font-size: 0.8rem;
+        }
+
+        .project-footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+
+        .project-footer-links a:hover,
+        .project-footer-links a:focus-visible {
+            color: #60a5fa;
+        }
+
+        .project-footer-bottom {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.4rem;
+            flex-wrap: wrap;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .project-footer-bottom p {
+            margin: 0;
+        }
+
+        .project-back-to-top {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font: inherit;
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 4px;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        .project-back-to-top:hover,
+        .project-back-to-top:focus-visible {
+            color: #60a5fa;
+            transform: translateY(-2px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .project-back-to-top:hover,
+            .project-back-to-top:focus-visible {
+                transform: none;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <main class="project-page">
+
+<a href="#main" class="skip-link">Skip to content</a>
+    <main id="main" class="project-page">
         <article class="project-card" data-reveal>
             <header class="project-hero" data-reveal>
                 <div class="hero-top">
@@ -466,6 +602,12 @@
                             <span>Modern UI</span>
                             <span>Client Focused</span>
                             <span>Trust Building</span>
+                        </div>
+
+                        <div class="hero-badges" aria-label="Project details" style="margin-top:0.6rem;opacity:0.85;font-size:0.85rem;">
+                            <span>Client: Kanyo 24hrs Response</span>
+                            <span>Industry: Private Security</span>
+                            <span>Service: Website Design &amp; Development</span>
                         </div>
                     </div>
 
@@ -526,7 +668,7 @@
                         <a href="#" class="portfolio-btn" aria-label="View the live website preview">
                             View Live Site
                         </a>
-                        <a href="index.html" class="secondary-btn" aria-label="Return to the portfolio homepage">
+                        <a href="our-work.html" class="secondary-btn" aria-label="Return to Our Work">
                             ← Back to Portfolio
                         </a>
                     </div>
@@ -588,52 +730,81 @@
                         <div class="related-card" data-reveal>
                             <h3>Branding & Web Design</h3>
                             <p>Professional visual direction for businesses looking to grow online.</p>
-                            <a href="index.html">Explore more work →</a>
+                            <a href="our-work.html">Explore more work →</a>
                         </div>
                         <div class="related-card" data-reveal>
                             <h3>Lead Generation Websites</h3>
                             <p>Modern websites built to attract, inform, and convert visitors.</p>
-                            <a href="index.html">Explore more work →</a>
+                            <a href="our-work.html">Explore more work →</a>
                         </div>
                     </div>
                 </section>
             </section>
 
             <footer class="project-footer" data-reveal>
-                <p>Looking for a polished website for your business?</p>
+
+                <div class="project-footer-brand">
+                    <div class="project-footer-logo">
+                        <img src="assets/images/logo.svg" alt="" aria-hidden="true">
+                        <span>Bodibe Digital</span>
+                    </div>
+                    <p>Looking for a polished website for your business?</p>
+                </div>
+
                 <div class="footer-actions">
-                    <a href="index.html#contact" class="portfolio-btn" aria-label="Contact the team">
+                    <a href="contact.html" class="portfolio-btn" aria-label="Contact the team">
                         Contact the Team
                     </a>
-                    <a href="index.html" class="secondary-btn" aria-label="Go to the portfolio homepage">
+                    <a href="our-work.html" class="secondary-btn" aria-label="Go to Our Work">
                         View Portfolio
                     </a>
                 </div>
+
+                <div class="project-footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="refund-policy.html">Refund &amp; Cancellation Policy</a>
+                </div>
+
+                <div class="project-footer-bottom">
+                    <p>&copy; 2026 Bodibe Digital. All rights reserved.</p>
+                    <button type="button" class="project-back-to-top">&uarr; Back to Top</button>
+                </div>
+
             </footer>
         </article>
     </main>
 
     <script>
         const themeToggle = document.getElementById("themeToggle");
-        const body = document.body;
+        const html = document.documentElement;
 
-        const savedTheme = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
+        // The early-init script in <head> already applied the correct
+        // initial theme (manual choice > system preference > dark) to
+        // <html> before this script runs -- this only keeps the button
+        // in sync and handles clicks, using the same "theme" key/values
+        // the rest of the site uses so the choice carries across pages.
+        function syncToggleUI(theme) {
+            themeToggle.setAttribute("aria-pressed", theme === "dark");
+            themeToggle.innerHTML = theme === "dark" ? "\u2600\uFE0F Light" : "\uD83C\uDF19 Dark";
+        }
 
         function applyTheme(theme) {
-            body.setAttribute("data-theme", theme);
-            themeToggle.setAttribute("aria-pressed", theme === "dark");
-            themeToggle.innerHTML = theme === "dark" ? "☀️ Light" : "🌙 Dark";
-            localStorage.setItem("theme", theme);
+            html.setAttribute("data-theme", theme);
+            syncToggleUI(theme);
+            try {
+                localStorage.setItem("theme", theme);
+            } catch (e) {
+                /* ignore -- private browsing / storage disabled */
+            }
         }
 
         themeToggle.addEventListener("click", () => {
-            const nextTheme = body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            const nextTheme = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
             applyTheme(nextTheme);
         });
 
-        applyTheme(initialTheme);
+        syncToggleUI(html.getAttribute("data-theme") === "dark" ? "dark" : "light");
 
         const revealItems = document.querySelectorAll("[data-reveal]");
 
@@ -649,6 +820,28 @@
         });
 
         revealItems.forEach((item) => observer.observe(item));
+
+        const backToTop = document.querySelector(".project-back-to-top");
+
+        if (backToTop) {
+            backToTop.addEventListener("click", () => {
+                const reduceMotion = window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                ).matches;
+                window.scrollTo({
+                    top: 0,
+                    behavior: reduceMotion ? "auto" : "smooth",
+                });
+            });
+        }
     </script>
+
+    <a href="https://wa.me/27817483597" target="_blank" rel="noopener noreferrer" aria-label="Chat with Bodibe Digital on WhatsApp"
+        style="position:fixed;right:25px;bottom:25px;width:65px;height:65px;border-radius:50%;background:#25d366;display:flex;justify-content:center;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,0.35);z-index:999;transition:transform 0.2s ease;"
+        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="#ffffff" aria-hidden="true">
+            <path d="M16.001 3.2c-7.07 0-12.8 5.73-12.8 12.8 0 2.258.594 4.376 1.632 6.21L3.2 28.8l6.79-1.78a12.74 12.74 0 0 0 6.01 1.53h.001c7.07 0 12.8-5.73 12.8-12.8s-5.731-12.55-12.8-12.55zm0 23.256a10.42 10.42 0 0 1-5.31-1.454l-.381-.226-3.955 1.037 1.056-3.855-.248-.395a10.43 10.43 0 0 1-1.598-5.563c0-5.766 4.692-10.457 10.462-10.457 2.795 0 5.42 1.09 7.394 3.067a10.386 10.386 0 0 1 3.063 7.395c0 5.766-4.716 10.451-10.483 10.451zm5.735-7.828c-.313-.157-1.856-.916-2.144-1.021-.288-.104-.498-.156-.708.157-.209.313-.812 1.02-.996 1.23-.183.209-.366.235-.68.078-.313-.157-1.322-.487-2.518-1.552-.93-.83-1.559-1.855-1.742-2.168-.183-.313-.02-.482.137-.638.14-.14.313-.365.47-.548.157-.183.209-.313.313-.522.104-.209.052-.392-.026-.548-.078-.157-.708-1.706-.97-2.336-.255-.615-.516-.532-.708-.542l-.603-.01c-.209 0-.548.078-.834.392-.287.313-1.095 1.07-1.095 2.61s1.121 3.028 1.278 3.238c.157.209 2.207 3.37 5.348 4.727.747.322 1.328.514 1.782.658.749.238 1.43.204 1.968.124.6-.09 1.856-.759 2.117-1.492.26-.732.26-1.36.183-1.492-.078-.13-.287-.209-.6-.365z"/>
+        </svg>
+    </a>
 </body>
 </html>

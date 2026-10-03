@@ -11,6 +11,13 @@
       name="description"
       content="818 Khangeziwe Services website project created by Bodibe Digital."
     />
+    <link rel="canonical" href="https://bodibedigital.co.za/818-project.html" />
+
+    <meta property="og:title" content="818 Khangeziwe Services | Bodibe Digital" />
+    <meta property="og:description" content="818 Khangeziwe Services website project created by Bodibe Digital." />
+    <meta property="og:image" content="assets/images/818-preview.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bodibedigital.co.za/818-project.html" />
 
     <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
 
@@ -22,11 +29,36 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
 
+    <!-- Theme: apply saved/system preference before first paint (no flash) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t !== "dark" && t !== "light") {
+            t =
+              window.matchMedia &&
+              window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark";
+          }
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+    <script src="theme.js" defer></script>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
+
+<a href="#main" class="skip-link">Skip to content</a>
     <div class="background-animation">
       <span></span>
       <span></span>
@@ -44,7 +76,8 @@
       <nav class="navbar">
         <a href="index.html" class="logo">
           <div class="logo-mark">
-            <img src="assets/images/logo.svg" alt="Bodibe Digital Logo" />
+            <img src="assets/images/logo.svg" alt="Bodibe Digital Logo" class="logo-mark-dark">
+            <img src="assets/images/logo.svg" alt="Bodibe Digital Logo" class="logo-mark-light">
           </div>
 
           <div class="logo-details">
@@ -54,7 +87,11 @@
           </div>
         </a>
 
-        <a href="index.html#portfolio" class="btn"> ← Back to Portfolio </a>
+        <a href="our-work.html" class="btn"> ← Back to Our Work </a>
+        <button type="button" class="theme-toggle" aria-label="Switch to light mode" aria-pressed="false">
+          <svg class="theme-toggle-icon theme-toggle-icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="1.5" x2="12" y2="4.2"/><line x1="12" y1="19.8" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.2" y2="12"/><line x1="19.8" y1="12" x2="22.5" y2="12"/><line x1="4.4" y1="4.4" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.6" y2="19.6"/><line x1="4.4" y1="19.6" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.6" y2="4.4"/></g></svg>
+          <svg class="theme-toggle-icon theme-toggle-icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1z"/></svg>
+        </button>
       </nav>
     </header>
 
@@ -62,7 +99,7 @@
      PROJECT SHOWCASE
 ========================== -->
 
-    <main class="project-showcase">
+    <main id="main" class="project-showcase">
       <div class="project-container">
         <span class="project-tag"> BUSINESS WEBSITE </span>
 
@@ -86,11 +123,36 @@
         <!-- PROJECT INFORMATION -->
 
         <div class="project-info">
+
+          <div class="case-meta-grid">
+            <div><span>Client</span><strong>818 Khangeziwe Services</strong></div>
+            <div><span>Industry</span><strong>Mobile &amp; Event Services</strong></div>
+            <div><span>Services</span><strong>Website Design &amp; Development</strong></div>
+            <div><span>Location</span><strong>Soweto, South Africa</strong></div>
+          </div>
+
           <h2>Project Overview</h2>
 
           <p>
             818 Khangeziwe Services is a Soweto-based mobile services business
             providing practical solutions for events, businesses and customers.
+          </p>
+
+          <h2>The Challenge</h2>
+
+          <p>
+            The business had no professional online presence, making it harder
+            for potential customers to discover their services or find a
+            reliable way to get in touch.
+          </p>
+
+          <h2>The Approach</h2>
+
+          <p>
+            We designed a clean, mobile-friendly business website structured
+            around clear service presentation and easy contact — prioritising
+            straightforward navigation over decoration, so visitors can find
+            what they need quickly.
           </p>
 
           <h2>The Goal</h2>
@@ -116,6 +178,14 @@
 
             <li>Strong call-to-action sections</li>
           </ul>
+
+          <h2>Result</h2>
+
+          <p>
+            818 Khangeziwe Services now has a live, professional website that
+            presents their services clearly and gives customers a direct way
+            to get in touch — replacing having no web presence at all.
+          </p>
 
           <h2>Technologies</h2>
 
@@ -150,12 +220,12 @@
                  PROJECT NAVIGATION
             ========================== -->
           <div class="project-navigation">
-            <a href="index.html#portfolio" class="project-nav-btn">
-              ← Back to Portfolio
+            <a href="our-work.html" class="project-nav-btn">
+              ← Back to Our Work
             </a>
 
             <a href="kanyo-project.html" class="project-nav-btn">
-              ← Previous Project
+              Next Project →
             </a>
           </div>
         </div>
@@ -166,10 +236,101 @@
      FOOTER
 ========================== -->
 
-    <footer>
-      <div class="copyright">
-        <p>© 2026 Bodibe Digital. All rights reserved.</p>
-      </div>
+        <footer>
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    <div class="logo-mark">
+                        <img src="assets/images/logo.svg" alt="" class="logo-mark-dark">
+                        <img src="assets/images/logo.svg" alt="" class="logo-mark-light">
+                    </div>
+                    <span>Bodibe Digital</span>
+                </div>
+
+                <p class="footer-tagline">Websites That Grow Businesses.</p>
+
+                <p>Premium, conversion-focused websites for South African businesses.</p>
+
+                <a href="contact.html" class="btn footer-cta">Get a Quote</a>
+
+            </div>
+
+            <nav class="footer-links" aria-label="Services">
+
+                <h3>Services</h3>
+
+                <a href="services.html#website-design">Website Design &amp; Development</a>
+                <a href="services.html#maintenance">Website Maintenance</a>
+                <a href="services.html#google-business">Google Business Setup</a>
+                <a href="services.html#brand-identity">Brand Identity</a>
+
+            </nav>
+
+            <nav class="footer-links" aria-label="Explore">
+
+                <h3>Explore</h3>
+
+                <a href="index.html">Home</a>
+                <a href="our-work.html">Our Work</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="process.html">Process</a>
+                <a href="faq.html">FAQ</a>
+
+            </nav>
+
+            <nav class="footer-links" aria-label="Company">
+
+                <h3>Company</h3>
+
+                <a href="about.html">About</a>
+                <a href="careers.html">Careers</a>
+                <a href="contact.html">Contact</a>
+
+            </nav>
+
+            <nav class="footer-links" aria-label="Support and legal">
+
+                <h3>Support &amp; Legal</h3>
+
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="refund-policy.html">Refund &amp; Cancellation Policy</a>
+
+                <div class="footer-contact-links">
+                    <a href="mailto:bodibedigital@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i>bodibedigital@gmail.com</a>
+                    <a href="tel:+27817483597"><i class="fa-solid fa-phone" aria-hidden="true"></i>+27 81 748 3597</a>
+                    <a href="https://wa.me/27817483597" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i>WhatsApp Us</a>
+                </div>
+
+                <a href="staff-login.html" class="footer-staff-link">Staff Login</a>
+
+            </nav>
+
+        </div>
+
+        <hr class="footer-divider">
+
+        <div class="footer-bottom">
+
+            <p class="footer-copyright">&copy; 2026 Bodibe Digital. All rights reserved.</p>
+
+            <div class="footer-bottom-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="refund-policy.html">Refund Policy</a>
+            </div>
+
+            <button type="button" class="back-to-top">&uarr; Back to Top</button>
+
+        </div>
+
     </footer>
+
+    <a href="https://wa.me/27817483597" class="whatsapp-btn" target="_blank" aria-label="Chat with Bodibe Digital on WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
   </body>
 </html>

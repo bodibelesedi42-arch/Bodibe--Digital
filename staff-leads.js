@@ -962,11 +962,15 @@
 
     /* ------------------------------------------------------- manual capture */
 
-    function openCreate() {
+    async function openCreate() {
+        var allocationOptions;
+        try{var r=await Portal.authedFetch('/staff/sales/allocation');allocationOptions=await r.json();if(!r.ok||!allocationOptions.success)throw Error(allocationOptions.message||'Could not load allocation options.');}catch(e){return Portal.showNotice(e.message,'warning');}
         openDrawer("New lead", "Manual capture",
               '<p class="crm-drawer-hint">For a phone enquiry, a walk-in or a referral. '
             + 'Website enquiries arrive on their own.</p>'
             + '<form class="crm-edit" id="leadCreate" novalidate>'
+            + window.BodibeAllocation.fields(allocationOptions)
+            + '<label class="crm-edit-field">Source<input name="source" placeholder="Referral, Google Maps…"></label>'
             + '<label class="crm-edit-field"><span>Client name *</span>'
             + '<input type="text" name="name" required autocomplete="off" /></label>'
             + '<label class="crm-edit-field"><span>Email *</span>'
@@ -1008,6 +1012,8 @@
             projectType: form.elements.projectType.value.trim(),
             message: form.elements.message.value.trim(),
         };
+        payload.source=form.elements.source?.value||'Manual';
+        payload.allocation=window.BodibeAllocation.read(form);
         if (!payload.name || !payload.email) {
             if (statusEl) {
                 statusEl.textContent = "A client name and email address are required.";

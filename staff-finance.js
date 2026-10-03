@@ -69,6 +69,11 @@
     }
     function apiError(data, fallback) { return data && data.message ? data.message : fallback; }
 
+    function tabFromHash() {
+        var h = String(window.location.hash || "").replace(/^#/, "").toLowerCase();
+        return ["invoices", "payments", "reports"].indexOf(h) !== -1 ? h : null;
+    }
+
     function availableTabs() {
         var tabs = [];
         if (Portal.can("Finance", "View Invoices")) tabs.push({ id: "invoices", label: "Invoices", icon: "fa-file-invoice-dollar" });
@@ -181,6 +186,7 @@
         if (state.selectedType === "invoice") {
             drawerEyebrow.textContent = x.invoiceId; drawerTitle.textContent = x.clientName || "Invoice";
             var actions = "";
+            if (x.balanceDue > 0 && !/^(paid|cancelled|void)$/i.test(x.status)) actions += '<button class="finance-primary" data-finance-action="yoco-link">Create Yoco test payment link</button>';
             if (Portal.canHere("Finance", "Edit Invoices")) actions += '<button class="finance-secondary" data-finance-action="edit-invoice"><i class="fa-solid fa-pen"></i>Edit due date / notes</button>';
             drawerBody.innerHTML = '<div class="finance-detail-grid">' + detail("Status", x.status) + detail("Quote", x.quoteId) + detail("Lead", x.leadId) + detail("Issued", formatDate(x.dateIssued)) + detail("Due", formatDate(x.dueDate)) + detail("Total", money(x.total)) + detail("Amount paid", money(x.amountPaid)) + detail("Balance due", money(x.balanceDue)) + detail("Deposit due", money(x.depositDue)) + detail("VAT", money(x.vat)) + '</div>' + (x.notes ? '<div class="finance-note">' + esc(x.notes) + '</div>' : '') + (actions ? '<div class="finance-drawer-actions">' + actions + '</div>' : '');
         } else {
@@ -196,11 +202,21 @@
         Array.prototype.forEach.call(drawerBody.querySelectorAll("[data-finance-action]"), function (btn) {
             btn.addEventListener("click", function () {
                 var action = btn.getAttribute("data-finance-action");
+                if (action === "yoco-link") openYocoLink(x);
                 if (action === "edit-invoice") openEditInvoice(x);
                 if (action === "verify-payment") openVerifyPayment(x);
                 if (action === "reject-payment") openRejectPayment(x);
             });
         });
+    }
+    async function openYocoLink(invoice) {
+        try {
+            var response = await Portal.authedFetch("/staff/invoices/" + encodeURIComponent(invoice.invoiceId) + "/payment-link", {method:"POST",headers:{"Content-Type":"application/json"},body:"{}"});
+            var result = await response.json();
+            if (!response.ok || !result.success) throw new Error(result.message || "Payment link unavailable.");
+            openModal("Yoco test payment · " + invoice.invoiceId, '<p>This is a test checkout. Test payments do not change real revenue or commission.</p><label>Official payment link<input id="yocoInvoiceLink" readonly value="' + esc(result.url) + '" /></label><p><a href="' + esc(result.url) + '" target="_blank" rel="noopener">Open test payment page</a></p><p>Link expires in seven days. Share only with the intended tester.</p>');
+            document.getElementById("yocoInvoiceLink").addEventListener("click", function(){this.select();});
+        } catch(error) { openModal("Payment link unavailable", "<p>" + esc(error.message) + "</p>"); }
     }
     function openInvoice(id) { var x = state.invoices.find(function (i) { return i.invoiceId === id; }); if (x) openDrawer("invoice", x); }
     function openPayment(id) { var x = state.payments.find(function (p) { return p.transactionId === id; }); if (x) openDrawer("payment", x); }
@@ -288,9 +304,21 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") { if (!modal.hidden) closeModal(); else if (!drawer.hidden) closeDrawer(); } });
 
     Portal.onReady(function () {
+        var requestedTab = tabFromHash();
+        if (requestedTab) state.activeTab = requestedTab;
         renderTabs(); renderHeaderActions();
         Promise.all([loadInvoices(), loadPayments(), loadReport()]);
     });
+    window.addEventListener("hashchange", function () {
+        var requestedTab = tabFromHash();
+        if (!requestedTab) return;
+        if (!availableTabs().some(function (x) { return x.id === requestedTab; })) return;
+        state.activeTab = requestedTab;
+        renderTabs();
+        renderViews();
+        renderHeaderActions();
+    });
+
     Portal.onFail(function () { tabsEl.innerHTML = ""; headerActionsEl.innerHTML = ""; });
     Portal.onModeChange(function () { renderHeaderActions(); if (!drawer.hidden) renderDrawer(); });
 })(window, document);

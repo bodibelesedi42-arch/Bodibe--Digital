@@ -4,7 +4,7 @@
 ========================================== */
 
 .checkout-back {
-    color: #94a3b8;
+    color: var(--text-muted);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
@@ -12,7 +12,7 @@
 }
 
 .checkout-back:hover {
-    color: #60a5fa;
+    color: var(--secondary);
 }
 
 
@@ -41,11 +41,11 @@
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,0.07),
-            rgba(255,255,255,0.025)
+            var(--card-glass-1),
+            var(--card-glass-2)
         );
 
-    border: 1px solid rgba(255,255,255,0.09);
+    border: 1px solid var(--card-border);
 
     border-radius: 30px;
 
@@ -55,7 +55,7 @@
     -webkit-backdrop-filter: blur(20px);
 
     box-shadow:
-        0 35px 100px rgba(0,0,0,0.35);
+        0 35px 100px var(--card-shadow);
 }
 
 
@@ -73,12 +73,12 @@
             transparent 40%
         );
 
-    border-right: 1px solid rgba(255,255,255,0.07);
+    border-right: 1px solid var(--border);
 }
 
 
 .checkout-label {
-    color: #60a5fa;
+    color: var(--secondary);
 
     font-size: 11px;
 
@@ -100,7 +100,7 @@
 
 
 .checkout-intro {
-    color: #94a3b8;
+    color: var(--text-muted);
 
     font-size: 14px;
 
@@ -136,7 +136,7 @@
 
 
 .package-label {
-    color: #64748b;
+    color: var(--text-faint);
 
     font-size: 10px;
 
@@ -166,7 +166,7 @@
 
     background: rgba(59,130,246,0.14);
 
-    color: #60a5fa;
+    color: var(--secondary);
 }
 
 
@@ -181,7 +181,7 @@
 
     margin-top: 30px;
 
-    color: white;
+    color: var(--text);
 }
 
 
@@ -190,7 +190,7 @@
 
     font-size: 19px;
 
-    color: #60a5fa;
+    color: var(--secondary);
 
     font-weight: 600;
 }
@@ -206,7 +206,7 @@
 
 
 .package-price small {
-    color: #60a5fa;
+    color: var(--secondary);
 
     font-size: 21px;
 
@@ -217,7 +217,7 @@
 
 
 .payment-type {
-    color: #64748b;
+    color: var(--text-faint);
 
     font-size: 12px;
 
@@ -232,7 +232,7 @@
 .package-divider {
     height: 1px;
 
-    background: rgba(255,255,255,0.08);
+    background: var(--border);
 
     margin: 28px 0;
 }
@@ -267,7 +267,7 @@
 
     gap: 10px;
 
-    color: #cbd5e1;
+    color: var(--text-secondary);
 
     font-size: 13px;
 
@@ -276,7 +276,7 @@
 
 
 .checkout-features i {
-    color: #60a5fa;
+    color: var(--secondary);
 
     font-size: 12px;
 
@@ -295,7 +295,7 @@
 
     gap: 8px;
 
-    color: #64748b;
+    color: var(--text-faint);
 
     font-size: 11px;
 
@@ -306,7 +306,7 @@
 
 
 .checkout-note i {
-    color: #60a5fa;
+    color: var(--secondary);
 }
 
 
@@ -317,13 +317,12 @@
 .checkout-form-container {
     padding: 55px 45px;
 
-    background:
-        rgba(255,255,255,0.015);
+    background: var(--surface-glass-faint);
 }
 
 
 .form-heading > span {
-    color: #60a5fa;
+    color: var(--secondary);
 
     font-size: 10px;
 
@@ -341,7 +340,7 @@
 
 
 .form-heading p {
-    color: #94a3b8;
+    color: var(--text-muted);
 
     font-size: 13px;
 
@@ -383,7 +382,7 @@
 
 
 .form-group label {
-    color: #cbd5e1;
+    color: var(--text-secondary);
 
     font-size: 12px;
 
@@ -399,11 +398,11 @@
 
     border-radius: 12px;
 
-    border: 1px solid rgba(255,255,255,0.09);
+    border: 1px solid var(--input-border);
 
-    background: rgba(255,255,255,0.035);
+    background: var(--input-bg);
 
-    color: white;
+    color: var(--text);
 
     font-family: inherit;
 
@@ -427,7 +426,7 @@
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: #475569;
+    color: var(--text-faint);
 }
 
 
@@ -453,7 +452,7 @@
 
     gap: 10px;
 
-    color: #64748b;
+    color: var(--text-faint);
 
     font-size: 11px;
 
@@ -530,6 +529,28 @@
 }
 
 
+/* Total due shown on the submit button. This mirrors the package price the
+   backend re-derives and actually charges (PACKAGE_PRICES in the backend's
+   src/services/payfast.js). Plain totals -- no VAT wording. */
+
+.checkout-submit-amount {
+    white-space: nowrap;
+}
+
+
+/* Very narrow phones: let the button wrap rather than overflow. */
+
+@media (max-width: 380px) {
+    .checkout-submit {
+        flex-wrap: wrap;
+
+        gap: 6px;
+
+        font-size: 13px;
+    }
+}
+
+
 /* ==========================
    SECURE NOTE
 ========================== */
@@ -543,7 +564,7 @@
 
     gap: 7px;
 
-    color: #475569;
+    color: var(--text-faint);
 
     font-size: 10px;
 
@@ -552,7 +573,7 @@
 
 
 .secure-note i {
-    color: #60a5fa;
+    color: var(--secondary);
 }
 
 
@@ -565,9 +586,9 @@ footer {
 
     padding: 25px 20px;
 
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid var(--border);
 
-    color: #475569;
+    color: var(--text-faint);
 
     font-size: 11px;
 }
@@ -586,7 +607,7 @@ footer {
     .checkout-summary {
         border-right: none;
 
-        border-bottom: 1px solid rgba(255,255,255,0.07);
+        border-bottom: 1px solid var(--border);
     }
 
 }
@@ -651,7 +672,7 @@ footer {
     justify-content: center;
     border-radius: 50%;
     background: rgba(59, 130, 246, 0.12);
-    color: #3B82F6;
+    color: var(--primary);
     font-size: 18px;
     flex-shrink: 0;
 }
@@ -662,14 +683,14 @@ footer {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.2px;
-    color: #94A3B8;
+    color: var(--text-muted);
 }
 
 .selected-form-package strong {
     display: block;
     font-size: 15px;
     font-weight: 700;
-    color: #F8FAFC;
+    color: var(--text);
 }
 
 .selected-form-package small {
@@ -677,5 +698,6 @@ footer {
     margin-top: 2px;
     font-size: 13px;
     font-weight: 500;
-    color: #60A5FA;
+    color: var(--secondary);
 }
+.maintenance-checkout-note{padding:24px;margin-bottom:26px;border:1px solid var(--border);border-radius:18px;background:var(--surface-glass)}.maintenance-checkout-note h2{font-size:20px}.maintenance-checkout-note p{font-size:14px;line-height:1.8}.maintenance-checkout-note input[type="checkbox"]{width:auto;flex-shrink:0}.maintenance-checkout-note a{text-decoration:underline}
