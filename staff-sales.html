@@ -15,7 +15,7 @@
   </script>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="staff-dashboard.css" />
-  <link rel="stylesheet" href="staff-sales.css" />
+  <link rel="stylesheet" href="staff-sales.css?v=20261005-contactlog" />
   <script src="theme.js" defer></script>
 </head>
 <body class="portal-body portal-shell-body">
@@ -62,6 +62,19 @@
           </article>
         </section>
 
+        <section class="sales-card sales-my-leads" id="my-leads">
+          <div class="sales-card-head sales-card-head-wrap">
+            <div><span>OWNED LEADS</span><h2>My leads & contact log</h2><p>Every claimed or assigned lead appears here. Use Log contact after each call, WhatsApp, email or meeting; History shows the full conversation record.</p></div>
+            <span class="sales-count" id="myLeadCount">0 leads</span>
+          </div>
+          <div class="sales-table-wrap">
+            <table class="sales-table sales-owned-table">
+              <thead><tr><th>Lead</th><th>Business</th><th>Stage</th><th>Contact</th><th>Last contact</th><th>Next follow-up</th><th>Actions</th></tr></thead>
+              <tbody id="myLeadRows"><tr><td colspan="7" class="sales-empty">Loading your leads…</td></tr></tbody>
+            </table>
+          </div>
+        </section>
+
         <section class="sales-card sales-followups" id="follow-ups">
           <div class="sales-card-head sales-card-head-wrap"><div><span>FOLLOW-UPS</span><h2>Follow-up queue</h2><p>Work overdue items first, then today, then upcoming conversations.</p></div><div class="sales-segment" id="followupTabs"><button class="is-active" data-filter="all">All <b id="followAllCount">0</b></button><button data-filter="overdue">Overdue <b id="followOverdueCount">0</b></button><button data-filter="today">Today <b id="followTodayCount">0</b></button><button data-filter="upcoming">Upcoming <b id="followUpcomingCount">0</b></button></div></div>
           <div class="sales-table-wrap"><table class="sales-table"><thead><tr><th>Lead</th><th>Business</th><th>Stage</th><th>Follow-up date</th><th>Last contact</th><th></th></tr></thead><tbody id="followupRows"><tr><td colspan="6" class="sales-empty">Loading follow-ups…</td></tr></tbody></table></div>
@@ -69,7 +82,7 @@
 
         <section class="sales-grid sales-grid-bottom">
           <article class="sales-card">
-            <div class="sales-card-head"><div><span>RECENT ACTIVITY</span><h2>Conversation history</h2></div><span class="sales-count" id="activityCount">0 entries</span></div>
+            <div class="sales-card-head"><div><span>ACTIVITY LOG</span><h2>Recent conversation activity</h2></div><span class="sales-count" id="activityCount">0 entries</span></div>
             <div class="sales-timeline" id="recentActivity"></div>
           </article>
           <article class="sales-card" id="availablePoolCard">
@@ -83,7 +96,7 @@
 
   <dialog class="sales-dialog" id="activityDialog">
     <form id="activityForm" method="dialog">
-      <div class="sales-dialog-head"><div><span>SALES ACTIVITY</span><h2 id="activityDialogTitle">Log activity</h2><p id="activityLeadLabel"></p></div><button type="button" id="closeActivityDialog" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="sales-dialog-head"><div><span>CONTACT LOG</span><h2 id="activityDialogTitle">Log contact</h2><p id="activityLeadLabel"></p></div><button type="button" id="closeActivityDialog" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>
       <div class="sales-form-grid">
         <label>Activity type<select id="activityType" required></select></label>
         <label>Outcome<select id="activityOutcome" required></select></label>
@@ -91,13 +104,19 @@
         <label>Next follow-up<input id="activityFollowUp" type="date" /></label>
         <label class="is-wide">Notes<textarea id="activityNote" rows="4" maxlength="800" placeholder="What happened and what should happen next?"></textarea></label>
       </div>
-      <div class="sales-dialog-actions"><button type="button" class="sales-btn sales-btn-secondary" id="cancelActivity">Cancel</button><button type="submit" class="sales-btn sales-btn-primary" id="saveActivity">Save activity</button></div>
+      <div class="sales-dialog-actions"><button type="button" class="sales-btn sales-btn-secondary" id="cancelActivity">Cancel</button><button type="submit" class="sales-btn sales-btn-primary" id="saveActivity">Save contact</button></div>
     </form>
+  </dialog>
+
+  <dialog class="sales-dialog sales-history-dialog" id="historyDialog">
+    <div class="sales-dialog-head"><div><span>CONTACT HISTORY</span><h2 id="historyDialogTitle">Conversation history</h2><p id="historyLeadLabel"></p></div><button type="button" id="closeHistoryDialog" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="sales-history-body" id="historyTimeline"></div>
+    <div class="sales-dialog-actions"><button type="button" class="sales-btn sales-btn-secondary" id="doneHistory">Done</button></div>
   </dialog>
 
   <script src="portal-access.js"></script>
   <script src="portal-effects.js"></script>
   <script src="staff-portal-shell.js"></script>
-  <script src="staff-sales.js"></script>
+  <script src="staff-sales.js?v=20261005-contactlog"></script>
 </body>
 </html>
