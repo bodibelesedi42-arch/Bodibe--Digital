@@ -1,0 +1,18 @@
+/* Bodibe Digital — claimed lead contact log hotfix */
+.sales-my-leads{margin-bottom:16px;scroll-margin-top:18px}
+.sales-owned-table{min-width:1120px}
+.sales-owned-table tr.is-closed td{opacity:.72}
+.sales-contact-stack{display:grid;gap:5px;min-width:170px}
+.sales-contact-chip{display:flex;align-items:center;gap:6px;width:max-content;max-width:220px;color:var(--text-secondary);font-size:8px;font-weight:600;text-decoration:none}
+.sales-contact-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sales-contact-chip i{width:14px;color:var(--accent-primary)}
+.sales-contact-chip.is-whatsapp i{font-size:11px}
+.sales-contact-chip:hover{color:var(--accent-primary)}
+.sales-owned-actions{justify-content:flex-start;flex-wrap:wrap;min-width:165px}
+.sales-icon-btn.is-primary{border-color:var(--accent-glow-medium);background:var(--accent-glow-soft);color:var(--accent-primary)}
+.sales-history-dialog{width:min(760px,94vw)}
+.sales-history-body{padding:18px 20px;max-height:min(62vh,620px);overflow:auto}
+.sales-history-body .sales-timeline-item{margin-bottom:9px}
+.sales-history-body .sales-empty{margin:0;border:1px dashed var(--border);border-radius:12px}
+.sales-history-staff{display:block;margin-top:4px;color:var(--text-faint);font-size:7px}
+@media(max-width:900px){.sales-owned-table{min-width:980px}.sales-history-body{padding:14px}}
