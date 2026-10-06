@@ -151,10 +151,12 @@
     var summary = state.detail && state.detail.metrics ? state.detail.metrics.taskSummary || {} : {};
     var due = summary.due;
     var completed = metricValue(state.detail, "tasksDueCompleted");
+    var notCompleted = summary.notCompleted;
     var completionPct = due && completed != null ? Math.max(0, Math.min(100, Math.round((completed / due) * 100))) : 0;
     taskHealth.innerHTML = ''
       + '<div class="performance-health-card"><span>Due this month</span><strong>' + esc(valueOrDash(due)) + '</strong></div>'
       + '<div class="performance-health-card is-success"><span>Completed</span><strong>' + esc(valueOrDash(completed)) + '</strong></div>'
+      + '<div class="performance-health-card is-danger"><span>Not completed</span><strong>' + esc(valueOrDash(notCompleted)) + '</strong></div>'
       + '<div class="performance-health-card is-danger"><span>Overdue now</span><strong>' + esc(valueOrDash(summary.overdueNow)) + '</strong></div>'
       + '<div class="performance-health-meter"><div><span>Due-task completion</span><strong>' + completionPct + '%</strong></div><div class="performance-health-track"><i style="width:' + completionPct + '%"></i></div></div>';
   }
