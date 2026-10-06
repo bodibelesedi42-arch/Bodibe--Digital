@@ -15,7 +15,7 @@
   </script>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="staff-dashboard.css" />
-  <link rel="stylesheet" href="staff-sales.css?v=20261005-contactlog" />
+  <link rel="stylesheet" href="staff-sales.css?v=20261006-required-notes" />
   <link rel="stylesheet" href="staff-sales-contactlog.css?v=20261005-contactlog" />
   <script src="theme.js" defer></script>
 </head>
@@ -103,7 +103,7 @@
         <label>Outcome<select id="activityOutcome" required></select></label>
         <label>Lead status<select id="activityStatus"><option value="">Keep current status</option><option>Contacted</option><option>Quoted</option><option>Won</option><option>Lost</option></select></label>
         <label>Next follow-up<input id="activityFollowUp" type="date" /></label>
-        <label class="is-wide">Notes<textarea id="activityNote" rows="4" maxlength="800" placeholder="What happened and what should happen next?"></textarea></label>
+        <label class="is-wide">Notes <span aria-hidden="true">*</span><textarea id="activityNote" rows="4" maxlength="800" minlength="10" required placeholder="Required: explain what happened and what should happen next (minimum 10 characters)."></textarea></label>
       </div>
       <div class="sales-dialog-actions"><button type="button" class="sales-btn sales-btn-secondary" id="cancelActivity">Cancel</button><button type="submit" class="sales-btn sales-btn-primary" id="saveActivity">Save contact</button></div>
     </form>
@@ -118,6 +118,6 @@
   <script src="portal-access.js"></script>
   <script src="portal-effects.js"></script>
   <script src="staff-portal-shell.js"></script>
-  <script src="staff-sales.js?v=20261005-contactlog"></script>
+  <script src="staff-sales.js?v=20261006-required-notes"></script>
 </body>
 </html>
