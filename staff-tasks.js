@@ -34,6 +34,8 @@
     }
 
     function statusText(task) { return String(task.status || "Not Started"); }
+    function statusKey(task) { return statusText(task).trim().toLowerCase(); }
+    function isClosedTask(task) { return ["completed", "cancelled", "not completed"].indexOf(statusKey(task)) !== -1; }
     function progressPct(value) {
         var n = Number(value);
         if (!isFinite(n)) n = 0;
@@ -68,7 +70,8 @@
             + summaryCard("Open", state.counts.open, "fa-circle-play")
             + summaryCard("Due soon", state.counts.dueSoon, "fa-clock")
             + summaryCard("Overdue", state.counts.overdue, "fa-triangle-exclamation")
-            + summaryCard("Completed", state.counts.completed, "fa-circle-check");
+            + summaryCard("Completed", state.counts.completed, "fa-circle-check")
+            + summaryCard("Not completed", state.counts.notCompleted, "fa-circle-xmark");
     }
 
     function optionHtml(value) { return '<option value="' + esc(value) + '">' + esc(value) + '</option>'; }
@@ -138,18 +141,20 @@
         drawerId.textContent = task.taskId;
         drawerTitle.textContent = task.taskName || "Task";
         var pct = progressPct(task.progress);
-        var completed = statusText(task).toLowerCase() === "completed";
+        var closed = isClosedTask(task);
+        var missed = statusKey(task) === "not completed";
         var autoTracked = isAutoSalesTask(task);
         var actions = "";
-        if (!completed && Portal.canHere("Projects", "Assign Tasks")) actions += actionButton("assign", "fa-user-plus", task.assignedTo ? "Reassign" : "Assign");
-        if (!autoTracked && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("progress", "fa-chart-line", "Update progress");
-        if (!autoTracked && !completed && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("complete", "fa-check", "Mark complete", "is-success");
-        var restricted = !autoTracked && ((!completed && Portal.can("Projects", "Assign Tasks") && !Portal.canHere("Projects", "Assign Tasks"))
+        if (!closed && Portal.canHere("Projects", "Assign Tasks")) actions += actionButton("assign", "fa-user-plus", task.assignedTo ? "Reassign" : "Assign");
+        if (!autoTracked && !closed && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("progress", "fa-chart-line", "Update progress");
+        if (!autoTracked && !closed && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("complete", "fa-check", "Mark complete", "is-success");
+        var restricted = !autoTracked && !closed && ((Portal.can("Projects", "Assign Tasks") && !Portal.canHere("Projects", "Assign Tasks"))
             || (Portal.can("Projects", "Complete Tasks") && !Portal.canHere("Projects", "Complete Tasks")));
 
         drawerBody.innerHTML = '<div class="task-detail-status"><span class="' + badgeClass(statusText(task)) + '">' + esc(statusText(task)) + '</span>'
             + (task.priority ? '<span class="task-badge">' + esc(task.priority) + '</span>' : '')
             + (autoTracked ? '<span class="task-badge">Auto tracked</span>' : '') + '</div>'
+            + (missed ? '<p class="task-closed-note"><i class="fa-solid fa-circle-xmark" aria-hidden="true"></i>This task passed its deadline unfinished. It is preserved for performance history and can no longer be edited. Create a new task if the work is still required.</p>' : '')
             + '<div class="task-detail-progress"><div><span>Progress</span><strong>' + pct + '%</strong></div><div class="task-progress-track"><i style="width:' + pct + '%"></i></div></div>'
             + '<div class="task-detail-grid">'
             + detail(autoTracked ? "Work type" : "Project", autoTracked ? "Sales target" : task.projectId + (projectName(task.projectId) ? " · " + projectName(task.projectId) : ""))
