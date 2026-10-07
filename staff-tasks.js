@@ -5,7 +5,7 @@
     var Portal = window.BodibePortal;
     if (!Portal) return;
     var esc = Portal.escapeHtml;
-    var state = { tasks: [], counts: {}, filters: {}, projects: [], selected: null, staff: null };
+    var state = { tasks: [], counts: {}, filters: {}, projects: [], selected: null, staff: null, view: "today", batchDate: "" };
 
     var listEl = document.getElementById("taskList");
     var countEl = document.getElementById("taskResultCount");
@@ -25,6 +25,8 @@
     var modalBackdrop = document.getElementById("taskModalBackdrop");
     var modalTitle = document.getElementById("taskModalTitle");
     var modalBody = document.getElementById("taskModalBody");
+    var pageTitle = document.querySelector(".dash-greeting h1");
+    var pageRole = document.querySelector(".dash-greeting .dash-role");
 
     function formatDate(value) {
         if (!value) return "—";
@@ -66,12 +68,28 @@
             + esc(label) + '</span><strong>' + Number(value || 0) + '</strong></article>';
     }
     function renderSummary() {
-        summaryEl.innerHTML = summaryCard("Total", state.counts.total, "fa-list-check")
+        if (state.view === "history") {
+            summaryEl.innerHTML = summaryCard("History", state.counts.total, "fa-clock-rotate-left")
+                + summaryCard("Completed", state.counts.completed, "fa-circle-check")
+                + summaryCard("Not completed", state.counts.notCompleted, "fa-circle-xmark");
+            return;
+        }
+        var rolled = state.tasks.filter(function (task) { return task.rolloverDate && task.rolloverDate === state.batchDate; }).length;
+        summaryEl.innerHTML = summaryCard("Today", state.counts.total, "fa-calendar-day")
             + summaryCard("Open", state.counts.open, "fa-circle-play")
-            + summaryCard("Due soon", state.counts.dueSoon, "fa-clock")
-            + summaryCard("Overdue", state.counts.overdue, "fa-triangle-exclamation")
             + summaryCard("Completed", state.counts.completed, "fa-circle-check")
-            + summaryCard("Not completed", state.counts.notCompleted, "fa-circle-xmark");
+            + summaryCard("Rolled over", rolled, "fa-arrow-rotate-right");
+    }
+
+    function renderViewHeading() {
+        if (!pageTitle || !pageRole) return;
+        if (state.view === "history") {
+            pageTitle.textContent = "Task history";
+            pageRole.textContent = "Previous daily task batches are kept here for accountability and performance review.";
+        } else {
+            pageTitle.textContent = "Today's tasks";
+            pageRole.textContent = "Only the current Johannesburg daily batch is shown here. Unfinished past work rolls forward automatically.";
+        }
     }
 
     function optionHtml(value) { return '<option value="' + esc(value) + '">' + esc(value) + '</option>'; }
@@ -98,9 +116,11 @@
     function renderList() {
         var tasks = filteredTasks();
         clearEl.hidden = !(searchEl.value || projectEl.value || statusEl.value || assigneeEl.value);
-        countEl.textContent = tasks.length + " task" + (tasks.length === 1 ? "" : "s");
+        countEl.textContent = tasks.length + (state.view === "history" ? " historical task" : " task") + (tasks.length === 1 ? "" : "s");
         if (!tasks.length) {
-            listEl.innerHTML = '<div class="tasks-empty"><i class="fa-regular fa-circle-check" aria-hidden="true"></i><strong>No tasks match this view.</strong><span>Change the filters or create a task on desktop.</span></div>';
+            listEl.innerHTML = state.view === "history"
+                ? '<div class="tasks-empty"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i><strong>No task history yet.</strong><span>Previous daily batches will appear here after they close.</span></div>'
+                : '<div class="tasks-empty"><i class="fa-regular fa-circle-check" aria-hidden="true"></i><strong>No tasks in today\'s batch.</strong><span>Create a task or wait for scheduled work to become active today.</span></div>';
             return;
         }
         var head = '<div class="task-table-head"><span>Task</span><span>Project / Work</span><span>Status</span><span>Assigned</span><span>Due</span><span>Progress</span></div>';
@@ -143,18 +163,20 @@
         var pct = progressPct(task.progress);
         var closed = isClosedTask(task);
         var missed = statusKey(task) === "not completed";
+        var readOnlyHistory = state.view === "history";
         var autoTracked = isAutoSalesTask(task);
         var actions = "";
-        if (!closed && Portal.canHere("Projects", "Assign Tasks")) actions += actionButton("assign", "fa-user-plus", task.assignedTo ? "Reassign" : "Assign");
-        if (!autoTracked && !closed && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("progress", "fa-chart-line", "Update progress");
-        if (!autoTracked && !closed && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("complete", "fa-check", "Mark complete", "is-success");
-        var restricted = !autoTracked && !closed && ((Portal.can("Projects", "Assign Tasks") && !Portal.canHere("Projects", "Assign Tasks"))
+        if (!readOnlyHistory && !closed && Portal.canHere("Projects", "Assign Tasks")) actions += actionButton("assign", "fa-user-plus", task.assignedTo ? "Reassign" : "Assign");
+        if (!readOnlyHistory && !autoTracked && !closed && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("progress", "fa-chart-line", "Update progress");
+        if (!readOnlyHistory && !autoTracked && !closed && Portal.canHere("Projects", "Complete Tasks")) actions += actionButton("complete", "fa-check", "Mark complete", "is-success");
+        var restricted = !readOnlyHistory && !autoTracked && !closed && ((Portal.can("Projects", "Assign Tasks") && !Portal.canHere("Projects", "Assign Tasks"))
             || (Portal.can("Projects", "Complete Tasks") && !Portal.canHere("Projects", "Complete Tasks")));
 
         drawerBody.innerHTML = '<div class="task-detail-status"><span class="' + badgeClass(statusText(task)) + '">' + esc(statusText(task)) + '</span>'
             + (task.priority ? '<span class="task-badge">' + esc(task.priority) + '</span>' : '')
             + (autoTracked ? '<span class="task-badge">Auto tracked</span>' : '') + '</div>'
-            + (missed ? '<p class="task-closed-note"><i class="fa-solid fa-circle-xmark" aria-hidden="true"></i>This task passed its deadline unfinished. It is preserved for performance history and can no longer be edited. Create a new task if the work is still required.</p>' : '')
+            + (missed ? '<p class="task-closed-note"><i class="fa-solid fa-circle-xmark" aria-hidden="true"></i>This daily task closed unfinished and is preserved in history. Its unfinished work was rolled into the next active daily batch.</p>' : '')
+            + (task.rolloverFrom ? '<p class="task-rollover-note"><i class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></i>Rolled over from ' + esc(task.rolloverFrom) + ' after the previous daily batch closed unfinished.</p>' : '')
             + '<div class="task-detail-progress"><div><span>Progress</span><strong>' + pct + '%</strong></div><div class="task-progress-track"><i style="width:' + pct + '%"></i></div></div>'
             + '<div class="task-detail-grid">'
             + detail(autoTracked ? "Work type" : "Project", autoTracked ? "Sales target" : task.projectId + (projectName(task.projectId) ? " · " + projectName(task.projectId) : ""))
@@ -201,11 +223,11 @@
             + '<label>Project<select name="projectId"><option value="">No project / choose a project</option>' + options + '</select></label>'
             + '<label>Task name<input name="taskName" maxlength="160" placeholder="e.g. Claim and contact 20 leads" /></label>'
             + '<label>Target leads<input type="number" name="targetCount" min="1" max="500" value="20" /></label>'
-            + '<label>Start date<input type="date" name="startDate" /></label><label>Due date<input type="date" name="dueDate" /></label>'
+            + '<label>Start date<input type="date" name="startDate" value="' + esc(state.batchDate || "") + '" /></label><label>Due date<input type="date" name="dueDate" value="' + esc(state.batchDate || "") + '" /></label>'
             + '<label>Priority<input name="priority" maxlength="60" placeholder="Optional" /></label></div>'
             + '<label class="task-form-wide">Description<textarea name="description" maxlength="1200"></textarea></label>'
             + '<label class="task-form-wide">Notes<textarea name="notes" maxlength="1200"></textarea></label>'
-            + '<p class="task-form-hint"><strong>Project task:</strong> choose a project. <strong>Sales target:</strong> no project is needed; progress is calculated automatically from CRM lead claims and logged contact activity. If no dates are entered, the target starts and ends today.</p>'
+            + '<p class="task-form-hint"><strong>Daily batch:</strong> new tasks default to today. Future-dated work is stored but appears in Tasks only when its scheduled day becomes active. Unfinished work is archived as Not Completed and rolled forward automatically.</p>'
             + '<div class="task-form-actions"><button type="button" class="task-secondary" data-modal-cancel>Cancel</button><button class="task-primary-btn" type="submit"><i class="fa-solid fa-plus" aria-hidden="true"></i>Create task</button></div></form>';
     }
 
@@ -304,17 +326,32 @@
     }
 
     function renderHeaderActions() {
-        actionsEl.innerHTML = Portal.canHere("Projects", "Create Tasks") ? '<button type="button" class="tasks-create" id="taskCreate"><i class="fa-solid fa-plus" aria-hidden="true"></i>Create task</button>' : "";
-        var create = document.getElementById("taskCreate"); if (create) create.addEventListener("click", openCreate);
+        var toggleLabel = state.view === "history" ? "Today's tasks" : "Task history";
+        var toggleIcon = state.view === "history" ? "fa-calendar-day" : "fa-clock-rotate-left";
+        var html = '<button type="button" class="tasks-view-toggle" id="taskViewToggle"><i class="fa-solid ' + toggleIcon + '" aria-hidden="true"></i>' + toggleLabel + '</button>';
+        if (state.view === "today" && Portal.canHere("Projects", "Create Tasks")) {
+            html += '<button type="button" class="tasks-create" id="taskCreate"><i class="fa-solid fa-plus" aria-hidden="true"></i>Create task</button>';
+        }
+        actionsEl.innerHTML = html;
+        var create = document.getElementById("taskCreate");
+        if (create) create.addEventListener("click", openCreate);
+        var toggle = document.getElementById("taskViewToggle");
+        if (toggle) toggle.addEventListener("click", function () {
+            state.view = state.view === "history" ? "today" : "history";
+            searchEl.value = projectEl.value = statusEl.value = assigneeEl.value = "";
+            closeDrawer();
+            loadTasks();
+        });
     }
 
     async function loadTasks() {
         try {
-            var res = await Portal.authedFetch("/staff/tasks");
+            var endpoint = state.view === "history" ? "/staff/tasks/history" : "/staff/tasks";
+            var res = await Portal.authedFetch(endpoint);
             var data = await res.json();
             if (!res.ok || !data.success) throw new Error(data.message || "Could not load tasks.");
-            state.tasks = data.tasks || []; state.counts = data.counts || {}; state.filters = data.filters || {}; state.projects = data.projects || [];
-            renderSummary(); renderFilters(); renderList(); renderHeaderActions();
+            state.tasks = data.tasks || []; state.counts = data.counts || {}; state.filters = data.filters || {}; state.projects = data.projects || []; state.batchDate = data.batchDate || state.batchDate;
+            renderViewHeading(); renderSummary(); renderFilters(); renderList(); renderHeaderActions();
         } catch (err) {
             if (err.sessionExpired) return Portal.goToLogin();
             console.error("Task load failed:", err); listEl.innerHTML = '<p class="tasks-empty">Tasks could not be loaded right now.</p>';
