@@ -148,11 +148,16 @@
     function renderAutoTracking(task) {
         if (!isAutoSalesTask(task)) return "";
         var t = task.autoTracking;
+        var carried = Number(t.carriedCount || 0);
+        var newlyClaimed = Number(t.newlyClaimedCount || 0);
+        var firstLine = carried
+            ? '<strong>' + carried + '</strong> carried from yesterday · <strong>' + newlyClaimed + '</strong> newly claimed today · '
+            : '<strong>' + Number(t.claimedCount || 0) + '/' + Number(t.targetCount || 0) + '</strong> leads claimed · ';
         return '<section class="task-notes"><span>Automatic sales tracking</span>'
-            + '<p><strong>' + Number(t.claimedCount || 0) + '/' + Number(t.targetCount || 0) + '</strong> leads claimed · '
-            + '<strong>' + Number(t.contactedCount || 0) + '/' + Number(t.targetCount || 0) + '</strong> contacted · '
+            + '<p>' + firstLine
+            + '<strong>' + Number(t.contactedCount || 0) + '/' + Number(t.targetCount || 0) + '</strong> completed today · '
             + '<strong>' + Number(t.remaining || 0) + '</strong> remaining.</p>'
-            + '<p>Progress updates from the CRM when the assigned salesperson claims a lead and logs a Call, WhatsApp, Email, Meeting or Follow-Up within this task\'s date window.</p></section>';
+            + '<p>' + esc(t.progressRule || 'Progress updates automatically from CRM activity.') + '</p></section>';
     }
 
     function renderDrawer() {
