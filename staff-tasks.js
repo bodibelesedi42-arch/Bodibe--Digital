@@ -147,16 +147,29 @@
 
     function renderAutoTracking(task) {
         if (!isAutoSalesTask(task)) return "";
-        var t = task.autoTracking;
-        var carried = Number(t.carriedCount || 0);
-        var newlyClaimed = Number(t.newlyClaimedCount || 0);
-        var firstLine = carried
-            ? '<strong>' + carried + '</strong> carried from yesterday · <strong>' + newlyClaimed + '</strong> newly claimed today · '
-            : '<strong>' + Number(t.claimedCount || 0) + '/' + Number(t.targetCount || 0) + '</strong> leads claimed · ';
+        var t = task.autoTracking || {};
+        var mode = String(t.mode || "legacy");
+        var target = Number(t.targetCount || 0);
+        var line = "";
+
+        if (mode === "claim") {
+            line = '<strong>' + Number(t.claimedCount || 0) + '/' + target + '</strong> fresh leads claimed from today\'s pool · '
+                + '<strong>' + Number(t.contactedCount || 0) + '</strong> already contacted · '
+                + '<strong>' + Number(t.remaining || 0) + '</strong> still to claim.';
+        } else if (mode === "create") {
+            line = '<strong>' + Number(t.createdCount || 0) + '/' + target + '</strong> self-sourced leads created · '
+                + '<strong>' + Number(t.remaining || 0) + '</strong> still to create.';
+        } else if (mode === "carry") {
+            line = '<strong>' + Number(t.contactedCount || 0) + '/' + target + '</strong> carried-over leads completed · '
+                + '<strong>' + Number(t.remaining || 0) + '</strong> still outstanding.';
+        } else {
+            line = '<strong>' + Number(t.claimedCount || 0) + '</strong> claimed · '
+                + '<strong>' + Number(t.contactedCount || 0) + '/' + target + '</strong> completed · '
+                + '<strong>' + Number(t.remaining || 0) + '</strong> remaining.';
+        }
+
         return '<section class="task-notes"><span>Automatic sales tracking</span>'
-            + '<p>' + firstLine
-            + '<strong>' + Number(t.contactedCount || 0) + '/' + Number(t.targetCount || 0) + '</strong> completed today · '
-            + '<strong>' + Number(t.remaining || 0) + '</strong> remaining.</p>'
+            + '<p>' + line + '</p>'
             + '<p>' + esc(t.progressRule || 'Progress updates automatically from CRM activity.') + '</p></section>';
     }
 
