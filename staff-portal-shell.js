@@ -569,38 +569,25 @@
     async function boot() {
         renderModeNotice();
 
-        // 1. Identity. Without this there is no portal.
-        try {
-            var meRes = await authedFetch("/auth/me");
-            if (!meRes.ok) throw new Error("me_failed_" + meRes.status);
-            var me = await meRes.json();
-            if (!me.success || !me.staff) throw new Error("me_malformed");
-            setIdentity(me.staff);
-        } catch (err) {
-            if (err.sessionExpired) return goToLogin();
-            console.error("Portal identity load failed:", err);
-            showNotice("The portal is temporarily unavailable. Please try again shortly.", "warning");
-            renderNavigation();
-            bootState = "failed"; bootError = err;
-            failCallbacks.forEach(function (fn) { try { fn(err); } catch (e) { console.error(e); } });
-            return;
-        }
-
-        // 2. Permissions.
+        // The permissions endpoint already checks the current Staff row and
+        // returns the current identity. Successful boot needs only one request
+        // instead of waiting for /auth/me followed by /staff/my-permissions.
+        // If permissions temporarily fail, use /auth/me for the same identity
+        // fallback and keep the navigation fail-closed as before.
+        var identityLoaded = false;
         try {
             var permRes = await authedFetch("/staff/my-permissions");
-            if (permRes.ok) {
-                var data = await permRes.json();
-                if (data.success && data.permissions) {
-                    permissions = data.permissions;
-                    permissionsLoaded = true;
-                    // The server re-reads the Staff sheet, so this is fresher
-                    // than the token.
-                    if (data.staff) setIdentity(data.staff);
-                    if (data.roleFound === false) {
-                        showNotice("Your role isn't set up with any module access yet. "
-                            + "Ask your manager to check your role.");
-                    }
+            if (!permRes.ok) throw new Error("permissions_failed_" + permRes.status);
+            var data = await permRes.json();
+            if (!data.success || !data.staff) throw new Error("permissions_malformed");
+            setIdentity(data.staff);
+            identityLoaded = true;
+            if (data.permissions) {
+                permissions = data.permissions;
+                permissionsLoaded = true;
+                if (data.roleFound === false) {
+                    showNotice("Your role isn't set up with any module access yet. "
+                        + "Ask your manager to check your role.");
                 }
             } else {
                 showNotice("Your module list couldn't be loaded.", "warning");
@@ -609,6 +596,24 @@
             if (err.sessionExpired) return goToLogin();
             console.error("Permissions load failed:", err);
             showNotice("Your module list couldn't be loaded.", "warning");
+        }
+
+        if (!identityLoaded) {
+            try {
+                var meRes = await authedFetch("/auth/me");
+                if (!meRes.ok) throw new Error("me_failed_" + meRes.status);
+                var me = await meRes.json();
+                if (!me.success || !me.staff) throw new Error("me_malformed");
+                setIdentity(me.staff);
+            } catch (err) {
+                if (err.sessionExpired) return goToLogin();
+                console.error("Portal identity load failed:", err);
+                showNotice("The portal is temporarily unavailable. Please try again shortly.", "warning");
+                renderNavigation();
+                bootState = "failed"; bootError = err;
+                failCallbacks.forEach(function (fn) { try { fn(err); } catch (e) { console.error(e); } });
+                return;
+            }
         }
 
         renderNavigation();
